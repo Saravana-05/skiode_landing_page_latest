@@ -51,7 +51,7 @@ export default function Comparison() {
             transition={{ duration: 0.6, delay: 0.2 }}
             className="text-lg text-slate-500 max-w-xl mx-auto"
           >
-            See why teams switch from traditional development to Sky LowCode AI.
+            See why teams switch from traditional development to skiode.
           </motion.p>
         </div>
 
@@ -67,7 +67,7 @@ export default function Comparison() {
             <div className="py-4 px-6 text-slate-500 text-left">Feature</div>
             <div className="py-4 px-4 bg-slate-100 text-slate-400">Traditional Dev.</div>
             <div className="py-4 px-4 text-white" style={{ background: 'linear-gradient(135deg, #0a1628, #0d1b3e)' }}>
-              <div>Sky LowCode AI</div>
+              <div>skiode</div>
               <div className="text-[10px] text-lime-400 font-normal">Recommended</div>
             </div>
           </div>

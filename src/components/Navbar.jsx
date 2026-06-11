@@ -1,261 +1,396 @@
-﻿import { useState, useEffect, useRef } from "react"
-import { motion, AnimatePresence } from "framer-motion"
-import { Zap, ChevronDown, Menu, X, ArrowRight, LayoutGrid, GitBranch, Users, FolderOpen, Brain, BarChart2, Bot, Plug, Settings, FileText, Database, Monitor, Shield, Search, Book, Building2, HeartPulse, UserCheck, HardHat, DollarSign, Briefcase, ScanText, Activity, Sparkles, FileCode, Globe, BookOpen, Calculator, LifeBuoy, ChevronRight, Workflow } from "lucide-react"
+import { useState, useEffect, useRef } from 'react'
+import { Link, useNavigate } from 'react-router-dom'
+import { motion, AnimatePresence } from 'framer-motion'
+import {
+  ChevronDown, Menu, X, ArrowRight, GitBranch, Brain,
+  Shield, FileText, Database, Bot, BarChart2, ScanText, Users,
+  Plug, LayoutGrid, Building2, HeartPulse,
+  Cpu, Factory, Truck,
+  FlaskConical, ShoppingCart, CreditCard
+} from 'lucide-react'
+import skiodeLogo from '../../logo/skiode_Logo_transparent.png'
 
-const platformCols = [
-  { label:"Build", items:[
-    {icon:FileText, name:"Forms and Core Data", desc:"Dynamic forms, data models"},
-    {icon:Database, name:"Data Model Builder", desc:"Entities, fields, relationships"},
-    {icon:Monitor, name:"Page Builder", desc:"Layouts, tables, dashboards"},
-    {icon:LayoutGrid, name:"Form Builder", desc:"Drag-and-drop field designer"},
-    {icon:Workflow, name:"Workflow Builder", desc:"Visual process configuration"},
-  ]},
-  { label:"Automate", items:[
-    {icon:GitBranch, name:"Process Flow", desc:"Approval flows and routing"},
-    {icon:Bot, name:"RPA Automation", desc:"Desktop and web task automation"},
-    {icon:Sparkles, name:"BOT Automation", desc:"Smart bots for reminders"},
-    {icon:Settings, name:"Business Rules", desc:"Conditions, SLAs, triggers"},
-    {icon:Shield, name:"Approval Workflows", desc:"Multi-level approval routing"},
-  ]},
-  { label:"Intelligence", items:[
-    {icon:ScanText, name:"OCR and AI/ML", desc:"Document extraction and AI"},
-    {icon:Brain, name:"AI Assistant", desc:"Conversational AI for ops"},
-    {icon:BarChart2, name:"Dashboards and Reports", desc:"Real-time analytics"},
-    {icon:Activity, name:"Predictive Insights", desc:"AI-powered forecasting"},
-    {icon:Search, name:"Smart Validation", desc:"AI-assisted quality checks"},
-  ]},
-  { label:"Manage", items:[
-    {icon:Users, name:"Users and Groups", desc:"Teams, roles, org management"},
-    {icon:Shield, name:"Role Permissions", desc:"Fine-grained access control"},
-    {icon:FolderOpen, name:"DMS", desc:"Secure document management"},
-    {icon:Plug, name:"Integrations", desc:"APIs, databases, cloud apps"},
-    {icon:FileCode, name:"Audit Logs", desc:"Activity tracking compliance"},
-  ]},
-]
+/* ── Mega menu data ── */
+const menus = {
+  Platform: {
+    groups: [
+      {
+        label: 'Build',
+        items: [
+          { icon: FileText,   title: 'Form Builder',          desc: 'Drag-and-drop form canvas with 20+ field types', link: '/platform' },
+          { icon: Database,   title: 'Data Model Builder',    desc: 'Visual data architecture for any domain', link: '/platform' },
+          { icon: LayoutGrid, title: 'Page Builder',          desc: 'Build web pages and portals visually', link: '/platform' },
+        ],
+      },
+      {
+        label: 'Automate',
+        items: [
+          { icon: GitBranch,  title: 'Process Flow',          desc: 'Visual approval and workflow diagrams', link: '/platform' },
+          { icon: Cpu,        title: 'RPA',                   desc: 'Robotic process automation for repetitive work', link: '/platform' },
+          { icon: Bot,        title: 'BOT Automation',        desc: 'Deploy configurable bots across channels', link: '/platform' },
+        ],
+      },
+      {
+        label: 'Intelligence',
+        items: [
+          { icon: ScanText,  title: 'OCR & Document AI',     desc: 'Extract data from documents intelligently', link: '/platform' },
+          { icon: Brain,     title: 'AI/ML Engine',          desc: 'AI-powered automation and smart recommendations', link: '/platform' },
+          { icon: BarChart2, title: 'Dashboards & Reports',  desc: 'Real-time analytics and custom reports', link: '/platform' },
+        ],
+      },
+      {
+        label: 'Manage',
+        items: [
+          { icon: Users,     title: 'Users & Groups',        desc: 'Manage teams, roles and access policies', link: '/platform' },
+          { icon: Shield,    title: 'Role Permissions',      desc: 'Field-level and module-level access control', link: '/platform' },
+          { icon: Plug,      title: 'Integrations',          desc: '50+ pre-built API and ERP connectors', link: '/platform' },
+        ],
+      },
+    ],
+    featured: {
+      title: 'Explore the Workspace',
+      desc: 'Build forms, automate processes, manage data, and run AI-powered operations from one platform.',
+      cta: 'View Platform',
+      link: '/platform',
+    },
+  },
 
-const solutionsItems = [
-  {icon:Building2, name:"ERP Applications", desc:"Sales, purchase, inventory"},
-  {icon:HeartPulse, name:"Healthcare Workflows", desc:"Patient records, approvals"},
-  {icon:UserCheck, name:"HR and Recruitment", desc:"AI Recruiter, onboarding"},
-  {icon:HardHat, name:"Construction Management", desc:"Site progress, materials"},
-  {icon:DollarSign, name:"Finance Approvals", desc:"Invoice, expense workflows"},
-  {icon:Briefcase, name:"CRM and Leads", desc:"Lead tracking, follow-ups"},
-  {icon:ScanText, name:"Document Processing", desc:"OCR, extraction, classification"},
-  {icon:Activity, name:"Operations Management", desc:"Daily tasks, reporting"},
-]
+  'Use Cases': {
+    items: [
+      { icon: FlaskConical, title: 'Pharma Sale Order Automation',    desc: 'Automated 6-team sale order workflow', link: '/use-cases#pharma-sale-order' },
+      { icon: Truck,        title: 'Vendor Ops — Airport Mfg',        desc: 'Centralized ASN and vendor portal', link: '/use-cases#vendor-operations' },
+      { icon: Factory,      title: 'Ticketing — Manufacturing',       desc: 'Incident management with live chat', link: '/use-cases#ticketing-tool' },
+      { icon: ShoppingCart,  title: 'Procurement — Aquaculture',       desc: 'End-to-end indent-to-PO automation', link: '/use-cases#procurement-automation' },
+      { icon: CreditCard,   title: 'Claims — FMCG Africa/ME',        desc: 'Reimbursement with auto PO generation', link: '/use-cases#reimbursement-claims' },
+      { icon: FlaskConical, title: 'Lab Automation — Tubes Mfg',      desc: 'Quality lab test request to report', link: '/use-cases#lab-automation' },
+      { icon: Factory,      title: 'RPA — Fuel Injection Mfg',        desc: 'Excel-to-Oracle bot with validation', link: '/use-cases#sale-order-rpa' },
+      { icon: HeartPulse,   title: 'Payment Recovery — Stem Cell',    desc: 'Demand notice to legal escalation', link: '/use-cases#payment-tracking' },
+    ],
+    cta: { label: 'View All Use Cases', link: '/use-cases' },
+  },
 
-const aiItems = [
-  {icon:UserCheck, name:"AI Recruiter", desc:"Resume parsing, ranking"},
-  {icon:ScanText, name:"OCR Automation", desc:"Invoice, ID extraction"},
-  {icon:FileText, name:"AI Document Processing", desc:"Classify and route docs"},
-  {icon:Brain, name:"AI Workflow Decisions", desc:"Smart routing"},
-  {icon:Bot, name:"AI Chatbot", desc:"Conversational automation"},
-  {icon:BarChart2, name:"AI Reports", desc:"Auto-generated insights"},
-  {icon:Shield, name:"AI Data Validation", desc:"Quality checks"},
-]
+  Industries: {
+    items: [
+      { icon: Factory,      title: 'Manufacturing',         desc: 'Production, quality and site management', link: '/industries#manufacturing' },
+      { icon: HeartPulse,   title: 'Healthcare',            desc: 'Patient, compliance and care workflows', link: '/industries#healthcare' },
+      { icon: FlaskConical, title: 'Pharma & Life Sciences', desc: 'Sale order and compliance automation', link: '/industries#pharma' },
+      { icon: CreditCard,   title: 'Banking & Finance',     desc: 'Approvals, lending and compliance', link: '/industries#banking' },
+      { icon: Shield,       title: 'Insurance',             desc: 'Claims processing and SLA compliance', link: '/industries#insurance' },
+      { icon: Truck,        title: 'Logistics & Supply Chain',desc: 'Shipment, tracking and fulfilment', link: '/industries#logistics' },
+      { icon: ShoppingCart,  title: 'FMCG & Retail',         desc: 'Supply chain and ops automation', link: '/industries#fmcg' },
+      { icon: Building2,    title: 'Construction',           desc: 'Site, material and project management', link: '/industries#construction' },
+    ],
+    cta: { label: 'Explore All Industries', link: '/industries' },
+  },
 
-const industriesItems = [
-  {icon:HeartPulse, name:"Healthcare"}, {icon:HardHat, name:"Construction"},
-  {icon:Building2, name:"Retail"}, {icon:Settings, name:"Manufacturing"},
-  {icon:Globe, name:"Logistics"}, {icon:BookOpen, name:"Education"},
-  {icon:DollarSign, name:"Finance"}, {icon:Briefcase, name:"Professional Services"},
-]
+}
 
-const resourcesItems = [
-  {icon:Book, name:"Blog", desc:"Latest articles and updates"},
-  {icon:BookOpen, name:"Documentation", desc:"Guides and references"},
-  {icon:FileCode, name:"API Reference", desc:"Full API documentation"},
-  {icon:Briefcase, name:"Case Studies", desc:"Customer success stories"},
-  {icon:Calculator, name:"ROI Calculator", desc:"Estimate your savings"},
-  {icon:LifeBuoy, name:"Help Center", desc:"Support and tutorials"},
-]
+/* ── Dropdown panel ── */
+function MegaPanel({ name, data, close, navigate }) {
+  const handleClick = (e, link) => {
+    e.preventDefault()
+    close()
+    if (link && link !== '#') {
+      if (link.startsWith('/#')) {
+        // Hash link on home page
+        if (window.location.pathname === '/') {
+          const el = document.getElementById(link.slice(2))
+          if (el) { el.scrollIntoView({ behavior: 'smooth' }); return }
+        }
+        navigate('/')
+        setTimeout(() => {
+          const el = document.getElementById(link.slice(2))
+          if (el) el.scrollIntoView({ behavior: 'smooth' })
+        }, 300)
+      } else if (link.includes('#')) {
+        const [path, hash] = link.split('#')
+        navigate(path)
+        setTimeout(() => {
+          const el = document.getElementById(hash)
+          if (el) el.scrollIntoView({ behavior: 'smooth' })
+        }, 300)
+      } else {
+        navigate(link)
+      }
+    }
+  }
 
-const megaMenus = {Platform:"platform",Solutions:"solutions","AI Automation":"ai",Industries:"industries",Resources:"resources"}
+  if (name === 'Platform') {
+    return (
+      <div className="flex gap-6">
+        <div className="grid grid-cols-4 gap-4 flex-1">
+          {data.groups.map(grp => (
+            <div key={grp.label}>
+              <p className="text-xs font-bold uppercase tracking-widest mb-2"
+                style={{ color: '#94a3b8', fontFamily: 'var(--font-heading)' }}>{grp.label}</p>
+              <div className="space-y-0.5">
+                {grp.items.map(it => (
+                  <a key={it.title} href={it.link || '#'} onClick={(e) => handleClick(e, it.link)}
+                    className="mega-item flex items-start gap-2.5 px-2.5 py-2 rounded-xl group cursor-pointer">
+                    <div className="w-7 h-7 rounded-lg flex items-center justify-center flex-shrink-0 mt-0.5"
+                      style={{ background: 'rgba(59,130,246,0.15)' }}>
+                      <it.icon size={13} style={{ color: '#3b82f6' }} />
+                    </div>
+                    <div>
+                      <div className="text-xs font-semibold text-slate-800 group-hover:text-blue-600 transition-colors"
+                        style={{ fontFamily: 'var(--font-heading)' }}>{it.title}</div>
+                      <div className="text-xs leading-tight mt-0.5"
+                        style={{ color: '#64748b', fontFamily: 'var(--font-body)' }}>{it.desc}</div>
+                    </div>
+                  </a>
+                ))}
+              </div>
+            </div>
+          ))}
+        </div>
+        <div className="w-52 flex-shrink-0 rounded-2xl p-4 flex flex-col justify-between"
+          style={{ background: 'linear-gradient(135deg,rgba(59,130,246,0.15),rgba(132,204,22,0.1))', border: '1px solid rgba(59,130,246,0.25)' }}>
+          <div>
+            <div className="w-9 h-9 rounded-xl flex items-center justify-center mb-3"
+              style={{ background: 'linear-gradient(135deg,#3b82f6,#84cc16)' }}>
+              <LayoutGrid size={16} color="white" />
+            </div>
+            <div className="text-sm font-bold text-slate-900 mb-1.5"
+              style={{ fontFamily: 'var(--font-heading)' }}>{data.featured.title}</div>
+            <p className="text-xs leading-relaxed"
+              style={{ color: '#64748b', fontFamily: 'var(--font-body)' }}>{data.featured.desc}</p>
+          </div>
+          <a href={data.featured.link || '#'} onClick={(e) => handleClick(e, data.featured.link)}
+            className="mt-4 flex items-center gap-1.5 text-xs font-bold px-3 py-2 rounded-xl transition-all hover:scale-105"
+            style={{ background: 'linear-gradient(135deg,#3b82f6,#2563eb)', color: 'white', fontFamily: 'var(--font-heading)' }}>
+            {data.featured.cta} <ArrowRight size={11} />
+          </a>
+        </div>
+      </div>
+    )
+  }
+
+  const cols = data.items.length > 6 ? 3 : data.items.length > 3 ? 2 : 1
+  return (
+    <div>
+      <div className="grid gap-1" style={{ gridTemplateColumns: `repeat(${cols}, minmax(0,1fr))` }}>
+        {data.items.map(it => (
+          <a key={it.title} href={it.link || '#'} onClick={(e) => handleClick(e, it.link)}
+            className="mega-item flex items-start gap-2.5 px-3 py-2.5 rounded-xl group cursor-pointer">
+            <div className="w-7 h-7 rounded-lg flex items-center justify-center flex-shrink-0 mt-0.5"
+              style={{ background: 'rgba(59,130,246,0.15)' }}>
+              <it.icon size={13} style={{ color: '#3b82f6' }} />
+            </div>
+            <div>
+              <div className="text-xs font-semibold text-slate-800 group-hover:text-blue-600 transition-colors"
+                style={{ fontFamily: 'var(--font-heading)' }}>{it.title}</div>
+              <div className="text-xs leading-tight mt-0.5"
+                style={{ color: '#64748b', fontFamily: 'var(--font-body)' }}>{it.desc}</div>
+            </div>
+          </a>
+        ))}
+      </div>
+      {data.cta && (
+        <div className="mt-3 pt-3" style={{ borderTop: '1px solid rgba(0,0,0,0.06)' }}>
+          <a href={data.cta.link} onClick={(e) => handleClick(e, data.cta.link)}
+            className="flex items-center gap-1.5 px-3 py-2 text-xs font-bold text-blue-600 hover:text-blue-700 transition-colors"
+            style={{ fontFamily: 'var(--font-heading)' }}>
+            {data.cta.label} <ArrowRight size={11} />
+          </a>
+        </div>
+      )}
+    </div>
+  )
+}
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false)
-  const [activeMenu, setActiveMenu] = useState(null)
-  const [mobileOpen, setMobileOpen] = useState(false)
-  const timeoutRef = useRef(null)
+  const [openMenu, setOpenMenu] = useState(null)
+  const [mobileOpen, setMobile] = useState(false)
+  const [mobileExpanded, setMobileExpanded] = useState(null)
+  const navRef = useRef(null)
+  const navigate = useNavigate()
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 20)
-    window.addEventListener("scroll", onScroll)
-    return () => window.removeEventListener("scroll", onScroll)
+    window.addEventListener('scroll', onScroll)
+    return () => window.removeEventListener('scroll', onScroll)
   }, [])
 
-  const enter = (menu) => { clearTimeout(timeoutRef.current); setActiveMenu(menu) }
-  const leave = () => { timeoutRef.current = setTimeout(() => setActiveMenu(null), 150) }
+  useEffect(() => {
+    const handler = (e) => {
+      if (navRef.current && !navRef.current.contains(e.target)) setOpenMenu(null)
+    }
+    document.addEventListener('mousedown', handler)
+    return () => document.removeEventListener('mousedown', handler)
+  }, [])
 
   const navStyle = scrolled
-    ? {background:"rgba(255,255,255,0.96)",backdropFilter:"blur(24px)",boxShadow:"0 1px 0 rgba(0,0,0,0.08),0 4px 24px rgba(0,0,0,0.06)"}
-    : {background:"transparent"}
+    ? { background: 'rgba(255,255,255,0.97)', backdropFilter: 'blur(20px)', borderBottom: '1px solid rgba(0,0,0,0.08)', boxShadow: '0 4px 24px rgba(0,0,0,0.08)' }
+    : { background: 'rgba(255,255,255,0.92)', backdropFilter: 'blur(16px)', borderBottom: '1px solid rgba(0,0,0,0.05)' }
+
+  const navItems = ['Platform', 'Use Cases', 'Industries', 'Pricing', 'Contact']
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 transition-all duration-300" style={navStyle}>
+    <header ref={navRef} className="fixed top-0 left-0 right-0 z-50 transition-all duration-300" style={navStyle}>
       <nav className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
-          <a href="#" className="flex items-center gap-2.5 flex-shrink-0">
-            <div className="w-8 h-8 rounded-xl flex items-center justify-center" style={{background:"linear-gradient(135deg,#3b82f6,#06b6d4)"}}>
-              <Zap size={15} color="white" strokeWidth={2.5} />
-            </div>
-            <span className={`font-extrabold text-base tracking-tight ${scrolled?"text-slate-900":"text-white"}`}>
-              Sky <span className="gradient-text-blue">LowCode AI</span>
-            </span>
-          </a>
+          <Link to="/" className="flex items-center flex-shrink-0" onClick={() => setOpenMenu(null)}>
+            <img src={skiodeLogo} alt="skiode" style={{ height: 42 }} />
+          </Link>
 
           <div className="hidden lg:flex items-center gap-0.5">
-            {["Platform","Solutions","AI Automation","Industries","Resources","Pricing","Contact"].map(item => (
-              <div key={item} className="relative"
-                onMouseEnter={() => megaMenus[item] ? enter(megaMenus[item]) : null}
-                onMouseLeave={megaMenus[item] ? leave : undefined}
-              >
-                <a href={megaMenus[item] ? "#" : `#${item.toLowerCase().replace(" ","-")}`}
-                  className={`flex items-center gap-1 px-3 py-2 rounded-lg text-sm font-medium transition-all ${scrolled?"text-slate-600 hover:text-blue-600 hover:bg-blue-50":"text-white/80 hover:text-white hover:bg-white/10"}`}
-                >
-                  {item}
-                  {megaMenus[item] && <ChevronDown size={13} className={`transition-transform duration-200 ${activeMenu===megaMenus[item]?"rotate-180":""}`} />}
-                </a>
+            {navItems.map(item => (
+              <div key={item} className="relative">
+                {item === 'Contact' ? (
+                  <a href="#contact"
+                    className="px-3 py-2 text-sm font-medium text-slate-500 hover:text-slate-900 transition-colors rounded-lg hover:bg-slate-100"
+                    style={{ fontFamily: 'var(--font-heading)' }}
+                    onClick={() => setOpenMenu(null)}>
+                    Contact
+                  </a>
+                ) : item === 'Pricing' ? (
+                  <Link to="/pricing"
+                    className="px-3 py-2 text-sm font-medium text-slate-500 hover:text-slate-900 transition-colors rounded-lg hover:bg-slate-100"
+                    style={{ fontFamily: 'var(--font-heading)' }}
+                    onClick={() => setOpenMenu(null)}>
+                    Pricing
+                  </Link>
+                ) : (
+                  <button
+                    className="flex items-center gap-1 px-3 py-2 text-sm font-medium rounded-lg transition-all"
+                    style={{
+                      fontFamily: 'var(--font-heading)',
+                      color: openMenu === item ? '#1e293b' : '#475569',
+                      background: openMenu === item ? 'rgba(59,130,246,0.07)' : 'transparent',
+                    }}
+                    onClick={() => setOpenMenu(openMenu === item ? null : item)}>
+                    {item}
+                    <ChevronDown size={13} className={`transition-transform duration-200 ${openMenu === item ? 'rotate-180' : ''}`} />
+                  </button>
+                )}
               </div>
             ))}
           </div>
 
           <div className="hidden lg:flex items-center gap-2">
-            <a href="#contact" className={`px-4 py-2 rounded-lg text-sm font-semibold transition-all ${scrolled?"text-slate-600 hover:text-blue-600 hover:bg-blue-50":"text-white/80 hover:text-white"}`}>Login</a>
-            <a href="#contact" className="px-5 py-2.5 rounded-xl text-sm font-bold text-white transition-all hover:scale-105" style={{background:"linear-gradient(135deg,#3b82f6,#06b6d4)",boxShadow:"0 4px 14px rgba(59,130,246,0.35)"}}>Book a Demo</a>
+            <Link to="/request-demo"
+              className="btn-primary text-sm px-5 py-2.5"
+              style={{ fontFamily: 'var(--font-heading)' }}
+              onClick={() => setOpenMenu(null)}>
+              Request Demo <ArrowRight size={13} />
+            </Link>
           </div>
 
-          <button className={`lg:hidden p-2 rounded-lg transition-colors ${scrolled?"text-slate-700 hover:bg-slate-100":"text-white hover:bg-white/10"}`} onClick={() => setMobileOpen(!mobileOpen)}>
-            {mobileOpen ? <X size={22} /> : <Menu size={22} />}
+          <button className="lg:hidden p-2 rounded-xl text-slate-600 hover:text-slate-900 transition-colors"
+            style={{ background: 'rgba(0,0,0,0.05)' }}
+            onClick={() => setMobile(!mobileOpen)}>
+            {mobileOpen ? <X size={20} /> : <Menu size={20} />}
           </button>
         </div>
+
+        <AnimatePresence>
+          {openMenu && menus[openMenu] && (
+            <motion.div
+              key={openMenu}
+              initial={{ opacity: 0, y: -8 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -8 }}
+              transition={{ duration: 0.18, ease: 'easeOut' }}
+              className="absolute left-0 right-0 top-16 mx-auto"
+              style={{ maxWidth: '1280px', padding: '0 32px' }}>
+              <div className="rounded-2xl p-5 shadow-2xl"
+                style={{ background: 'rgba(255,255,255,0.99)', border: '1px solid rgba(0,0,0,0.08)', backdropFilter: 'blur(24px)' }}>
+                <MegaPanel name={openMenu} data={menus[openMenu]} close={() => setOpenMenu(null)} navigate={navigate} />
+              </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
       </nav>
 
       <AnimatePresence>
-        {activeMenu && (
-          <motion.div initial={{opacity:0,y:-8}} animate={{opacity:1,y:0}} exit={{opacity:0,y:-8}} transition={{duration:0.18}}
-            className="absolute top-full left-0 right-0 bg-white border-b border-slate-100"
-            style={{boxShadow:"0 20px 60px rgba(0,0,0,0.1)"}}
-            onMouseEnter={() => clearTimeout(timeoutRef.current)} onMouseLeave={leave}
-          >
-            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-              {activeMenu === "platform" && (
-                <div className="flex gap-5">
-                  {platformCols.map(col => (
-                    <div key={col.label} className="flex-1">
-                      <p className="text-xs font-bold text-blue-600 uppercase tracking-widest mb-3 px-2">{col.label}</p>
-                      <div className="space-y-0.5">
-                        {col.items.map(item => (
-                          <a key={item.name} href="#platform" className="mega-item flex items-start gap-2.5 px-2 py-2.5 rounded-lg group transition-all">
-                            <div className="w-7 h-7 rounded-lg flex items-center justify-center flex-shrink-0 mt-0.5" style={{background:"rgba(59,130,246,0.08)"}}>
-                              <item.icon size={13} style={{color:"#3b82f6"}} />
-                            </div>
-                            <div>
-                              <div className="text-sm font-semibold text-slate-800 group-hover:text-blue-600 transition-colors leading-tight">{item.name}</div>
-                              <div className="text-xs text-slate-400 mt-0.5 leading-tight">{item.desc}</div>
-                            </div>
-                          </a>
-                        ))}
-                      </div>
-                    </div>
-                  ))}
-                  <div className="w-52 flex-shrink-0">
-                    <div className="rounded-2xl p-5 h-full flex flex-col" style={{background:"linear-gradient(135deg,#0a1628,#1a3a6e)"}}>
-                      <div className="w-9 h-9 rounded-xl flex items-center justify-center mb-3" style={{background:"rgba(96,165,250,0.2)"}}>
-                        <Zap size={16} color="#60a5fa" />
-                      </div>
-                      <h4 className="font-bold text-white text-sm mb-2">Explore the Workspace</h4>
-                      <p className="text-xs text-white/50 leading-relaxed mb-4 flex-1">See how forms, workflows, AI, documents, bots, and reports work together.</p>
-                      <a href="#platform" className="inline-flex items-center gap-1.5 text-xs font-bold text-blue-400 hover:text-blue-300 transition-colors">View Platform <ArrowRight size={11} /></a>
-                    </div>
-                  </div>
-                </div>
-              )}
-              {activeMenu === "solutions" && (
-                <div className="grid grid-cols-4 gap-1">
-                  {solutionsItems.map(item => (
-                    <a key={item.name} href="#solutions" className="mega-item flex items-start gap-2.5 px-3 py-3 rounded-lg group transition-all">
-                      <div className="w-8 h-8 rounded-lg flex items-center justify-center flex-shrink-0" style={{background:"rgba(99,102,241,0.08)"}}>
-                        <item.icon size={14} style={{color:"#6366f1"}} />
-                      </div>
-                      <div>
-                        <div className="text-sm font-semibold text-slate-800 group-hover:text-indigo-600 transition-colors">{item.name}</div>
-                        <div className="text-xs text-slate-400 mt-0.5 leading-tight">{item.desc}</div>
-                      </div>
-                    </a>
-                  ))}
-                </div>
-              )}
-              {activeMenu === "ai" && (
-                <div className="flex gap-6">
-                  <div className="flex-1 grid grid-cols-3 gap-1">
-                    {aiItems.map(item => (
-                      <a key={item.name} href="#ai-automation" className="mega-item flex items-start gap-2.5 px-3 py-3 rounded-lg group transition-all">
-                        <div className="w-8 h-8 rounded-lg flex items-center justify-center flex-shrink-0" style={{background:"rgba(139,92,246,0.08)"}}>
-                          <item.icon size={14} style={{color:"#8b5cf6"}} />
-                        </div>
-                        <div>
-                          <div className="text-sm font-semibold text-slate-800 group-hover:text-purple-600 transition-colors">{item.name}</div>
-                          <div className="text-xs text-slate-400 mt-0.5 leading-tight">{item.desc}</div>
-                        </div>
-                      </a>
-                    ))}
-                  </div>
-                  <div className="w-60 flex-shrink-0">
-                    <div className="rounded-2xl p-5" style={{background:"linear-gradient(135deg,#1e1b4b,#312e81)"}}>
-                      <Sparkles size={20} color="#a78bfa" className="mb-3" />
-                      <h4 className="font-bold text-white text-sm mb-2">AI-First Operations</h4>
-                      <p className="text-xs text-white/55 leading-relaxed">Use AI to screen candidates, extract documents, validate data, and make smart decisions automatically.</p>
-                    </div>
-                  </div>
-                </div>
-              )}
-              {activeMenu === "industries" && (
-                <div className="grid grid-cols-4 gap-1 max-w-2xl">
-                  {industriesItems.map(item => (
-                    <a key={item.name} href="#solutions" className="mega-item flex items-center gap-2.5 px-3 py-3 rounded-lg group transition-all">
-                      <div className="w-8 h-8 rounded-lg flex items-center justify-center flex-shrink-0" style={{background:"rgba(20,184,166,0.08)"}}>
-                        <item.icon size={14} style={{color:"#14b8a6"}} />
-                      </div>
-                      <span className="text-sm font-semibold text-slate-700 group-hover:text-teal-600 transition-colors">{item.name}</span>
-                    </a>
-                  ))}
-                </div>
-              )}
-              {activeMenu === "resources" && (
-                <div className="grid grid-cols-3 gap-1 max-w-xl">
-                  {resourcesItems.map(item => (
-                    <a key={item.name} href="#contact" className="mega-item flex items-start gap-2.5 px-3 py-3 rounded-lg group transition-all">
-                      <div className="w-8 h-8 rounded-lg flex items-center justify-center flex-shrink-0" style={{background:"rgba(59,130,246,0.08)"}}>
-                        <item.icon size={14} style={{color:"#3b82f6"}} />
-                      </div>
-                      <div>
-                        <div className="text-sm font-semibold text-slate-800 group-hover:text-blue-600 transition-colors">{item.name}</div>
-                        <div className="text-xs text-slate-400 mt-0.5 leading-tight">{item.desc}</div>
-                      </div>
-                    </a>
-                  ))}
-                </div>
-              )}
-            </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
-
-      <AnimatePresence>
         {mobileOpen && (
-          <motion.div initial={{opacity:0,height:0}} animate={{opacity:1,height:"auto"}} exit={{opacity:0,height:0}}
-            className="lg:hidden overflow-hidden bg-white border-t border-slate-100 shadow-xl"
-          >
-            <div className="px-4 py-4 space-y-1">
-              {["Platform","Solutions","AI Automation","Industries","Resources","Pricing","Contact"].map(item => (
-                <a key={item} href={`#${item.toLowerCase().replace(" ","-")}`} className="flex items-center justify-between px-3 py-2.5 rounded-lg text-sm font-medium text-slate-700 hover:bg-blue-50 hover:text-blue-600 transition-colors">
-                  {item} <ChevronRight size={14} className="text-slate-400" />
-                </a>
+          <motion.div
+            initial={{ opacity: 0, height: 0 }}
+            animate={{ opacity: 1, height: 'auto' }}
+            exit={{ opacity: 0, height: 0 }}
+            transition={{ duration: 0.25 }}
+            className="lg:hidden overflow-hidden"
+            style={{ background: 'rgba(255,255,255,0.99)', borderTop: '1px solid rgba(0,0,0,0.06)' }}>
+            <div className="max-w-7xl mx-auto px-4 py-4 space-y-1 max-h-[75vh] overflow-y-auto">
+              {navItems.map(item => (
+                <div key={item}>
+                  {item === 'Contact' ? (
+                    <a href="#contact"
+                      className="block px-4 py-3 rounded-xl text-sm font-medium text-slate-600 hover:text-slate-900 hover:bg-slate-100 transition-all"
+                      style={{ fontFamily: 'var(--font-heading)' }}
+                      onClick={() => setMobile(false)}>
+                      Contact
+                    </a>
+                  ) : item === 'Pricing' ? (
+                    <Link to="/pricing"
+                      className="block px-4 py-3 rounded-xl text-sm font-medium text-slate-600 hover:text-slate-900 hover:bg-slate-100 transition-all"
+                      style={{ fontFamily: 'var(--font-heading)' }}
+                      onClick={() => setMobile(false)}>
+                      Pricing
+                    </Link>
+                  ) : (
+                    <>
+                      <button
+                        className="w-full flex items-center justify-between px-4 py-3 rounded-xl text-sm font-medium text-slate-700 hover:bg-slate-100 transition-all"
+                        style={{ fontFamily: 'var(--font-heading)' }}
+                        onClick={() => setMobileExpanded(mobileExpanded === item ? null : item)}>
+                        {item}
+                        <ChevronDown size={14} className={`transition-transform ${mobileExpanded === item ? 'rotate-180' : ''}`} />
+                      </button>
+                      <AnimatePresence>
+                        {mobileExpanded === item && menus[item] && (
+                          <motion.div
+                            initial={{ opacity: 0, height: 0 }}
+                            animate={{ opacity: 1, height: 'auto' }}
+                            exit={{ opacity: 0, height: 0 }}
+                            className="overflow-hidden pl-2">
+                            {(menus[item].groups
+                              ? menus[item].groups.flatMap(g => g.items)
+                              : menus[item].items
+                            ).slice(0, 8).map(it => (
+                              <a key={it.title} href={it.link || '#'}
+                                className="flex items-center gap-2.5 px-3 py-2 rounded-xl hover:bg-slate-100 transition-all"
+                                onClick={(e) => {
+                                  e.preventDefault()
+                                  setMobile(false)
+                                  if (it.link && it.link !== '#') {
+                                    if (it.link.includes('#')) {
+                                      const [path, hash] = it.link.startsWith('/#')
+                                        ? ['/', it.link.slice(2)]
+                                        : it.link.split('#')
+                                      navigate(path)
+                                      setTimeout(() => {
+                                        const el = document.getElementById(hash)
+                                        if (el) el.scrollIntoView({ behavior: 'smooth' })
+                                      }, 300)
+                                    } else {
+                                      navigate(it.link)
+                                    }
+                                  }
+                                }}>
+                                <div className="w-6 h-6 rounded-lg flex items-center justify-center flex-shrink-0"
+                                  style={{ background: 'rgba(59,130,246,0.15)' }}>
+                                  <it.icon size={11} style={{ color: '#3b82f6' }} />
+                                </div>
+                                <span className="text-xs font-medium text-slate-600"
+                                  style={{ fontFamily: 'var(--font-heading)' }}>{it.title}</span>
+                              </a>
+                            ))}
+                          </motion.div>
+                        )}
+                      </AnimatePresence>
+                    </>
+                  )}
+                </div>
               ))}
-              <div className="pt-3 space-y-2 border-t border-slate-100">
-                <a href="#contact" className="block w-full py-2.5 text-center rounded-xl text-sm font-semibold border border-slate-200 text-slate-700">Login</a>
-                <a href="#contact" className="block w-full py-2.5 text-center rounded-xl text-sm font-bold text-white" style={{background:"linear-gradient(135deg,#3b82f6,#06b6d4)"}}>Book a Demo</a>
+              <div className="pt-3 pb-1">
+                <Link to="/request-demo"
+                  className="btn-primary w-full justify-center text-sm py-3"
+                  style={{ fontFamily: 'var(--font-heading)' }}
+                  onClick={() => setMobile(false)}>
+                  Request Demo <ArrowRight size={13} />
+                </Link>
               </div>
             </div>
           </motion.div>

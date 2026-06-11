@@ -67,7 +67,7 @@ export default function Integrations() {
             className="rounded-3xl overflow-hidden shadow-xl border border-slate-800" style={{ background: "#0d1117" }}>
             <div className="flex items-center gap-2 px-5 py-3 border-b border-white/10">
               <div className="flex gap-1.5"><div className="w-3 h-3 rounded-full bg-red-500/70" /><div className="w-3 h-3 rounded-full bg-amber-500/70" /><div className="w-3 h-3 rounded-full bg-emerald-500/70" /></div>
-              <span className="text-xs text-white/40 font-mono ml-2">Sky LowCode API · REST v2</span>
+              <span className="text-xs text-white/40 font-mono ml-2">skiode API · REST v2</span>
               <div className="ml-auto flex items-center gap-1.5 px-2 py-1 rounded text-xs" style={{ background: "rgba(16,185,129,0.15)", color: "#10b981" }}>
                 <div className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />200 OK
               </div>

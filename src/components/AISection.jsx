@@ -106,8 +106,8 @@ function AIMockup() {
 
 export default function AISection() {
   return (
-    <section id="ai" className="py-24 relative overflow-hidden" style={{ background: 'linear-gradient(180deg, #0a1628 0%, #060e1e 100%)' }}>
-      <div className="absolute inset-0 grid-pattern" />
+    <section id="ai" className="py-24 relative overflow-hidden" style={{ background: 'linear-gradient(180deg, #f0fdfa 0%, #f8faff 100%)' }}>
+      <div className="absolute inset-0 dot-pattern-light opacity-50" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
         <div className="grid lg:grid-cols-2 gap-16 items-center">
@@ -119,7 +119,7 @@ export default function AISection() {
               viewport={{ once: true }}
               transition={{ duration: 0.5 }}
               className="inline-flex items-center gap-2 rounded-full px-4 py-1.5 text-xs font-semibold mb-5"
-              style={{ background: 'rgba(34,211,238,0.1)', border: '1px solid rgba(34,211,238,0.25)', color: '#22d3ee' }}
+              style={{ background: 'rgba(6,182,212,0.07)', border: '1px solid rgba(6,182,212,0.2)', color: '#0891b2' }}
             >
               <Brain size={12} /> AI & Automation
             </motion.div>
@@ -128,7 +128,7 @@ export default function AISection() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: 0.1 }}
-              className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white mb-5 leading-tight"
+              className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-slate-900 mb-5 leading-tight"
             >
               AI built into<br />
               <span className="gradient-text-lime">every workflow</span>
@@ -138,7 +138,7 @@ export default function AISection() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: 0.2 }}
-              className="text-base text-white/55 leading-relaxed mb-8"
+              className="text-base text-slate-600 leading-relaxed mb-8"
             >
               Use AI agents, OCR, intelligent document processing, smart validation, and automated decisioning to reduce manual work and accelerate operations across your entire organization.
             </motion.p>
@@ -153,10 +153,10 @@ export default function AISection() {
                     viewport={{ once: true }}
                     transition={{ duration: 0.5, delay: i * 0.06 }}
                     className="flex items-center gap-3 rounded-xl px-4 py-3"
-                    style={{ background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.06)' }}
+                    style={{ background: '#ffffff', border: '1px solid rgba(0,0,0,0.06)' }}
                   >
                     <Icon size={16} style={{ color: '#22d3ee' }} className="shrink-0" />
-                    <span className="text-sm text-white/70 font-medium">{f.text}</span>
+                    <span className="text-sm text-slate-700 font-medium">{f.text}</span>
                   </motion.div>
                 )
               })}

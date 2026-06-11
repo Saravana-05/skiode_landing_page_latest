@@ -1,141 +1,187 @@
-﻿import { motion } from "framer-motion"
-import { X, CheckCircle2, ArrowRight, Clock, AlertTriangle, Zap } from "lucide-react"
+import { motion } from "framer-motion"
+import {
+  FileText, GitBranch, FolderOpen, ScanText, BarChart2, Bot, Plug, Users, Cpu,
+  Sparkles, Shield, Bell, Smartphone, ArrowRight, X, Check
+} from "lucide-react"
 
-const before = [
-  { text: "Forms managed through spreadsheets and emails", pain: "2-3 days delay" },
-  { text: "Approvals stuck in email chains without tracking", pain: "No visibility" },
-  { text: "Documents scattered across folders and drives", pain: "Data lost" },
-  { text: "Manual data entry from PDFs and scanned images", pain: "High error rate" },
-  { text: "No clear ownership or task tracking system", pain: "Accountability gap" },
-  { text: "Every small change requires developer involvement", pain: "High cost" },
-  { text: "Reports compiled manually at end of week", pain: "Always outdated" },
-  { text: "HR team manually screening hundreds of resumes", pain: "Weeks wasted" },
-  { text: "Construction updates shared via WhatsApp calls", pain: "No audit trail" },
-  { text: "No visibility on pending tasks or bottlenecks", pain: "Operations stall" },
+/* ── All the old tools people juggle ── */
+const oldTools = [
+  "Excel", "Google Forms", "Paper Forms", "Visio", "Email Chains",
+  "UiPath", "Automation Anywhere", "ABBYY", "Manual Data Entry",
+  "Intercom", "Freshdesk", "WhatsApp Bots", "Zapier", "Custom APIs",
+  "Tableau", "Power BI", "SharePoint", "Dropbox", "BambooHR",
+  "Active Directory", "Flutter", "Slack Alerts", "Jira", "Trello",
 ]
 
-const after = [
-  { text: "Forms built with drag-and-drop in hours, not days", gain: "Same day" },
-  { text: "Approvals routed automatically with SLA tracking", gain: "Real-time" },
-  { text: "All documents in one secure, searchable DMS", gain: "Instant access" },
-  { text: "OCR extracts data automatically with 94%+ accuracy", gain: "Zero errors" },
-  { text: "Every task has owner, deadline, and audit trail", gain: "Full visibility" },
-  { text: "Business teams self-configure workflows visually", gain: "No dev needed" },
-  { text: "Reports generated instantly with live dashboards", gain: "Always live" },
-  { text: "AI Recruiter ranks candidates in minutes", gain: "10x faster" },
-  { text: "Construction tracked with workflows, photos, approvals", gain: "Traceable" },
-  { text: "Live dashboards show every bottleneck in real-time", gain: "Full control" },
+/* ── skiode modules ── */
+const modules = [
+  { icon: FileText, name: "Form Builder", color: "#3b82f6", bg: "#dbeafe" },
+  { icon: GitBranch, name: "Process Flow", color: "#8b5cf6", bg: "#ede9fe" },
+  { icon: Cpu, name: "RPA", color: "#ec4899", bg: "#fce7f3" },
+  { icon: ScanText, name: "OCR / AI", color: "#10b981", bg: "#d1fae5" },
+  { icon: Bot, name: "BOTS", color: "#6366f1", bg: "#e0e7ff" },
+  { icon: Plug, name: "Integration", color: "#06b6d4", bg: "#cffafe" },
+  { icon: BarChart2, name: "Dashboards", color: "#f97316", bg: "#ffedd5" },
+  { icon: FolderOpen, name: "DMS", color: "#f59e0b", bg: "#fef3c7" },
+  { icon: Users, name: "Users", color: "#3b82f6", bg: "#dbeafe" },
+  { icon: Shield, name: "Rules", color: "#10b981", bg: "#d1fae5" },
+  { icon: Smartphone, name: "Mobile", color: "#8b5cf6", bg: "#ede9fe" },
+  { icon: Bell, name: "SLA", color: "#f97316", bg: "#ffedd5" },
 ]
 
-export default function BeforeAfter() {
+export default function WhatSkiodeReplaces() {
   return (
-    <section className="py-24 bg-white overflow-hidden">
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-14">
+    <section className="py-28 relative overflow-hidden" style={{ background: "linear-gradient(180deg, #f8faff 0%, #ffffff 50%, #f8faff 100%)" }}>
+      <div className="absolute inset-0 dot-pattern-light pointer-events-none" />
+
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative">
+
+        {/* Header */}
+        <div className="text-center mb-16">
           <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}
-            className="inline-flex items-center gap-2 rounded-full px-4 py-1.5 text-xs font-semibold mb-5"
-            style={{ background: "rgba(59,130,246,0.08)", border: "1px solid rgba(59,130,246,0.2)", color: "#3b82f6" }}>
-            Platform Impact
+            className="inline-flex items-center gap-2 rounded-full px-5 py-2 text-xs font-bold mb-5"
+            style={{ background: "rgba(59,130,246,0.07)", border: "1px solid rgba(59,130,246,0.15)", color: "#3b82f6" }}>
+            <Sparkles size={12} /> BPM + Lowcode + RPA + AI — All In One
           </motion.div>
           <motion.h2 initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.1 }}
-            className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-slate-900 mb-4 leading-tight">
-            Before vs After Sky LowCode AI
+            className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-slate-900 mb-5 leading-tight">
+            One platform, <span className="gradient-text-blue">zero fragmentation</span>
           </motion.h2>
           <motion.p initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.2 }}
-            className="text-lg text-slate-500 max-w-xl mx-auto">
-            See the transformation when manual, scattered operations become automated and intelligent.
+            className="text-lg text-slate-500 max-w-2xl mx-auto leading-relaxed">
+            Stop managing a dozen subscriptions. skiode replaces them all.
           </motion.p>
         </div>
 
-        <div className="grid lg:grid-cols-11 gap-4 items-start">
-          {/* Before */}
-          <motion.div initial={{ opacity: 0, x: -40 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }}
-            className="lg:col-span-5 rounded-3xl overflow-hidden"
-            style={{ background: "linear-gradient(135deg,#fff1f2,#fff5f5)", border: "2px solid #fecdd3", boxShadow: "0 20px 60px rgba(239,68,68,0.08)" }}>
-            <div className="px-6 py-4 flex items-center gap-3" style={{ background: "linear-gradient(135deg,#fee2e2,#fef2f2)", borderBottom: "1px solid #fecdd3" }}>
-              <div className="w-9 h-9 rounded-xl bg-red-100 flex items-center justify-center">
-                <AlertTriangle size={16} className="text-red-500" />
+        {/* Two-panel comparison */}
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ delay: 0.25 }}
+          className="grid lg:grid-cols-[1fr_auto_1fr] gap-0 items-stretch"
+        >
+          {/* LEFT — chaos panel */}
+          <div className="rounded-2xl lg:rounded-r-none p-8 relative overflow-hidden"
+            style={{ background: "#f8f9fb", border: "1px solid #e2e8f0", borderRight: "none" }}>
+            {/* Label */}
+            <div className="flex items-center gap-2 mb-6">
+              <div className="w-7 h-7 rounded-lg flex items-center justify-center bg-slate-200">
+                <X size={14} className="text-slate-500" strokeWidth={3} />
               </div>
-              <div>
-                <h3 className="font-extrabold text-slate-900 text-sm">Before</h3>
-                <p className="text-xs text-red-500">Manual, scattered, and slow</p>
-              </div>
-              <div className="ml-auto px-2.5 py-1 rounded-full text-xs font-bold bg-red-100 text-red-600">10+ pain points</div>
+              <span className="text-sm font-extrabold text-slate-500 uppercase tracking-wider">Without skiode</span>
             </div>
-            <div className="p-5 space-y-2.5">
-              {before.map((b, i) => (
-                <motion.div key={i} initial={{ opacity: 0, x: -10 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.05 }}
-                  className="flex items-start justify-between gap-3 p-3 rounded-xl" style={{ background: "rgba(255,255,255,0.7)", border: "1px solid rgba(239,68,68,0.1)" }}>
-                  <div className="flex items-start gap-2.5 flex-1">
-                    <X size={13} className="text-red-400 flex-shrink-0 mt-0.5" />
-                    <span className="text-sm text-slate-600 leading-snug">{b.text}</span>
-                  </div>
-                  <span className="text-xs font-bold px-2 py-0.5 rounded-full flex-shrink-0 bg-red-50 text-red-500 whitespace-nowrap">{b.pain}</span>
-                </motion.div>
+            {/* Scattered tool pills */}
+            <div className="flex flex-wrap gap-2">
+              {oldTools.map((tool, i) => (
+                <motion.span
+                  key={tool}
+                  initial={{ opacity: 0, scale: 0.8 }}
+                  whileInView={{ opacity: 1, scale: 1 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: 0.3 + i * 0.02 }}
+                  className="px-3 py-1.5 rounded-lg text-sm font-semibold"
+                  style={{
+                    background: "white",
+                    border: "1px solid #e2e8f0",
+                    color: "#64748b",
+                    boxShadow: "0 1px 3px rgba(0,0,0,0.04)",
+                  }}>
+                  {tool}
+                </motion.span>
               ))}
             </div>
-          </motion.div>
-
-          {/* Center arrow */}
-          <div className="lg:col-span-1 flex lg:flex-col items-center justify-center gap-2 py-4">
-            <div className="w-10 h-10 rounded-full bg-white shadow-lg border border-slate-200 flex items-center justify-center">
-              <ArrowRight size={18} className="text-blue-500 hidden lg:block" />
-              <ArrowRight size={18} className="text-blue-500 lg:hidden rotate-90" />
-            </div>
-            <div className="hidden lg:flex flex-col items-center gap-1">
-              <div className="w-px h-16" style={{ background: "linear-gradient(180deg,#3b82f6,transparent)" }} />
-              <Zap size={14} className="text-blue-400" />
-              <div className="w-px h-16" style={{ background: "linear-gradient(180deg,transparent,#10b981)" }} />
+            {/* Subtle chaos markers */}
+            <div className="mt-6 flex flex-wrap gap-3 text-xs text-slate-400 font-medium">
+              <span>24+ separate licenses</span>
+              <span>·</span>
+              <span>No unified view</span>
+              <span>·</span>
+              <span>Complex integrations</span>
             </div>
           </div>
 
-          {/* After */}
-          <motion.div initial={{ opacity: 0, x: 40 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }}
-            className="lg:col-span-5 rounded-3xl overflow-hidden"
-            style={{ background: "linear-gradient(135deg,#f0fdf4,#ecfdf5)", border: "2px solid #86efac", boxShadow: "0 20px 60px rgba(16,185,129,0.08)" }}>
-            <div className="px-6 py-4 flex items-center gap-3" style={{ background: "linear-gradient(135deg,#dcfce7,#f0fdf4)", borderBottom: "1px solid #86efac" }}>
-              <div className="w-9 h-9 rounded-xl bg-emerald-100 flex items-center justify-center">
-                <Zap size={16} className="text-emerald-500" />
-              </div>
-              <div>
-                <h3 className="font-extrabold text-slate-900 text-sm">After</h3>
-                <p className="text-xs text-emerald-600">Automated, connected, and intelligent</p>
-              </div>
-              <div className="ml-auto px-2.5 py-1 rounded-full text-xs font-bold bg-emerald-100 text-emerald-700">10x outcomes</div>
+          {/* CENTER — arrow divider */}
+          <div className="hidden lg:flex flex-col items-center justify-center px-0 relative z-10">
+            <div className="w-14 h-14 rounded-full bg-white flex items-center justify-center"
+              style={{ border: "2px solid #e2e8f0", boxShadow: "0 4px 20px rgba(0,0,0,0.08)" }}>
+              <ArrowRight size={20} className="text-blue-500" />
             </div>
-            <div className="p-5 space-y-2.5">
-              {after.map((a, i) => (
-                <motion.div key={i} initial={{ opacity: 0, x: 10 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.05 }}
-                  className="flex items-start justify-between gap-3 p-3 rounded-xl" style={{ background: "rgba(255,255,255,0.8)", border: "1px solid rgba(16,185,129,0.15)" }}>
-                  <div className="flex items-start gap-2.5 flex-1">
-                    <CheckCircle2 size={13} className="text-emerald-500 flex-shrink-0 mt-0.5" />
-                    <span className="text-sm text-slate-700 font-medium leading-snug">{a.text}</span>
+          </div>
+          {/* Mobile arrow */}
+          <div className="flex lg:hidden items-center justify-center py-4">
+            <div className="w-10 h-10 rounded-full bg-white flex items-center justify-center border border-slate-200 shadow-sm rotate-90">
+              <ArrowRight size={16} className="text-blue-500" />
+            </div>
+          </div>
+
+          {/* RIGHT — skiode clean panel */}
+          <div className="rounded-2xl lg:rounded-l-none p-8 relative overflow-hidden"
+            style={{
+              background: "linear-gradient(135deg, #f0f7ff 0%, #f5f0ff 100%)",
+              border: "1px solid #dbeafe",
+              borderLeft: "none",
+            }}>
+            {/* Label */}
+            <div className="flex items-center gap-2 mb-6">
+              <div className="w-7 h-7 rounded-lg flex items-center justify-center"
+                style={{ background: "linear-gradient(135deg, #3b82f6, #8b5cf6)" }}>
+                <Check size={14} className="text-white" strokeWidth={3} />
+              </div>
+              <span className="text-sm font-extrabold uppercase tracking-wider"
+                style={{ background: "linear-gradient(135deg, #3b82f6, #8b5cf6)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }}>
+                With skiode
+              </span>
+            </div>
+            {/* Clean module grid */}
+            <div className="grid grid-cols-3 sm:grid-cols-4 gap-3">
+              {modules.map((m, i) => (
+                <motion.div
+                  key={m.name}
+                  initial={{ opacity: 0, scale: 0.8 }}
+                  whileInView={{ opacity: 1, scale: 1 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: 0.4 + i * 0.04 }}
+                  className="flex flex-col items-center gap-2 p-3 rounded-xl bg-white group hover:shadow-lg transition-all duration-300"
+                  style={{ border: "1px solid #e8edf4" }}
+                >
+                  <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-xl flex items-center justify-center transition-transform duration-300 group-hover:scale-110"
+                    style={{ background: m.bg }}>
+                    <m.icon size={20} style={{ color: m.color }} strokeWidth={1.8} />
                   </div>
-                  <span className="text-xs font-bold px-2 py-0.5 rounded-full flex-shrink-0 bg-emerald-50 text-emerald-600 whitespace-nowrap">{a.gain}</span>
+                  <span className="text-[11px] sm:text-xs font-bold text-slate-700 text-center leading-tight">{m.name}</span>
                 </motion.div>
               ))}
             </div>
-          </motion.div>
-        </div>
-
-        {/* Bottom CTA strip */}
-        <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.3 }}
-          className="mt-8 rounded-2xl p-6 flex flex-col sm:flex-row items-center justify-between gap-4"
-          style={{ background: "linear-gradient(135deg,#eff6ff,#f0f9ff)", border: "1px solid #bfdbfe" }}>
-          <div className="flex items-center gap-3">
-            <div className="w-10 h-10 rounded-xl flex items-center justify-center" style={{ background: "linear-gradient(135deg,#3b82f6,#06b6d4)" }}>
-              <Zap size={18} color="white" />
-            </div>
-            <div>
-              <p className="font-extrabold text-slate-900 text-sm">Ready to make the switch?</p>
-              <p className="text-xs text-slate-500">Join 500+ teams already using Sky LowCode AI</p>
+            {/* Benefits */}
+            <div className="mt-6 flex flex-wrap gap-3 text-xs font-semibold" style={{ color: "#3b82f6" }}>
+              <span>1 platform</span>
+              <span>·</span>
+              <span>1 license</span>
+              <span>·</span>
+              <span>Zero integration headaches</span>
             </div>
           </div>
-          <a href="#contact"
-            className="inline-flex items-center gap-2 px-6 py-2.5 rounded-xl font-bold text-sm text-white flex-shrink-0 hover:scale-105 transition-transform"
-            style={{ background: "linear-gradient(135deg,#3b82f6,#06b6d4)", boxShadow: "0 4px 16px rgba(59,130,246,0.3)" }}>
-            Start Free Trial <ArrowRight size={14} />
-          </a>
+        </motion.div>
+
+        {/* Bottom stats */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="mt-16 flex flex-wrap items-center justify-center gap-8 sm:gap-12"
+        >
+          {[
+            { num: "50+", label: "Integrations ready" },
+            { num: "5×", label: "Faster app builds" },
+            { num: "70%", label: "Cycle time reduction" },
+            { num: "10×", label: "Productivity boost" },
+          ].map(s => (
+            <div key={s.label} className="text-center">
+              <div className="text-3xl sm:text-4xl font-black gradient-text-blue">{s.num}</div>
+              <div className="text-sm text-slate-400 font-semibold mt-1">{s.label}</div>
+            </div>
+          ))}
         </motion.div>
       </div>
     </section>

@@ -1,56 +1,107 @@
-﻿import { motion } from "framer-motion"
-import { Zap, Globe, Users2, Code2, PlayCircle, Mail, Phone } from "lucide-react"
+import { Link } from 'react-router-dom'
+import { motion } from 'framer-motion'
+import { ArrowRight, Globe, Users2, Code2, PlayCircle, Mail, Phone, MapPin } from 'lucide-react'
+import skiodeLogo from '../../logo/skiode_Logo_transparent.png'
 
 const cols = [
-  { title:"Platform", links:["Forms and Core Data","Process Flow","Users and Groups","DMS","OCR and AI/ML","Dashboards and Reports","RPA","Integration","BOT Automation"] },
-  { title:"Solutions", links:["ERP Applications","Healthcare","AI Recruiter","Construction Management","HR Automation","Finance Workflows","CRM","Operations"] },
-  { title:"Resources", links:["Blog","Documentation","API Reference","Case Studies","ROI Calculator","Help Center"] },
-  { title:"Company", links:["About","Contact","Careers","Partners"] },
-  { title:"Legal", links:["Privacy Policy","Terms of Service","Security","Compliance"] },
+  {
+    title: 'Platform',
+    links: [
+      'Forms & Core Data','Process Flow','Users & Groups','DMS',
+      'OCR & AI/ML','Dashboards & Reports','RPA','Integration','BOT Automation',
+    ],
+  },
+  {
+    title: 'Solutions',
+    links: [
+      'ERP','Healthcare','AI Recruiter','Construction Management',
+      'HR Automation','Finance Workflows','CRM','Operations',
+    ],
+  },
+  {
+    title: 'Use Cases',
+    links: [
+      'Employee Onboarding','Purchase Approval','Invoice Processing',
+      'Resume Screening','Site Progress Tracking','Loan Origination',
+    ],
+  },
+  {
+    title: 'Resources',
+    links: ['Blog','Documentation','API Reference','Case Studies','ROI Calculator','Help Center'],
+  },
+  {
+    title: 'Company',
+    links: ['About','Contact','Careers','Partners','Request Demo'],
+  },
+  {
+    title: 'Legal',
+    links: ['Privacy Policy','Terms of Service','Security','Compliance'],
+  },
 ]
 
 const socials = [
-  {Icon:Globe, label:"Twitter / X"},
-  {Icon:Users2, label:"LinkedIn"},
-  {Icon:Code2, label:"GitHub"},
-  {Icon:PlayCircle, label:"YouTube"},
+  { Icon: Globe,       label: 'Website'  },
+  { Icon: Users2,      label: 'LinkedIn' },
+  { Icon: Code2,       label: 'GitHub'   },
+  { Icon: PlayCircle,  label: 'YouTube'  },
 ]
 
 export default function Footer() {
   return (
-    <footer style={{background:"#030810",borderTop:"1px solid rgba(255,255,255,0.05)"}}>
+    <footer style={{ background: '#f8fafc', borderTop: '1px solid rgba(0,0,0,0.06)' }}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-16 pb-10">
-        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-10 mb-14">
-          {/* Brand */}
+        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-7 gap-8 mb-14">
+
+          {/* Brand column */}
           <div className="col-span-2 sm:col-span-3 lg:col-span-1">
-            <a href="#" className="flex items-center gap-2 mb-4">
-              <div className="w-8 h-8 rounded-lg flex items-center justify-center" style={{background:"linear-gradient(135deg,#3b82f6,#06b6d4)"}}>
-                <Zap size={15} color="white" strokeWidth={2.5} />
-              </div>
-              <span className="font-extrabold text-base text-white">Sky <span className="gradient-text-blue">LowCode AI</span></span>
-            </a>
-            <p className="text-xs text-white/35 leading-relaxed mb-5">Enterprise-grade low-code AI platform for building, automating, and scaling business applications.</p>
+            <Link to="/" className="flex items-center mb-4">
+              <img src={skiodeLogo} alt="skiode" style={{ height: 48 }} />
+            </Link>
+            <p className="text-xs leading-relaxed mb-5" style={{ color: '#94a3b8', fontFamily: 'var(--font-body)' }}>
+              AI-powered low-code platform for building apps, automating workflows, and running intelligent business operations.
+            </p>
+
+            {/* Socials */}
             <div className="flex items-center gap-2 mb-5">
-              {socials.map(({Icon,label}) => (
-                <a key={label} href="#contact" aria-label={label}
-                  className="w-8 h-8 rounded-lg flex items-center justify-center text-white/30 hover:text-white transition-all"
-                  style={{background:"rgba(255,255,255,0.04)",border:"1px solid rgba(255,255,255,0.08)"}}>
+              {socials.map(({ Icon, label }) => (
+                <a key={label} href="#" aria-label={label}
+                  className="w-8 h-8 rounded-lg flex items-center justify-center transition-all hover:scale-110"
+                  style={{ background: 'rgba(0,0,0,0.04)', border: '1px solid rgba(0,0,0,0.06)', color: '#94a3b8' }}>
                   <Icon size={14} />
                 </a>
               ))}
             </div>
-            <a href="mailto:hello@skylowcode.ai" className="flex items-center gap-2 text-xs text-white/30 hover:text-blue-400 transition-colors">
-              <Mail size={13} /> hello@skylowcode.ai
-            </a>
+
+            {/* Contact */}
+            <div className="space-y-1.5 text-xs" style={{ color: '#94a3b8', fontFamily: 'var(--font-body)' }}>
+              <div className="flex items-center gap-2"><Mail size={11} /> hello@skiode.com</div>
+              <div className="flex items-center gap-2"><Phone size={11} /> +1 (555) 000-0000</div>
+            </div>
           </div>
 
+          {/* Link columns */}
           {cols.map(col => (
             <div key={col.title}>
-              <h4 className="text-xs font-bold text-white uppercase tracking-widest mb-4">{col.title}</h4>
-              <ul className="space-y-2.5">
+              <h4 className="text-xs font-bold uppercase tracking-widest mb-3"
+                style={{ color: '#64748b', fontFamily: 'var(--font-heading)' }}>
+                {col.title}
+              </h4>
+              <ul className="space-y-2">
                 {col.links.map(link => (
                   <li key={link}>
-                    <a href="#contact" className="text-xs text-white/35 hover:text-white/80 transition-colors block hover:translate-x-0.5 transition-all">{link}</a>
+                    {link === 'Request Demo' ? (
+                      <Link to="/request-demo"
+                        className="text-xs transition-colors hover:text-blue-600 font-semibold"
+                        style={{ color: '#3b82f6', fontFamily: 'var(--font-body)' }}>
+                        {link}
+                      </Link>
+                    ) : (
+                      <a href="#"
+                        className="text-xs transition-colors hover:text-slate-900"
+                        style={{ color: '#94a3b8', fontFamily: 'var(--font-body)' }}>
+                        {link}
+                      </a>
+                    )}
                   </li>
                 ))}
               </ul>
@@ -58,15 +109,17 @@ export default function Footer() {
           ))}
         </div>
 
-        <div className="border-t pt-6 flex flex-col sm:flex-row items-center justify-between gap-3" style={{borderColor:"rgba(255,255,255,0.06)"}}>
-          <p className="text-xs text-white/25">© 2026 Sky LowCode AI. All rights reserved.</p>
-          <div className="flex items-center gap-4 text-xs text-white/25">
-            <span>Built with React + Tailwind CSS + Framer Motion</span>
-            <div className="flex items-center gap-1.5">
-              <div className="w-1.5 h-1.5 rounded-full bg-blue-400 animate-pulse" />
-              <span>All systems operational</span>
-            </div>
-          </div>
+        {/* Bottom bar */}
+        <div className="pt-8 border-t flex flex-col sm:flex-row items-center justify-between gap-3"
+          style={{ borderColor: 'rgba(0,0,0,0.06)' }}>
+          <p className="text-xs" style={{ color: '#94a3b8', fontFamily: 'var(--font-body)' }}>
+            © 2026 skiode. All rights reserved.
+          </p>
+          <Link to="/request-demo"
+            className="flex items-center gap-1.5 text-xs font-semibold px-4 py-2 rounded-xl transition-all hover:scale-105"
+            style={{ fontFamily: 'var(--font-heading)', background: 'linear-gradient(135deg,#3b82f6,#84cc16)', color: 'white' }}>
+            Request Demo <ArrowRight size={11} />
+          </Link>
         </div>
       </div>
     </footer>

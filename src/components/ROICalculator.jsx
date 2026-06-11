@@ -46,20 +46,20 @@ export default function ROICalculator() {
   const fmtH = v => `${v}h`
 
   return (
-    <section className="py-24" id="roi" style={{ background: "linear-gradient(135deg,#0a1628,#1e1b4b)" }}>
+    <section className="py-24" id="roi" style={{ background: "linear-gradient(135deg,#f0f4ff 0%,#eef6ff 100%)" }}>
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-14">
           <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}
             className="inline-flex items-center gap-2 rounded-full px-4 py-1.5 text-xs font-semibold mb-4"
-            style={{ background: "rgba(163,230,53,0.1)", border: "1px solid rgba(163,230,53,0.25)", color: "#a3e635" }}>
+            style={{ background: "rgba(101,163,13,0.08)", border: "1px solid rgba(101,163,13,0.2)", color: "#65a30d" }}>
             <Calculator size={11} /> ROI Calculator
           </motion.div>
           <motion.h2 initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.1 }}
-            className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white mb-4">
+            className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-slate-900 mb-4">
             See your exact savings<br className="hidden sm:block" /> before you commit
           </motion.h2>
           <motion.p initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }} transition={{ delay: 0.2 }}
-            className="text-lg text-white/50 max-w-xl mx-auto">
+            className="text-lg text-slate-500 max-w-xl mx-auto">
             Drag the sliders to reflect your team. Our model calculates time and cost savings in real time.
           </motion.p>
         </div>
@@ -68,13 +68,13 @@ export default function ROICalculator() {
           {/* Sliders */}
           <motion.div initial={{ opacity: 0, x: -30 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }}
             className="rounded-3xl p-8 space-y-7"
-            style={{ background: "rgba(255,255,255,0.05)", border: "1px solid rgba(255,255,255,0.1)", backdropFilter: "blur(20px)" }}>
-            <h3 className="font-extrabold text-white text-lg mb-2">Your Organization</h3>
+            style={{ background: "#ffffff", border: "1px solid rgba(0,0,0,0.08)", boxShadow: "0 4px 24px rgba(0,0,0,0.06)" }}>
+            <h3 className="font-extrabold text-slate-900 text-lg mb-2">Your Organization</h3>
             <Slider label="Total Employees" icon={Users} color="#3b82f6" min={10} max={500} step={5} value={employees} onChange={setEmployees} format={v => `${v} people`} />
             <Slider label="Hours Wasted on Manual Work/Week" icon={Clock} color="#8b5cf6" min={2} max={40} step={1} value={hoursPerWeek} onChange={setHoursPerWeek} format={fmtH} />
             <Slider label="Average Hourly Cost (USD)" icon={DollarSign} color="#10b981" min={15} max={150} step={5} value={hourlyCost} onChange={setHourlyCost} format={v => `$${v}`} />
             <Slider label="Monthly Approval Tasks" icon={Zap} color="#f59e0b" min={10} max={500} step={10} value={approvals} onChange={setApprovals} format={v => `${v} tasks`} />
-            <div className="pt-2 text-xs text-white/30 text-center">* Based on industry benchmarks. Assumes 70% automation efficiency.</div>
+            <div className="pt-2 text-xs text-slate-400 text-center">* Based on industry benchmarks. Assumes 70% automation efficiency.</div>
           </motion.div>
 
           {/* Results */}
@@ -88,14 +88,14 @@ export default function ROICalculator() {
             ].map((r, i) => (
               <motion.div key={r.label} layout
                 className={`flex items-center justify-between px-6 py-4 rounded-2xl border transition-all ${r.large ? "py-6" : ""}`}
-                style={{ background: r.large ? `${r.color}10` : "rgba(255,255,255,0.04)", borderColor: r.large ? `${r.color}40` : "rgba(255,255,255,0.08)" }}>
+                style={{ background: r.large ? `${r.color}10` : "#ffffff", borderColor: r.large ? `${r.color}40` : "rgba(0,0,0,0.07)" }}>
                 <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 rounded-xl flex items-center justify-center flex-shrink-0" style={{ background: `${r.color}20` }}>
+                  <div className="w-10 h-10 rounded-xl flex items-center justify-center flex-shrink-0" style={{ background: `${r.color}15` }}>
                     <r.icon size={16} style={{ color: r.color }} />
                   </div>
                   <div>
-                    <div className={`font-semibold text-white ${r.large ? "text-base" : "text-sm"}`}>{r.label}</div>
-                    <div className="text-xs text-white/40">{r.sub}</div>
+                    <div className={`font-semibold text-slate-900 ${r.large ? "text-base" : "text-sm"}`}>{r.label}</div>
+                    <div className="text-xs text-slate-500">{r.sub}</div>
                   </div>
                 </div>
                 <div className={`font-extrabold flex-shrink-0 ${r.large ? "text-3xl" : "text-xl"}`} style={{ color: r.color }}>{r.value}</div>

@@ -4,8 +4,8 @@ import { ChevronDown, HelpCircle } from "lucide-react"
 
 const faqs = [
   {
-    q:"What is Sky LowCode AI?",
-    a:"Sky LowCode AI is an enterprise-grade low-code platform that helps businesses build applications, automate workflows, manage forms and data, process documents with OCR, use intelligent bots, and apply AI to business operations — all without heavy coding.",
+    q:"What is skiode?",
+    a:"skiode is an AI-led low-code platform built to simplify enterprise business operations. It combines BPM, RPA, workflow automation, process orchestration, rule engines, configurable bots, dashboards, OCR, AI/ML, and visual designing into one unified platform — enabling organizations to build apps 5x faster and achieve 10x productivity gains.",
   },
   {
     q:"Can business users build apps without coding?",
@@ -21,7 +21,7 @@ const faqs = [
   },
   {
     q:"How does OCR automation work?",
-    a:"Sky LowCode AI uses AI-powered OCR to extract text, fields, and data from uploaded documents such as invoices, IDs, medical forms, and contracts. Extracted data is mapped automatically into forms and can trigger approval workflows.",
+    a:"skiode uses AI-powered OCR to extract text, fields, and data from uploaded documents such as invoices, IDs, medical forms, and contracts. Extracted data is mapped automatically into forms and can trigger approval workflows.",
   },
   {
     q:"What is AI Recruiter?",
@@ -29,7 +29,7 @@ const faqs = [
   },
   {
     q:"Can this be used for construction management?",
-    a:"Yes. Sky LowCode AI has a dedicated construction management solution covering site progress tracking, material requests, contractor management, daily reports, safety checklists, document uploads, budget tracking, and project dashboards.",
+    a:"Yes. skiode has a dedicated construction management solution covering site progress tracking, material requests, contractor management, daily reports, safety checklists, document uploads, budget tracking, and project dashboards.",
   },
   {
     q:"Does it support role-based permissions?",
@@ -37,7 +37,7 @@ const faqs = [
   },
   {
     q:"Can it connect with existing systems?",
-    a:"Yes. The Integration module supports REST APIs, webhooks, PostgreSQL, MySQL, MongoDB, AWS, Azure, Google Cloud, Salesforce, SAP, Zoho, Slack, Email, and WhatsApp API connections with secure authentication.",
+    a:"Yes. skiode offers 50+ leading platform integrations including SAP ERP, Oracle Fusion, Tally Prime, QuickBooks, Salesforce, HubSpot, Microsoft Teams, WhatsApp API, Google Workspace, SharePoint, AWS S3, Zapier, Twilio, Power BI, and more — with full REST API and webhook support for custom integrations.",
   },
   {
     q:"How can ROI be measured?",

@@ -1,55 +1,38 @@
-﻿import Navbar from "./components/Navbar"
-import Hero from "./components/Hero"
-import TrustedBrands from "./components/TrustedBrands"
-import StatsSection from "./components/StatsSection"
-import BeforeAfter from "./components/BeforeAfter"
-import PlatformModules from "./components/PlatformModules"
-import HowItWorks from "./components/HowItWorks"
-import FormBuilder from "./components/FormBuilder"
-import ProcessFlowSection from "./components/ProcessFlowSection"
-import DevSection from "./components/DevSection"
-import OCRSection from "./components/OCRSection"
-import BotSection from "./components/BotSection"
-import AIRecruiter from "./components/AIRecruiter"
-import ConstructionSection from "./components/ConstructionSection"
-import ROICalculator from "./components/ROICalculator"
-import Solutions from "./components/Solutions"
-import Integrations from "./components/Integrations"
-import Governance from "./components/Governance"
-import TeamsSection from "./components/TeamsSection"
-import Testimonials from "./components/Testimonials"
-import Pricing from "./components/Pricing"
-import FAQ from "./components/FAQ"
-import FinalCTA from "./components/FinalCTA"
-import Footer from "./components/Footer"
+import { Routes, Route, useLocation } from 'react-router-dom'
+import { useEffect } from 'react'
+import Navbar from './components/Navbar'
+import Footer from './components/Footer'
+import ChatBot from './components/ChatBot'
+import Home from './pages/Home'
+import PlatformPage from './pages/PlatformPage'
+import PricingPage from './pages/PricingPage'
+import RequestDemo from './pages/RequestDemo'
+import ThankYou from './pages/ThankYou'
+import UseCases from './pages/UseCases'
+import Industries from './pages/Industries'
+
+function ScrollToTop() {
+  const { pathname } = useLocation()
+  useEffect(() => { window.scrollTo(0, 0) }, [pathname])
+  return null
+}
 
 export default function App() {
   return (
     <div className="overflow-x-hidden">
+      <ScrollToTop />
       <Navbar />
-      <Hero />
-      <TrustedBrands />
-      <StatsSection />
-      <BeforeAfter />
-      <PlatformModules />
-      <HowItWorks />
-      <FormBuilder />
-      <ProcessFlowSection />
-      <DevSection />
-      <OCRSection />
-      <BotSection />
-      <AIRecruiter />
-      <ConstructionSection />
-      <ROICalculator />
-      <Solutions />
-      <Integrations />
-      <Governance />
-      <TeamsSection />
-      <Testimonials />
-      <Pricing />
-      <FAQ />
-      <FinalCTA />
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/platform" element={<PlatformPage />} />
+        <Route path="/pricing" element={<PricingPage />} />
+        <Route path="/request-demo" element={<RequestDemo />} />
+        <Route path="/thank-you" element={<ThankYou />} />
+        <Route path="/use-cases" element={<UseCases />} />
+        <Route path="/industries" element={<Industries />} />
+      </Routes>
       <Footer />
+      <ChatBot />
     </div>
   )
 }

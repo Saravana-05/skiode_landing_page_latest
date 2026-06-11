@@ -63,7 +63,7 @@ export default function Personas() {
             transition={{ duration: 0.6, delay: 0.2 }}
             className="text-lg text-slate-500 max-w-xl mx-auto"
           >
-            Whether you write code or configure workflows, Sky LowCode AI adapts to how your team works best.
+            Whether you write code or configure workflows, skiode adapts to how your team works best.
           </motion.p>
         </div>
 

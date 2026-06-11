@@ -3,34 +3,34 @@ import { Users, Code, UserCheck, HardHat, Activity, BarChart2, CheckCircle2 } fr
 
 const personas = [
   {
-    icon:Users, color:"#3b82f6", bg:"rgba(59,130,246,0.08)", name:"Business Users",
-    desc:"Create forms, workflows, and reports without waiting for long development cycles. Configure your own automations.",
-    perks:["No-code app builder","Self-service workflows","Instant report generation","Form-based data collection"],
+    icon:Users, color:"#3b82f6", bg:"rgba(59,130,246,0.08)", name:"Operations & Business",
+    desc:"Automate daily processes, reduce manual follow-ups, and get real-time visibility into how work moves across your organization.",
+    perks:["Asset tracking & vendor updates","Shift scheduling & SLA monitoring","Approval routing & escalations","Live status dashboards"],
   },
   {
-    icon:Code, color:"#8b5cf6", bg:"rgba(139,92,246,0.08)", name:"Developers",
-    desc:"Extend apps with APIs, scripts, custom components, and secure integrations while business teams handle the visual layer.",
-    perks:["Full API access","Custom scripting","Webhooks and events","Reusable components"],
+    icon:Code, color:"#8b5cf6", bg:"rgba(139,92,246,0.08)", name:"IT & Developers",
+    desc:"Clear the application backlog — let business users build apps without coding while developers focus on custom integrations and extensions.",
+    perks:["Full REST API & webhooks","Inbuilt CI/CD & flow management","Custom scripting & connectors","50+ pre-built integrations"],
   },
   {
     icon:UserCheck, color:"#ec4899", bg:"rgba(236,72,153,0.08)", name:"HR Teams",
-    desc:"Use AI Recruiter to reduce manual screening, follow-ups, and interview coordination. Onboard employees faster.",
-    perks:["AI resume screening","Candidate ranking","Interview scheduling","Onboarding automation"],
+    desc:"Automate employee onboarding, leave requests, policy Q&A, and payslip downloads. Reduce HR time spent on repetitive administration.",
+    perks:["Onboarding automation","Leave management workflows","AI resume screening","Employee self-service portal"],
   },
   {
-    icon:HardHat, color:"#f59e0b", bg:"rgba(245,158,11,0.08)", name:"Construction Teams",
-    desc:"Track site work, approvals, materials, contractors, photos, and progress reports from one connected platform.",
-    perks:["Site progress tracking","Material approvals","Photo and document uploads","Safety checklists"],
+    icon:HardHat, color:"#f59e0b", bg:"rgba(245,158,11,0.08)", name:"Manufacturing & Construction",
+    desc:"Track orders from enquiry to dispatch, manage daily site reports, material requests, inspections, and quality lab testing.",
+    perks:["Sale order automation","Lab test management","Material & procurement tracking","Daily progress reports"],
   },
   {
-    icon:Activity, color:"#10b981", bg:"rgba(16,185,129,0.08)", name:"Operations Teams",
-    desc:"Automate daily processes, assign tasks, monitor status, improve accountability, and reduce manual follow-ups.",
-    perks:["Task assignment automation","Approval routing","Escalation alerts","Live status dashboards"],
+    icon:Activity, color:"#10b981", bg:"rgba(16,185,129,0.08)", name:"Finance & Procurement",
+    desc:"Streamline invoice processing, expense claims, payment tracking, purchase approvals, and vendor management with complete audit trails.",
+    perks:["Invoice & payment automation","Multi-level purchase approvals","Vendor registration workflows","Compliance & audit readiness"],
   },
   {
-    icon:BarChart2, color:"#06b6d4", bg:"rgba(6,182,212,0.08)", name:"Management",
-    desc:"Get real-time dashboards, reports, ROI visibility, and process performance insights for faster decisions.",
-    perks:["Executive dashboards","Process KPIs","ROI tracking","Audit and compliance"],
+    icon:BarChart2, color:"#06b6d4", bg:"rgba(6,182,212,0.08)", name:"CEO & Management",
+    desc:"Get complete visibility into operations, identify bottlenecks before they impact growth, and make data-driven decisions with real-time dashboards.",
+    perks:["Executive dashboards & KPIs","Process performance insights","ROI tracking & analytics","Governance & compliance"],
   },
 ]
 
@@ -50,7 +50,7 @@ export default function TeamsSection() {
           </motion.h2>
           <motion.p initial={{opacity:0,y:20}} whileInView={{opacity:1,y:0}} viewport={{once:true}} transition={{delay:0.2}}
             className="text-lg text-slate-500 max-w-xl mx-auto">
-            Whether you are in HR, IT, operations, construction, finance, or management — Sky LowCode AI is built for you.
+            Whether you are in HR, IT, operations, construction, finance, or management — skiode is built for you.
           </motion.p>
         </div>
 

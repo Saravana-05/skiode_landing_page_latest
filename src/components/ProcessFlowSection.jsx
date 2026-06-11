@@ -1,180 +1,181 @@
-﻿import { motion } from "framer-motion"
-import { CheckCircle2, GitBranch, Settings, User, Clock, Bell, Zap, AlertCircle, RefreshCw, FileOutput } from "lucide-react"
+import { motion } from "framer-motion"
+import { GitBranch, CheckCircle2, User, Clock, Bell, Zap, AlertCircle, RefreshCw, FileOutput, ArrowRight, Shield, Settings, Play } from "lucide-react"
+import { WorkflowPlaceholder } from "./Placeholders"
 
-const connectorLine = "rgba(255,255,255,0.12)"
+const nodeDetails = [
+  { icon: User,       label: "Assignee",     val: "Finance Manager",  c: "#8b5cf6" },
+  { icon: Clock,      label: "SLA Time",     val: "48 hours",         c: "#f59e0b" },
+  { icon: Bell,       label: "Notification", val: "Email + Slack",    c: "#3b82f6" },
+  { icon: Zap,        label: "Auto Escalate",val: "After 48h",        c: "#ef4444" },
+  { icon: Settings,   label: "API Trigger",  val: "POST /approve",    c: "#10b981" },
+  { icon: Shield,     label: "Audit Trail",  val: "Full log",         c: "#06b6d4" },
+]
 
-function FlowNode({ label, color, icon: Icon, type = "rect", active = false, children }) {
-  const base = "flex items-center justify-center text-xs font-bold text-white transition-all"
-  if (type === "start" || type === "end") {
-    return (
-      <div className={`${base} w-24 h-10 rounded-full shadow-lg`} style={{ background: active ? color : `${color}88`, boxShadow: active ? `0 0 20px ${color}60` : "none" }}>
-        <Icon size={12} className="mr-1.5" />{label}
-      </div>
-    )
-  }
-  if (type === "diamond") {
-    return (
-      <div className="relative w-36 h-10 flex items-center justify-center" style={{ transform: "skewX(-12deg)" }}>
-        <div className={`absolute inset-0 rounded-xl`} style={{ background: `${color}25`, border: `1.5px solid ${color}60` }} />
-        <span className="relative z-10 text-xs font-bold text-white" style={{ transform: "skewX(12deg)" }}>
-          {label}
-        </span>
-      </div>
-    )
-  }
-  return (
-    <div className={`${base} px-4 h-10 rounded-xl`}
-      style={{ background: active ? color : `${color}20`, border: `1.5px solid ${color}${active ? "ff" : "50"}`, boxShadow: active ? `0 0 16px ${color}40` : "none", minWidth: "150px" }}>
-      {Icon && <Icon size={11} className="mr-1.5 opacity-80" />}{label}
-    </div>
-  )
-}
+const analytics = [
+  { l: "Avg Completion", v: "2.4h",  c: "#10b981" },
+  { l: "SLA Breaches",   v: "2%",   c: "#3b82f6" },
+  { l: "Auto-approved",  v: "68%",  c: "#8b5cf6" },
+  { l: "This Month",     v: "1,284",c: "#f59e0b" },
+]
 
-function Arrow({ dir = "down", color = connectorLine }) {
-  if (dir === "right") return (
-    <div className="flex items-center mx-1">
-      <div className="h-px w-6" style={{ background: color }} />
-      <div className="border-l-4 border-y-4 border-y-transparent" style={{ borderLeftColor: color }} />
-    </div>
-  )
-  return (
-    <div className="flex flex-col items-center my-1">
-      <div className="w-px h-5" style={{ background: color }} />
-      <div className="border-t-4 border-x-4 border-x-transparent" style={{ borderTopColor: color }} />
-    </div>
-  )
-}
+const features = [
+  { icon: GitBranch,  label: "Visual process builder",        c: "#8b5cf6" },
+  { icon: User,       label: "Multi-level approvals",          c: "#3b82f6" },
+  { icon: Clock,      label: "SLA rules & auto-escalation",    c: "#f59e0b" },
+  { icon: Bell,       label: "Smart notifications",            c: "#06b6d4" },
+  { icon: RefreshCw,  label: "Reusable process templates",     c: "#10b981" },
+  { icon: Shield,     label: "Complete audit trail",           c: "#ec4899" },
+  { icon: Zap,        label: "API and webhook triggers",       c: "#f97316" },
+  { icon: FileOutput, label: "Automated document generation",  c: "#6366f1" },
+]
 
 export default function ProcessFlowSection() {
   return (
-    <section className="py-24 relative overflow-hidden" style={{ background: "linear-gradient(180deg,#060e1e 0%,#0a1628 100%)" }}>
-      <div className="absolute inset-0 dot-pattern pointer-events-none" />
+    <section className="py-24 relative overflow-hidden" id="process-flow" style={{ background: "linear-gradient(180deg,#faf5ff 0%,#f8faff 100%)" }}>
+      <div className="absolute inset-0 dot-pattern-light pointer-events-none opacity-60" />
+      {/* Ambient glows */}
+      <div className="absolute top-0 left-1/4 w-96 h-96 rounded-full pointer-events-none" style={{ background: "radial-gradient(circle,rgba(139,92,246,0.06) 0%,transparent 70%)", filter: "blur(80px)" }} />
+      <div className="absolute bottom-0 right-1/4 w-80 h-80 rounded-full pointer-events-none" style={{ background: "radial-gradient(circle,rgba(59,130,246,0.05) 0%,transparent 70%)", filter: "blur(80px)" }} />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
+        {/* Header */}
         <div className="text-center mb-14">
           <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}
             className="inline-flex items-center gap-2 rounded-full px-4 py-1.5 text-xs font-semibold mb-4"
-            style={{ background: "rgba(139,92,246,0.12)", border: "1px solid rgba(139,92,246,0.3)", color: "#a78bfa" }}>
+            style={{ background: "rgba(139,92,246,0.08)", border: "1px solid rgba(139,92,246,0.2)", color: "#7c3aed" }}>
             <GitBranch size={11} /> Process Flow Builder
           </motion.div>
           <motion.h2 initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.1 }}
-            className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white mb-4">
-            Design workflows visually
+            className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-slate-900 mb-4">
+            Design workflows visually.{" "}
+            <span className="bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-blue-400">Run them automatically.</span>
           </motion.h2>
-          <motion.p initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.2 }}
-            className="text-lg text-white/50 max-w-xl mx-auto">
-            Turn complex business processes into clear, automated flow diagrams with visual nodes and connectors.
+          <motion.p initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }} transition={{ delay: 0.2 }}
+            className="text-lg text-slate-500 max-w-2xl mx-auto">
+            Turn complex business processes into clear, automated flow diagrams with drag-and-drop nodes, conditional logic, SLA rules, and smart notifications.
           </motion.p>
         </div>
 
-        <div className="grid lg:grid-cols-5 gap-6">
-          {/* Workflow diagram */}
-          <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="lg:col-span-3">
-            <div className="rounded-3xl overflow-hidden" style={{ background: "rgba(255,255,255,0.03)", border: "1px solid rgba(255,255,255,0.08)" }}>
-              {/* Toolbar */}
-              <div className="flex items-center gap-2 px-5 py-3 border-b" style={{ borderColor: "rgba(255,255,255,0.07)", background: "rgba(255,255,255,0.02)" }}>
-                <GitBranch size={14} style={{ color: "#a78bfa" }} />
-                <span className="text-sm font-bold text-white">Purchase Request Workflow</span>
-                <div className="ml-auto flex items-center gap-2">
-                  <div className="flex gap-1.5">
-                    {["Nodes", "Conditions", "Actions"].map(t => (
-                      <span key={t} className="text-xs px-2.5 py-1 rounded-lg text-white/50 cursor-pointer hover:bg-white/10 transition-colors">{t}</span>
-                    ))}
+        {/* Main content */}
+        <div className="grid lg:grid-cols-5 gap-6 items-start">
+          {/* ── Left: SVG Flow Diagram ── */}
+          <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}
+            className="lg:col-span-3 rounded-3xl overflow-hidden"
+            style={{ background: "#ffffff", border: "1px solid rgba(0,0,0,0.08)", boxShadow: "0 8px 40px rgba(0,0,0,0.08)" }}>
+            {/* Toolbar */}
+            <div className="flex items-center gap-2 px-5 py-3.5 border-b" style={{ borderColor: "rgba(0,0,0,0.06)", background: "#f8fafc" }}>
+              <div className="flex gap-1.5">
+                <div className="w-3 h-3 rounded-full bg-red-500/60" />
+                <div className="w-3 h-3 rounded-full bg-yellow-500/60" />
+                <div className="w-3 h-3 rounded-full bg-green-500/60" />
+              </div>
+              <div className="flex items-center gap-2 ml-2">
+                {["Configure", "Align", "Adjust", "Undo", "Redo"].map(t => (
+                  <button key={t} className="text-xs px-2 py-1 rounded-lg text-slate-400 hover:text-slate-700 hover:bg-slate-100 transition-colors">{t}</button>
+                ))}
+              </div>
+              <div className="ml-auto flex items-center gap-2">
+                <button className="text-xs px-2.5 py-1 rounded-lg border text-slate-500" style={{ borderColor: "rgba(0,0,0,0.12)" }}>Save Locally</button>
+                <button className="text-xs px-3 py-1.5 rounded-lg font-semibold text-white flex items-center gap-1.5" style={{ background: "linear-gradient(135deg,#10b981,#059669)" }}>
+                  <Play size={9} /> Export Process
+                </button>
+                <button className="text-xs px-3 py-1.5 rounded-lg font-semibold text-white flex items-center gap-1.5" style={{ background: "linear-gradient(135deg,#8b5cf6,#6366f1)" }}>
+                  ✨ AI WAND
+                </button>
+              </div>
+            </div>
+
+            <div className="flex">
+              {/* Side node palette */}
+              <div className="w-10 flex-shrink-0 flex flex-col items-center py-4 gap-3 border-r" style={{ borderColor: "rgba(0,0,0,0.06)", background: "#f1f5f9" }}>
+                {[
+                  { icon: "⊙", label: "Start" },
+                  { icon: "□", label: "Task" },
+                  { icon: "◇", label: "Gate" },
+                  { icon: "↯", label: "Trigger" },
+                  { icon: "⊛", label: "Wait" },
+                  { icon: "⚡", label: "Action" },
+                  { icon: "⊕", label: "Script" },
+                  { icon: "📅", label: "Timer" },
+                  { icon: "🔔", label: "Notify" },
+                  { icon: "⊗", label: "End" },
+                ].map((n, i) => (
+                  <div key={i} title={n.label}
+                    className="w-7 h-7 rounded-lg flex items-center justify-center cursor-pointer transition-all hover:bg-white/10"
+                    style={{ fontSize: "12px", color: "#94a3b8" }}>
+                    {n.icon}
                   </div>
-                  <div className="flex items-center gap-1.5 px-2.5 py-1 rounded-lg text-xs font-semibold text-emerald-400" style={{ background: "rgba(16,185,129,0.1)", border: "1px solid rgba(16,185,129,0.2)" }}>
-                    <div className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" /> Live
-                  </div>
-                </div>
+                ))}
               </div>
 
-              <div className="p-6 flex flex-col items-center">
-                {/* Flow */}
-                <FlowNode label="Start" color="#10b981" icon={Zap} type="start" active />
-                <Arrow />
-                <FlowNode label="Form Submitted" color="#3b82f6" icon={CheckCircle2} active />
-                <Arrow />
-                <FlowNode label="Validate Data" color="#06b6d4" icon={CheckCircle2} />
-                <Arrow />
-                <FlowNode label="Manager Approval" color="#8b5cf6" icon={User} active />
-                <Arrow />
-                <FlowNode label="Condition: Approved?" color="#f59e0b" icon={AlertCircle} type="diamond" />
-
-                {/* Branching */}
-                <div className="flex items-start gap-8 mt-1">
-                  {/* YES */}
-                  <div className="flex flex-col items-center">
-                    <div className="flex items-center gap-1 mb-2">
-                      <div className="w-px h-4" style={{ background: connectorLine }} />
-                    </div>
-                    <span className="text-xs font-extrabold text-emerald-400 mb-2">YES</span>
-                    <FlowNode label="Generate Document" color="#10b981" icon={FileOutput} />
-                    <Arrow />
-                    <FlowNode label="Notify Stakeholders" color="#10b981" icon={Bell} />
-                    <Arrow />
-                    <FlowNode label="Completed" color="#10b981" icon={CheckCircle2} type="end" active />
-                  </div>
-                  {/* NO */}
-                  <div className="flex flex-col items-center">
-                    <div className="flex items-center gap-1 mb-2">
-                      <div className="w-px h-4" style={{ background: connectorLine }} />
-                    </div>
-                    <span className="text-xs font-extrabold text-red-400 mb-2">NO</span>
-                    <FlowNode label="Send for Correction" color="#ef4444" icon={AlertCircle} />
-                    <Arrow />
-                    <FlowNode label="Resubmit" color="#f97316" icon={RefreshCw} />
-                  </div>
-                </div>
+              {/* Workflow visual — swap WorkflowPlaceholder body with a real screenshot or SVG */}
+              <div className="flex-1 overflow-auto p-4">
+                <WorkflowPlaceholder />
               </div>
             </div>
           </motion.div>
 
-          {/* Right panels */}
-          <motion.div initial={{ opacity: 0, x: 30 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ delay: 0.2 }} className="lg:col-span-2 flex flex-col gap-4">
-            {/* Active node panel */}
-            <div className="rounded-2xl p-5" style={{ background: "rgba(255,255,255,0.04)", border: "1px solid rgba(139,92,246,0.3)" }}>
-              <div className="flex items-center gap-2 mb-4">
-                <div className="w-7 h-7 rounded-lg flex items-center justify-center" style={{ background: "rgba(139,92,246,0.2)" }}>
-                  <User size={13} style={{ color: "#a78bfa" }} />
+          {/* ── Right panels ── */}
+          <motion.div initial={{ opacity: 0, x: 30 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ delay: 0.2 }}
+            className="lg:col-span-2 flex flex-col gap-4">
+            {/* Active node config */}
+            <div className="rounded-2xl p-5" style={{ background: "rgba(139,92,246,0.08)", border: "1px solid rgba(139,92,246,0.25)" }}>
+              <div className="flex items-center gap-2.5 mb-4">
+                <div className="w-8 h-8 rounded-xl flex items-center justify-center" style={{ background: "rgba(139,92,246,0.2)" }}>
+                  <User size={14} style={{ color: "#a78bfa" }} />
                 </div>
-                <span className="text-sm font-bold text-white">Manager Approval</span>
+                <div>
+                  <div className="text-sm font-bold text-slate-900">Manager Approval</div>
+                  <div className="text-xs text-slate-400">Active node — click to configure</div>
+                </div>
                 <div className="ml-auto w-2 h-2 rounded-full bg-purple-400 animate-pulse" />
               </div>
-              <div className="space-y-3">
-                {[
-                  { icon: User, label: "Assignee", val: "Finance Manager", c: "#8b5cf6" },
-                  { icon: Clock, label: "SLA Time", val: "48 hours", c: "#f59e0b" },
-                  { icon: Bell, label: "Notification", val: "Email + Slack", c: "#3b82f6" },
-                  { icon: Zap, label: "Auto Escalate", val: "After 48h", c: "#ef4444" },
-                  { icon: Settings, label: "API Trigger", val: "POST /approve", c: "#10b981" },
-                ].map(p => (
-                  <div key={p.label} className="flex items-center justify-between p-2.5 rounded-xl" style={{ background: "rgba(255,255,255,0.04)", border: "1px solid rgba(255,255,255,0.06)" }}>
+              <div className="space-y-2">
+                {nodeDetails.map(p => (
+                  <div key={p.label} className="flex items-center justify-between px-3 py-2.5 rounded-xl" style={{ background: "#f8fafc", border: "1px solid rgba(0,0,0,0.06)" }}>
                     <div className="flex items-center gap-2">
-                      <p.icon size={12} style={{ color: p.c }} />
-                      <span className="text-xs text-white/40">{p.label}</span>
+                      <p.icon size={11} style={{ color: p.c }} />
+                      <span className="text-xs text-slate-500">{p.label}</span>
                     </div>
-                    <span className="text-xs font-bold text-white">{p.val}</span>
+                    <span className="text-xs font-semibold text-slate-800">{p.val}</span>
                   </div>
                 ))}
               </div>
             </div>
 
-            {/* Stats panel */}
-            <div className="rounded-2xl p-5" style={{ background: "rgba(255,255,255,0.04)", border: "1px solid rgba(255,255,255,0.08)" }}>
-              <p className="text-xs font-bold text-white/40 uppercase tracking-wider mb-3">Workflow Analytics</p>
+            {/* Analytics */}
+            <div className="rounded-2xl p-5" style={{ background: "#ffffff", border: "1px solid rgba(0,0,0,0.07)" }}>
+              <p className="text-xs font-bold text-slate-400 uppercase tracking-widest mb-3">Workflow Analytics</p>
               <div className="grid grid-cols-2 gap-2">
-                {[
-                  { l: "Avg Completion", v: "2.4h", c: "#10b981" },
-                  { l: "SLA Breaches", v: "2%", c: "#3b82f6" },
-                  { l: "Auto-approved", v: "68%", c: "#8b5cf6" },
-                  { l: "This Month", v: "1,284", c: "#f59e0b" },
-                ].map(s => (
-                  <div key={s.l} className="rounded-xl p-3" style={{ background: `${s.c}10`, border: `1px solid ${s.c}25` }}>
+                {analytics.map(s => (
+                  <div key={s.l} className="rounded-xl p-3" style={{ background: `${s.c}10`, border: `1px solid ${s.c}20` }}>
                     <div className="text-xl font-extrabold mb-0.5" style={{ color: s.c }}>{s.v}</div>
-                    <div className="text-xs text-white/40 leading-tight">{s.l}</div>
+                    <div className="text-xs text-slate-500 leading-tight">{s.l}</div>
                   </div>
                 ))}
               </div>
             </div>
+
+            {/* Features list */}
+            <div className="rounded-2xl p-5" style={{ background: "#f8fafc", border: "1px solid rgba(0,0,0,0.06)" }}>
+              <p className="text-xs font-bold text-slate-400 uppercase tracking-widest mb-3">Capabilities</p>
+              <div className="grid grid-cols-1 gap-1.5">
+                {features.map(f => (
+                  <div key={f.label} className="flex items-center gap-2.5">
+                    <div className="w-6 h-6 rounded-lg flex items-center justify-center flex-shrink-0" style={{ background: `${f.c}15` }}>
+                      <f.icon size={11} style={{ color: f.c }} />
+                    </div>
+                    <span className="text-xs text-slate-600">{f.label}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* CTA */}
+            <a href="#contact" className="flex items-center justify-center gap-2 py-3.5 rounded-2xl font-bold text-sm text-white transition-all hover:scale-[1.02]"
+              style={{ background: "linear-gradient(135deg,#8b5cf6,#4f46e5)", boxShadow: "0 8px 24px rgba(139,92,246,0.3)" }}>
+              Build a Process Flow <ArrowRight size={14} />
+            </a>
           </motion.div>
         </div>
       </div>
