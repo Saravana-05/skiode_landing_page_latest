@@ -101,7 +101,7 @@ function LogoCard({ brand, index }) {
 
 export default function TrustedBrands() {
   return (
-    <section className="relative py-24 overflow-hidden" style={{ background: "linear-gradient(180deg, #f8faff 0%, #ffffff 50%, #f8faff 100%)" }}>
+    <section className="relative py-14 overflow-hidden" style={{ background: "linear-gradient(180deg, #f8faff 0%, #ffffff 50%, #f8faff 100%)" }}>
       {/* Subtle background pattern */}
       <div className="absolute inset-0 dot-pattern-light opacity-30 pointer-events-none" />
 

@@ -5,6 +5,7 @@ import BeforeAfter from '../components/BeforeAfter'
 import InteractiveShowcase from '../components/InteractiveShowcase'
 import PlatformOverview from '../components/PlatformOverview'
 import ProcessFlowShowcase from '../components/ProcessFlowShowcase'
+import IntegrationsShowcase from '../components/IntegrationsShowcase'
 import FinalCTA from '../components/FinalCTA'
 
 export default function Home() {
@@ -18,6 +19,7 @@ export default function Home() {
       <div id="platform"></div>
       <PlatformOverview />
       <ProcessFlowShowcase />
+      <IntegrationsShowcase />
       <FinalCTA />
     </>
   )

@@ -163,7 +163,7 @@ export default function InteractiveShowcase() {
   }
 
   return (
-    <section className="py-28 relative overflow-hidden"
+    <section className="py-16 relative overflow-hidden"
       style={{ background: "linear-gradient(180deg, #050a18 0%, #0d1117 40%, #0a0f1a 100%)" }}>
 
       {/* Background effects */}

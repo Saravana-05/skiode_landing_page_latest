@@ -81,7 +81,7 @@ export default function PlatformOverview() {
   const pillar = pillars[active]
 
   return (
-    <section id="platform-overview" className="py-24 relative overflow-hidden" style={{ background: 'linear-gradient(180deg, #ffffff 0%, #f8faff 50%, #f0f4ff 100%)' }}>
+    <section id="platform-overview" className="py-16 relative overflow-hidden" style={{ background: 'linear-gradient(180deg, #ffffff 0%, #f8faff 50%, #f0f4ff 100%)' }}>
       <div className="absolute inset-0 pointer-events-none opacity-30"
         style={{ backgroundImage: 'radial-gradient(circle, rgba(59,130,246,0.04) 1px, transparent 1px)', backgroundSize: '32px 32px' }} />
 

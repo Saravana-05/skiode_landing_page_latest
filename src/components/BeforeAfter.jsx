@@ -31,7 +31,7 @@ const modules = [
 
 export default function WhatSkiodeReplaces() {
   return (
-    <section className="py-28 relative overflow-hidden" style={{ background: "linear-gradient(180deg, #f8faff 0%, #ffffff 50%, #f8faff 100%)" }}>
+    <section className="py-16 relative overflow-hidden" style={{ background: "linear-gradient(180deg, #f8faff 0%, #ffffff 50%, #f8faff 100%)" }}>
       <div className="absolute inset-0 dot-pattern-light pointer-events-none" />
 
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative">

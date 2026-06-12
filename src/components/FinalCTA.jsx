@@ -13,7 +13,7 @@ const badges = [
 
 export default function FinalCTA() {
   return (
-    <section id="contact" className="py-28 relative overflow-hidden">
+    <section id="contact" className="py-16 relative overflow-hidden">
       <div className="absolute inset-0" style={{background:"linear-gradient(135deg,#f0f4ff 0%,#eef6ff 50%,#f8faff 100%)"}} />
       <div className="absolute inset-0 dot-pattern-light" />
       <div className="absolute top-0 left-1/4 w-96 h-96 rounded-full pointer-events-none" style={{background:"radial-gradient(circle,rgba(59,130,246,0.08) 0%,transparent 70%)",filter:"blur(80px)"}} />

@@ -13,7 +13,7 @@ export default function PricingPage() {
   return (
     <>
       {/* Page Hero */}
-      <section className="pt-28 pb-8 relative overflow-hidden" style={{ background: 'linear-gradient(180deg, #f0f4ff 0%, #ffffff 100%)' }}>
+      <section className="pt-28 pb-2 relative overflow-hidden" style={{ background: 'linear-gradient(180deg, #f0f4ff 0%, #ffffff 100%)' }}>
         <div className="absolute inset-0 pointer-events-none opacity-30"
           style={{ backgroundImage: 'radial-gradient(circle, rgba(59,130,246,0.05) 1px, transparent 1px)', backgroundSize: '32px 32px' }} />
 
@@ -46,7 +46,7 @@ export default function PricingPage() {
             transition={{ duration: 0.6, delay: 0.2, ease }}
             className="text-lg text-slate-500 max-w-xl mx-auto"
           >
-            Start free for 6 months. Scale as you grow. No hidden fees.
+            Start free for 3 months. Scale as you grow. No hidden fees.
           </motion.p>
         </div>
       </section>

@@ -126,7 +126,7 @@ function LogoCard({ logo, i, x, y, isHighlighted }) {
 
 export default function IntegrationsShowcase() {
   return (
-    <section className="py-24 relative overflow-hidden" style={{ background: 'linear-gradient(180deg, #ffffff 0%, #f8faff 50%, #f0f4ff 100%)' }}>
+    <section className="py-16 relative overflow-hidden" style={{ background: 'linear-gradient(180deg, #ffffff 0%, #f8faff 50%, #f0f4ff 100%)' }}>
       {/* Decorative background */}
       <div className="absolute inset-0 pointer-events-none">
         <div className="absolute top-20 right-0 w-[500px] h-[500px] opacity-20" style={{ background: 'radial-gradient(circle, rgba(59,130,246,0.1), transparent 70%)' }} />

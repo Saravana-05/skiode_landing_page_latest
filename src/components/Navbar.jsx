@@ -6,7 +6,8 @@ import {
   Shield, FileText, Database, Bot, BarChart2, ScanText, Users,
   Plug, LayoutGrid, Building2, HeartPulse,
   Cpu, Factory, Truck,
-  FlaskConical, ShoppingCart, CreditCard
+  FlaskConical, ShoppingCart, CreditCard,
+  Compass, Award, Zap, Eye, Workflow, MonitorDot, Link2
 } from 'lucide-react'
 import skiodeLogo from '../../logo/skiode_Logo_transparent.png'
 
@@ -17,33 +18,28 @@ const menus = {
       {
         label: 'Build',
         items: [
-          { icon: FileText,   title: 'Form Builder',          desc: 'Drag-and-drop form canvas with 20+ field types', link: '/platform' },
-          { icon: Database,   title: 'Data Model Builder',    desc: 'Visual data architecture for any domain', link: '/platform' },
-          { icon: LayoutGrid, title: 'Page Builder',          desc: 'Build web pages and portals visually', link: '/platform' },
+          { icon: FileText,   title: 'Form Builder',          desc: 'Drag-and-drop form canvas with 20+ field types', link: '/platform/form-builder' },
         ],
       },
       {
         label: 'Automate',
         items: [
-          { icon: GitBranch,  title: 'Process Flow',          desc: 'Visual approval and workflow diagrams', link: '/platform' },
-          { icon: Cpu,        title: 'RPA',                   desc: 'Robotic process automation for repetitive work', link: '/platform' },
-          { icon: Bot,        title: 'BOT Automation',        desc: 'Deploy configurable bots across channels', link: '/platform' },
+          { icon: GitBranch,  title: 'Process Flow',          desc: 'Visual approval and workflow diagrams', link: '/platform/process-flow' },
+          { icon: Bot,        title: 'BOT & RPA',             desc: 'Deploy bots and automate repetitive tasks', link: '/platform/bots' },
         ],
       },
       {
         label: 'Intelligence',
         items: [
-          { icon: ScanText,  title: 'OCR & Document AI',     desc: 'Extract data from documents intelligently', link: '/platform' },
-          { icon: Brain,     title: 'AI/ML Engine',          desc: 'AI-powered automation and smart recommendations', link: '/platform' },
-          { icon: BarChart2, title: 'Dashboards & Reports',  desc: 'Real-time analytics and custom reports', link: '/platform' },
+          { icon: ScanText,  title: 'OCR & Document AI',     desc: 'Extract data from documents intelligently', link: '/platform/ocr' },
+          { icon: BarChart2, title: 'Dashboards & Reports',  desc: 'Real-time analytics and custom reports', link: '/platform/dashboards' },
         ],
       },
       {
         label: 'Manage',
         items: [
-          { icon: Users,     title: 'Users & Groups',        desc: 'Manage teams, roles and access policies', link: '/platform' },
-          { icon: Shield,    title: 'Role Permissions',      desc: 'Field-level and module-level access control', link: '/platform' },
-          { icon: Plug,      title: 'Integrations',          desc: '50+ pre-built API and ERP connectors', link: '/platform' },
+          { icon: Users,     title: 'Users & Permissions',   desc: 'Manage teams, roles and access policies', link: '/platform/users-permissions' },
+          { icon: Plug,      title: 'Integrations',          desc: '50+ pre-built API and ERP connectors', link: '/platform/integrations' },
         ],
       },
     ],
@@ -224,14 +220,14 @@ export default function Navbar() {
     ? { background: 'rgba(255,255,255,0.97)', backdropFilter: 'blur(20px)', borderBottom: '1px solid rgba(0,0,0,0.08)', boxShadow: '0 4px 24px rgba(0,0,0,0.08)' }
     : { background: 'rgba(255,255,255,0.92)', backdropFilter: 'blur(16px)', borderBottom: '1px solid rgba(0,0,0,0.05)' }
 
-  const navItems = ['Platform', 'Use Cases', 'Industries', 'Pricing', 'Contact']
+  const navItems = ['Platform', 'Explore', 'Use Cases', 'Industries', 'Pricing', 'Contact']
 
   return (
     <header ref={navRef} className="fixed top-0 left-0 right-0 z-50 transition-all duration-300" style={navStyle}>
       <nav className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
           <Link to="/" className="flex items-center flex-shrink-0" onClick={() => setOpenMenu(null)}>
-            <img src={skiodeLogo} alt="skiode" style={{ height: 42 }} />
+            <img src={skiodeLogo} alt="skiode" style={{ height: 60 }} />
           </Link>
 
           <div className="hidden lg:flex items-center gap-0.5">

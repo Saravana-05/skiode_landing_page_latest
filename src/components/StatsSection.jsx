@@ -68,7 +68,7 @@ const items = [
 
 export default function StatsSection() {
   return (
-    <section className="relative py-28 overflow-hidden">
+    <section className="relative py-16 overflow-hidden">
       {/* Background */}
       <div className="absolute inset-0"
         style={{ background: "linear-gradient(180deg, #0d1117 0%, #111827 50%, #0d1117 100%)" }} />
