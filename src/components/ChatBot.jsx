@@ -1,6 +1,6 @@
 import { useState, useRef, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { MessageCircle, X, Send, Bot, User, Sparkles } from 'lucide-react'
+import { MessageCircle, X, Send, Bot, User, Sparkles, ArrowUp, Grip } from 'lucide-react'
 
 const QA = [
   { q: 'what is skiode', a: 'skiode is an AI-powered low-code platform that lets you build apps, automate processes, deploy bots, and integrate with 50+ systems — all from one visual workspace. No coding required.' },
@@ -75,7 +75,9 @@ function findAnswer(input) {
 }
 
 export default function ChatBot() {
-  const [open, setOpen] = useState(false)
+  const [chatOpen, setChatOpen] = useState(false)
+  const [fabOpen, setFabOpen] = useState(false)
+  const [showScrollTop, setShowScrollTop] = useState(false)
   const [messages, setMessages] = useState([
     { from: 'bot', text: "Hi! 👋 I'm skiode AI assistant. Ask me anything about our platform — features, pricing, integrations, or how we can help your business!" }
   ])
@@ -83,14 +85,29 @@ export default function ChatBot() {
   const [typing, setTyping] = useState(false)
   const bottomRef = useRef(null)
   const inputRef = useRef(null)
+  const fabRef = useRef(null)
+
+  useEffect(() => {
+    const onScroll = () => setShowScrollTop(window.scrollY > 400)
+    window.addEventListener('scroll', onScroll)
+    return () => window.removeEventListener('scroll', onScroll)
+  }, [])
 
   useEffect(() => {
     bottomRef.current?.scrollIntoView({ behavior: 'smooth' })
   }, [messages, typing])
 
   useEffect(() => {
-    if (open) inputRef.current?.focus()
-  }, [open])
+    if (chatOpen) inputRef.current?.focus()
+  }, [chatOpen])
+
+  useEffect(() => {
+    const handler = (e) => {
+      if (fabRef.current && !fabRef.current.contains(e.target)) setFabOpen(false)
+    }
+    document.addEventListener('mousedown', handler)
+    return () => document.removeEventListener('mousedown', handler)
+  }, [])
 
   const send = (text) => {
     const msg = text || input.trim()
@@ -116,32 +133,74 @@ export default function ChatBot() {
 
   return (
     <>
-      {/* Floating button */}
+      {/* FAB Hub */}
       <AnimatePresence>
-        {!open && (
-          <motion.button
-            initial={{ scale: 0, opacity: 0 }}
-            animate={{ scale: 1, opacity: 1 }}
-            exit={{ scale: 0, opacity: 0 }}
-            transition={{ type: 'spring', stiffness: 300, damping: 20 }}
-            onClick={() => setOpen(true)}
-            className="fixed bottom-6 right-6 z-50 w-14 h-14 rounded-full flex items-center justify-center shadow-2xl group"
-            style={{
-              background: 'linear-gradient(135deg, #3b82f6, #8b5cf6)',
-              boxShadow: '0 8px 32px rgba(59,130,246,0.4)',
-            }}
-          >
-            <MessageCircle size={24} className="text-white" />
-            {/* Pulse ring */}
-            <span className="absolute inset-0 rounded-full animate-ping opacity-20"
-              style={{ background: 'linear-gradient(135deg, #3b82f6, #8b5cf6)' }} />
-          </motion.button>
+        {!chatOpen && (
+          <div ref={fabRef} className="fixed bottom-6 right-6 z-50 flex flex-col items-center gap-3">
+            {/* Expanded options */}
+            <AnimatePresence>
+              {fabOpen && (
+                <>
+                  {showScrollTop && (
+                    <motion.button
+                      initial={{ opacity: 0, scale: 0.4, y: 20 }}
+                      animate={{ opacity: 1, scale: 1, y: 0 }}
+                      exit={{ opacity: 0, scale: 0.4, y: 20 }}
+                      transition={{ duration: 0.2, delay: 0.05 }}
+                      onClick={() => { window.scrollTo({ top: 0, behavior: 'smooth' }); setFabOpen(false) }}
+                      className="w-12 h-12 rounded-full flex items-center justify-center text-white shadow-xl hover:scale-110 transition-transform cursor-pointer"
+                      style={{ background: 'linear-gradient(135deg, #10b981, #06b6d4)', boxShadow: '0 4px 20px rgba(16,185,129,0.4)' }}
+                      aria-label="Scroll to top">
+                      <ArrowUp size={20} strokeWidth={2.5} />
+                    </motion.button>
+                  )}
+                  <motion.button
+                    initial={{ opacity: 0, scale: 0.4, y: 20 }}
+                    animate={{ opacity: 1, scale: 1, y: 0 }}
+                    exit={{ opacity: 0, scale: 0.4, y: 20 }}
+                    transition={{ duration: 0.2 }}
+                    onClick={() => { setChatOpen(true); setFabOpen(false) }}
+                    className="w-12 h-12 rounded-full flex items-center justify-center text-white shadow-xl hover:scale-110 transition-transform cursor-pointer"
+                    style={{ background: 'linear-gradient(135deg, #3b82f6, #8b5cf6)', boxShadow: '0 4px 20px rgba(59,130,246,0.4)' }}
+                    aria-label="Open chat">
+                    <MessageCircle size={20} />
+                  </motion.button>
+                </>
+              )}
+            </AnimatePresence>
+
+            {/* Main FAB toggle */}
+            <motion.button
+              initial={{ scale: 0, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1, rotate: fabOpen ? 45 : 0 }}
+              transition={{ type: 'spring', stiffness: 300, damping: 20 }}
+              onClick={() => setFabOpen(!fabOpen)}
+              className="w-14 h-14 rounded-full flex items-center justify-center shadow-2xl relative"
+              style={{
+                background: fabOpen
+                  ? 'linear-gradient(135deg, #64748b, #475569)'
+                  : 'linear-gradient(135deg, #3b82f6, #8b5cf6)',
+                boxShadow: fabOpen
+                  ? '0 8px 32px rgba(100,116,139,0.4)'
+                  : '0 8px 32px rgba(59,130,246,0.4)',
+              }}>
+              {fabOpen ? (
+                <X size={22} className="text-white" />
+              ) : (
+                <Grip size={22} className="text-white" />
+              )}
+              {!fabOpen && (
+                <span className="absolute inset-0 rounded-full animate-ping opacity-20"
+                  style={{ background: 'linear-gradient(135deg, #3b82f6, #8b5cf6)' }} />
+              )}
+            </motion.button>
+          </div>
         )}
       </AnimatePresence>
 
       {/* Chat window */}
       <AnimatePresence>
-        {open && (
+        {chatOpen && (
           <motion.div
             initial={{ opacity: 0, y: 20, scale: 0.95 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
@@ -153,8 +212,7 @@ export default function ChatBot() {
               maxHeight: 'calc(100vh - 100px)',
               background: '#ffffff',
               boxShadow: '0 24px 80px rgba(0,0,0,0.15), 0 0 0 1px rgba(0,0,0,0.05)',
-            }}
-          >
+            }}>
             {/* Header */}
             <div className="flex items-center justify-between px-5 py-4 flex-shrink-0"
               style={{ background: 'linear-gradient(135deg, #3b82f6, #7c3aed)' }}>
@@ -171,7 +229,7 @@ export default function ChatBot() {
                   </div>
                 </div>
               </div>
-              <button onClick={() => setOpen(false)}
+              <button onClick={() => setChatOpen(false)}
                 className="w-8 h-8 rounded-lg flex items-center justify-center transition-all hover:bg-white/10">
                 <X size={16} className="text-white/80" />
               </button>
@@ -186,8 +244,7 @@ export default function ChatBot() {
                   initial={{ opacity: 0, y: 8 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.25 }}
-                  className={`flex gap-2 ${msg.from === 'user' ? 'justify-end' : 'justify-start'}`}
-                >
+                  className={`flex gap-2 ${msg.from === 'user' ? 'justify-end' : 'justify-start'}`}>
                   {msg.from === 'bot' && (
                     <div className="w-7 h-7 rounded-lg flex items-center justify-center flex-shrink-0 mt-0.5"
                       style={{ background: 'linear-gradient(135deg, #3b82f6, #8b5cf6)' }}>
@@ -210,13 +267,8 @@ export default function ChatBot() {
                 </motion.div>
               ))}
 
-              {/* Typing indicator */}
               {typing && (
-                <motion.div
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  className="flex gap-2 items-start"
-                >
+                <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="flex gap-2 items-start">
                   <div className="w-7 h-7 rounded-lg flex items-center justify-center flex-shrink-0"
                     style={{ background: 'linear-gradient(135deg, #3b82f6, #8b5cf6)' }}>
                     <Sparkles size={12} className="text-white" />
@@ -235,21 +287,13 @@ export default function ChatBot() {
               <div ref={bottomRef} />
             </div>
 
-            {/* Quick suggestions — only show when few messages */}
             {messages.length <= 2 && (
               <div className="px-4 py-2 flex flex-wrap gap-1.5 border-t border-slate-100"
                 style={{ background: '#fafbfc' }}>
                 {suggestions.map(s => (
-                  <button
-                    key={s}
-                    onClick={() => send(s)}
+                  <button key={s} onClick={() => send(s)}
                     className="px-3 py-1.5 rounded-full text-xs font-semibold transition-all hover:scale-105"
-                    style={{
-                      background: 'rgba(59,130,246,0.06)',
-                      border: '1px solid rgba(59,130,246,0.15)',
-                      color: '#3b82f6',
-                    }}
-                  >
+                    style={{ background: 'rgba(59,130,246,0.06)', border: '1px solid rgba(59,130,246,0.15)', color: '#3b82f6' }}>
                     {s}
                   </button>
                 ))}
@@ -267,14 +311,9 @@ export default function ChatBot() {
                 className="flex-1 text-sm bg-slate-50 rounded-xl px-4 py-2.5 outline-none focus:ring-2 focus:ring-blue-200 transition-all"
                 style={{ border: '1px solid #e2e8f0' }}
               />
-              <button
-                onClick={() => send()}
-                disabled={!input.trim()}
+              <button onClick={() => send()} disabled={!input.trim()}
                 className="w-10 h-10 rounded-xl flex items-center justify-center transition-all disabled:opacity-30 hover:scale-105"
-                style={{
-                  background: input.trim() ? 'linear-gradient(135deg, #3b82f6, #8b5cf6)' : '#f1f5f9',
-                }}
-              >
+                style={{ background: input.trim() ? 'linear-gradient(135deg, #3b82f6, #8b5cf6)' : '#f1f5f9' }}>
                 <Send size={16} className={input.trim() ? 'text-white' : 'text-slate-400'} />
               </button>
             </div>

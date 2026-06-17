@@ -57,7 +57,7 @@ export default function ProcessFlowShowcase() {
   }
 
   return (
-    <section ref={sectionRef} className="py-16 relative overflow-hidden"
+    <section id="process-flow-showcase" ref={sectionRef} className="py-16 relative overflow-hidden"
       style={{ background: 'linear-gradient(180deg, #050a18 0%, #0a0f1e 50%, #0d1225 100%)' }}>
 
       {/* Background effects */}

@@ -79,6 +79,18 @@ const menus = {
     cta: { label: 'Explore All Industries', link: '/industries' },
   },
 
+  Explore: {
+    items: [
+      { icon: Award,      title: 'Trusted Brands',       desc: 'Companies that trust skiode', link: '/#trusted-brands' },
+      { icon: Zap,        title: 'Stats & Impact',        desc: 'Our numbers speak for themselves', link: '/#stats' },
+      { icon: Eye,        title: 'Before vs After',        desc: 'See the transformation', link: '/#before-after' },
+      { icon: MonitorDot, title: 'Interactive Showcase',   desc: 'Explore features hands-on', link: '/#showcase' },
+      { icon: LayoutGrid, title: 'Platform Overview',      desc: 'All modules at a glance', link: '/#platform-overview' },
+      { icon: Workflow,   title: 'Process Flow',           desc: 'Visual workflow automation', link: '/#process-flow-showcase' },
+      { icon: Link2,      title: 'Integrations',           desc: '50+ connectors and APIs', link: '/#integrations-showcase' },
+    ],
+    cta: { label: 'View Full Homepage', link: '/' },
+  },
 }
 
 /* ── Dropdown panel ── */
@@ -220,14 +232,14 @@ export default function Navbar() {
     ? { background: 'rgba(255,255,255,0.97)', backdropFilter: 'blur(20px)', borderBottom: '1px solid rgba(0,0,0,0.08)', boxShadow: '0 4px 24px rgba(0,0,0,0.08)' }
     : { background: 'rgba(255,255,255,0.92)', backdropFilter: 'blur(16px)', borderBottom: '1px solid rgba(0,0,0,0.05)' }
 
-  const navItems = ['Platform', 'Explore', 'Use Cases', 'Industries', 'Pricing', 'Contact']
+  const navItems = ['Explore', 'Platform', 'Use Cases', 'Industries', 'Pricing', 'Contact']
 
   return (
     <header ref={navRef} className="fixed top-0 left-0 right-0 z-50 transition-all duration-300" style={navStyle}>
       <nav className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-16">
+        <div className={`flex items-center justify-between transition-all duration-300 ${scrolled ? 'h-16' : 'h-20'}`}>
           <Link to="/" className="flex items-center flex-shrink-0" onClick={() => setOpenMenu(null)}>
-            <img src={skiodeLogo} alt="skiode" style={{ height: 60 }} />
+            <img src={skiodeLogo} alt="skiode" className="transition-all duration-300" style={{ height: scrolled ? 40 : 64 }} />
           </Link>
 
           <div className="hidden lg:flex items-center gap-0.5">
@@ -288,7 +300,7 @@ export default function Navbar() {
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -8 }}
               transition={{ duration: 0.18, ease: 'easeOut' }}
-              className="absolute left-0 right-0 top-16 mx-auto"
+              className={`absolute left-0 right-0 mx-auto ${scrolled ? 'top-16' : 'top-20'}`}
               style={{ maxWidth: '1280px', padding: '0 32px' }}>
               <div className="rounded-2xl p-5 shadow-2xl"
                 style={{ background: 'rgba(255,255,255,0.99)', border: '1px solid rgba(0,0,0,0.08)', backdropFilter: 'blur(24px)' }}>
