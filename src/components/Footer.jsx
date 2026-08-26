@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom'
 import { motion } from 'framer-motion'
 import { ArrowRight, Globe, Users2, Code2, PlayCircle, Mail, Phone, MapPin } from 'lucide-react'
-import skiodeLogo from '../../logo/skiode_Logo_transparent.png'
+import skiodeLogo from '../../logo/Trimmed_skiode_logo_drkBlue_forlightbg.png'
 
 const cols = [
   {

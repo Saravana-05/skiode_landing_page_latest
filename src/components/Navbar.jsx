@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from 'react'
-import { Link, useNavigate } from 'react-router-dom'
+import { Link, useLocation, useNavigate } from 'react-router-dom'
 import { motion, AnimatePresence } from 'framer-motion'
 import {
   ChevronDown, Menu, X, ArrowRight, GitBranch, Brain,
@@ -9,7 +9,7 @@ import {
   FlaskConical, ShoppingCart, CreditCard,
   Compass, Award, Zap, Eye, Workflow, MonitorDot, Link2
 } from 'lucide-react'
-import skiodeLogo from '../../logo/skiode_Logo_transparent.png'
+import skiodeLogo from '../../logo/Trimmed_skiode_logo_drkBlue_forlightbg.png'
 
 /* ── Mega menu data ── */
 const menus = {
@@ -126,23 +126,23 @@ function MegaPanel({ name, data, close, navigate }) {
   if (name === 'Platform') {
     return (
       <div className="flex gap-6">
-        <div className="grid grid-cols-4 gap-4 flex-1">
+        <div className="grid grid-cols-4 gap-3 flex-1">
           {data.groups.map(grp => (
-            <div key={grp.label}>
-              <p className="text-xs font-bold uppercase tracking-widest mb-2"
+            <div key={grp.label} className="mega-group rounded-xl p-2.5">
+              <p className="mega-label px-1 text-[11px] font-medium uppercase tracking-[0.14em] mb-2"
                 style={{ color: '#94a3b8', fontFamily: 'var(--font-heading)' }}>{grp.label}</p>
               <div className="space-y-0.5">
                 {grp.items.map(it => (
                   <a key={it.title} href={it.link || '#'} onClick={(e) => handleClick(e, it.link)}
-                    className="mega-item flex items-start gap-2.5 px-2.5 py-2 rounded-xl group cursor-pointer">
-                    <div className="w-7 h-7 rounded-lg flex items-center justify-center flex-shrink-0 mt-0.5"
-                      style={{ background: 'rgba(59,130,246,0.15)' }}>
-                      <it.icon size={13} style={{ color: '#3b82f6' }} />
+                    className="mega-item flex items-start gap-3 px-2.5 py-2.5 rounded-xl group cursor-pointer">
+                    <div className="mega-icon w-8 h-8 rounded-lg flex items-center justify-center flex-shrink-0"
+                      style={{ background: 'rgba(20,64,101,0.09)', border: '1px solid rgba(20,64,101,0.08)' }}>
+                      <it.icon size={14} style={{ color: '#164065' }} />
                     </div>
                     <div>
-                      <div className="text-xs font-semibold text-slate-800 group-hover:text-blue-600 transition-colors"
+                      <div className="mega-title text-xs font-medium tracking-[0.06em] text-slate-800 transition-colors"
                         style={{ fontFamily: 'var(--font-heading)' }}>{it.title}</div>
-                      <div className="text-xs leading-tight mt-0.5"
+                      <div className="mega-copy text-xs tracking-[0.035em] leading-tight mt-0.5"
                         style={{ color: '#64748b', fontFamily: 'var(--font-body)' }}>{it.desc}</div>
                     </div>
                   </a>
@@ -151,21 +151,20 @@ function MegaPanel({ name, data, close, navigate }) {
             </div>
           ))}
         </div>
-        <div className="w-52 flex-shrink-0 rounded-2xl p-4 flex flex-col justify-between"
-          style={{ background: 'linear-gradient(135deg,rgba(59,130,246,0.15),rgba(132,204,22,0.1))', border: '1px solid rgba(59,130,246,0.25)' }}>
+        <div className="mega-feature w-56 flex-shrink-0 rounded-xl p-4 flex flex-col justify-between">
           <div>
             <div className="w-9 h-9 rounded-xl flex items-center justify-center mb-3"
-              style={{ background: 'linear-gradient(135deg,#3b82f6,#84cc16)' }}>
+              style={{ background: '#164065' }}>
               <LayoutGrid size={16} color="white" />
             </div>
-            <div className="text-sm font-bold text-slate-900 mb-1.5"
+            <div className="mega-title text-sm font-medium tracking-[0.06em] text-slate-900 mb-1.5"
               style={{ fontFamily: 'var(--font-heading)' }}>{data.featured.title}</div>
-            <p className="text-xs leading-relaxed"
+            <p className="mega-copy text-xs tracking-[0.035em] leading-relaxed"
               style={{ color: '#64748b', fontFamily: 'var(--font-body)' }}>{data.featured.desc}</p>
           </div>
           <a href={data.featured.link || '#'} onClick={(e) => handleClick(e, data.featured.link)}
-            className="mt-4 flex items-center gap-1.5 text-xs font-bold px-3 py-2 rounded-xl transition-all hover:scale-105"
-            style={{ background: 'linear-gradient(135deg,#3b82f6,#2563eb)', color: 'white', fontFamily: 'var(--font-heading)' }}>
+            className="mt-4 flex items-center gap-1.5 text-xs font-medium tracking-[0.06em] px-3 py-2 rounded-xl transition-all hover:scale-105"
+            style={{ background: '#164065', color: 'white', fontFamily: 'var(--font-heading)', boxShadow: '0 8px 20px rgba(20,64,101,0.18)' }}>
             {data.featured.cta} <ArrowRight size={11} />
           </a>
         </div>
@@ -179,24 +178,24 @@ function MegaPanel({ name, data, close, navigate }) {
       <div className="grid gap-1" style={{ gridTemplateColumns: `repeat(${cols}, minmax(0,1fr))` }}>
         {data.items.map(it => (
           <a key={it.title} href={it.link || '#'} onClick={(e) => handleClick(e, it.link)}
-            className="mega-item flex items-start gap-2.5 px-3 py-2.5 rounded-xl group cursor-pointer">
-            <div className="w-7 h-7 rounded-lg flex items-center justify-center flex-shrink-0 mt-0.5"
-              style={{ background: 'rgba(59,130,246,0.15)' }}>
-              <it.icon size={13} style={{ color: '#3b82f6' }} />
+            className="mega-item flex items-start gap-3 px-3 py-3 rounded-xl group cursor-pointer">
+            <div className="mega-icon w-8 h-8 rounded-lg flex items-center justify-center flex-shrink-0"
+              style={{ background: 'rgba(20,64,101,0.09)', border: '1px solid rgba(20,64,101,0.08)' }}>
+              <it.icon size={14} style={{ color: '#164065' }} />
             </div>
             <div>
-              <div className="text-xs font-semibold text-slate-800 group-hover:text-blue-600 transition-colors"
+              <div className="mega-title text-xs font-medium tracking-[0.06em] text-slate-800 transition-colors"
                 style={{ fontFamily: 'var(--font-heading)' }}>{it.title}</div>
-              <div className="text-xs leading-tight mt-0.5"
+              <div className="mega-copy text-xs tracking-[0.035em] leading-tight mt-0.5"
                 style={{ color: '#64748b', fontFamily: 'var(--font-body)' }}>{it.desc}</div>
             </div>
           </a>
         ))}
       </div>
       {data.cta && (
-        <div className="mt-3 pt-3" style={{ borderTop: '1px solid rgba(0,0,0,0.06)' }}>
+        <div className="mega-footer mt-3 flex justify-end pt-3">
           <a href={data.cta.link} onClick={(e) => handleClick(e, data.cta.link)}
-            className="flex items-center gap-1.5 px-3 py-2 text-xs font-bold text-blue-600 hover:text-blue-700 transition-colors"
+            className="mega-footer-link inline-flex items-center gap-2 rounded-lg bg-[#164065] px-4 py-2.5 text-xs font-medium tracking-[0.06em] text-white transition-all hover:-translate-y-0.5 hover:bg-[#0f3555]"
             style={{ fontFamily: 'var(--font-heading)' }}>
             {data.cta.label} <ArrowRight size={11} />
           </a>
@@ -209,16 +208,39 @@ function MegaPanel({ name, data, close, navigate }) {
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false)
   const [openMenu, setOpenMenu] = useState(null)
+  const [activeMenu, setActiveMenu] = useState('Home')
   const [mobileOpen, setMobile] = useState(false)
   const [mobileExpanded, setMobileExpanded] = useState(null)
   const navRef = useRef(null)
   const navigate = useNavigate()
+  const location = useLocation()
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 20)
     window.addEventListener('scroll', onScroll)
     return () => window.removeEventListener('scroll', onScroll)
   }, [])
+
+  useEffect(() => {
+    const closeOnEscape = (event) => {
+      if (event.key === 'Escape') {
+        setOpenMenu(null)
+        setMobile(false)
+      }
+    }
+    document.addEventListener('keydown', closeOnEscape)
+    return () => document.removeEventListener('keydown', closeOnEscape)
+  }, [])
+
+  useEffect(() => {
+    setOpenMenu(null)
+    setMobile(false)
+    if (location.pathname.startsWith('/platform')) setActiveMenu('Platform')
+    else if (location.pathname === '/use-cases') setActiveMenu('Use Cases')
+    else if (location.pathname === '/industries') setActiveMenu('Industries')
+    else if (location.pathname === '/pricing') setActiveMenu('Pricing')
+    else if (location.pathname === '/') setActiveMenu(current => ['Explore', 'Contact'].includes(current) ? current : 'Home')
+  }, [location.pathname])
 
   useEffect(() => {
     const handler = (e) => {
@@ -229,47 +251,87 @@ export default function Navbar() {
   }, [])
 
   const navStyle = scrolled
-    ? { background: 'rgba(255,255,255,0.97)', backdropFilter: 'blur(20px)', borderBottom: '1px solid rgba(0,0,0,0.08)', boxShadow: '0 4px 24px rgba(0,0,0,0.08)' }
-    : { background: 'rgba(255,255,255,0.92)', backdropFilter: 'blur(16px)', borderBottom: '1px solid rgba(0,0,0,0.05)' }
+    ? { background: 'rgba(255,255,255,0.94)', backdropFilter: 'blur(22px)', boxShadow: '0 10px 30px rgba(20,64,101,0.08)' }
+    : { background: 'rgba(255,255,255,0.90)', backdropFilter: 'blur(18px)' }
 
-  const navItems = ['Explore', 'Platform', 'Use Cases', 'Industries', 'Pricing', 'Contact']
+  const navItems = ['Home', 'Explore', 'Platform', 'Use Cases', 'Industries', 'Pricing', 'Contact']
+
+  const isActive = (item) => {
+    if (item === 'Home') return location.pathname === '/' && activeMenu === 'Home'
+    if (item === 'Explore') return location.pathname === '/' && activeMenu === 'Explore'
+    if (item === 'Contact') return location.pathname === '/' && activeMenu === 'Contact'
+    if (item === 'Platform') return location.pathname.startsWith('/platform')
+    if (item === 'Use Cases') return location.pathname === '/use-cases'
+    if (item === 'Industries') return location.pathname === '/industries'
+    if (item === 'Pricing') return location.pathname === '/pricing'
+    return false
+  }
+
+  const goToContact = (event) => {
+    event.preventDefault()
+    setOpenMenu(null)
+    setMobile(false)
+    setActiveMenu('Contact')
+    if (location.pathname !== '/') navigate('/')
+    setTimeout(() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' }), location.pathname === '/' ? 0 : 300)
+  }
 
   return (
     <header ref={navRef} className="fixed top-0 left-0 right-0 z-50 transition-all duration-300" style={navStyle}>
-      <nav className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="absolute inset-x-0 top-0 h-[2px] bg-gradient-to-r from-[#164065] via-[#2f759f] to-[#7ee600]" aria-hidden="true" />
+      <nav className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8" aria-label="Primary navigation">
         <div className={`flex items-center justify-between transition-all duration-300 ${scrolled ? 'h-16' : 'h-20'}`}>
-          <Link to="/" className="flex items-center flex-shrink-0" onClick={() => setOpenMenu(null)}>
-            <img src={skiodeLogo} alt="skiode" className="transition-all duration-300" style={{ height: scrolled ? 40 : 64 }} />
-          </Link>
+          <div className="flex items-center gap-3">
+            <Link to="/" className="flex items-center flex-shrink-0 rounded-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#7ee600] focus-visible:ring-offset-4" onClick={() => { setOpenMenu(null); setActiveMenu('Home') }} aria-label="Skiode home">
+              <img src={skiodeLogo} alt="skiode" className="w-auto object-contain transition-all duration-300" style={{ height: scrolled ? 37 : 46 }} />
+            </Link>
+          </div>
 
-          <div className="hidden lg:flex items-center gap-0.5">
+          <div className="hidden lg:flex items-center gap-1 rounded-2xl bg-[#f5f8fb]/90 p-1.5 shadow-[inset_0_1px_0_rgba(255,255,255,0.9)]">
             {navItems.map(item => (
               <div key={item} className="relative">
-                {item === 'Contact' ? (
-                  <a href="#contact"
-                    className="px-3 py-2 text-sm font-medium text-slate-500 hover:text-slate-900 transition-colors rounded-lg hover:bg-slate-100"
+                {item === 'Home' ? (
+                  <Link to="/"
+                    className={`relative px-3.5 py-2 text-base font-medium transition-colors rounded-xl hover:bg-white ${isActive(item) ? 'bg-white text-[#164065] shadow-sm' : 'text-[#49647a] hover:text-[#164065]'}`}
                     style={{ fontFamily: 'var(--font-heading)' }}
-                    onClick={() => setOpenMenu(null)}>
+                    onClick={() => { setOpenMenu(null); setActiveMenu('Home') }}>
+                    Home
+                    {isActive(item) && <span className="absolute -bottom-0.5 left-1/2 h-1 w-1 -translate-x-1/2 rounded-full bg-[#7ee600]" />}
+                  </Link>
+                ) : item === 'Contact' ? (
+                  <a href="/#contact"
+                    className={`relative px-3.5 py-2 text-base font-medium transition-colors rounded-xl hover:bg-white ${isActive(item) ? 'bg-white text-[#164065] shadow-sm' : 'text-[#49647a] hover:text-[#164065]'}`}
+                    style={{ fontFamily: 'var(--font-heading)' }}
+                    onClick={goToContact}>
                     Contact
+                    {isActive(item) && <span className="absolute -bottom-0.5 left-1/2 h-1 w-1 -translate-x-1/2 rounded-full bg-[#7ee600]" />}
                   </a>
                 ) : item === 'Pricing' ? (
                   <Link to="/pricing"
-                    className="px-3 py-2 text-sm font-medium text-slate-500 hover:text-slate-900 transition-colors rounded-lg hover:bg-slate-100"
+                    className={`relative px-3.5 py-2 text-base font-medium transition-colors rounded-xl hover:bg-white ${isActive(item) ? 'bg-white text-[#164065] shadow-sm' : 'text-[#49647a] hover:text-[#164065]'}`}
                     style={{ fontFamily: 'var(--font-heading)' }}
-                    onClick={() => setOpenMenu(null)}>
+                    onClick={() => { setOpenMenu(null); setActiveMenu('Pricing') }}>
                     Pricing
+                    {isActive(item) && <span className="absolute -bottom-0.5 left-1/2 h-1 w-1 -translate-x-1/2 rounded-full bg-[#7ee600]" />}
                   </Link>
                 ) : (
                   <button
-                    className="flex items-center gap-1 px-3 py-2 text-sm font-medium rounded-lg transition-all"
+                    className="relative flex items-center gap-1.5 px-3.5 py-2 text-base font-medium rounded-xl transition-all hover:bg-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#7ee600]/70"
                     style={{
                       fontFamily: 'var(--font-heading)',
-                      color: openMenu === item ? '#1e293b' : '#475569',
-                      background: openMenu === item ? 'rgba(59,130,246,0.07)' : 'transparent',
+                      color: openMenu === item || isActive(item) ? '#164065' : '#49647a',
+                      background: openMenu === item || isActive(item) ? '#ffffff' : 'transparent',
+                      boxShadow: openMenu === item || isActive(item) ? '0 1px 4px rgba(20,64,101,0.10)' : 'none',
                     }}
-                    onClick={() => setOpenMenu(openMenu === item ? null : item)}>
+                    aria-expanded={openMenu === item}
+                    aria-haspopup="true"
+                    onClick={() => {
+                      setActiveMenu(item)
+                      setOpenMenu(openMenu === item ? null : item)
+                    }}>
                     {item}
                     <ChevronDown size={13} className={`transition-transform duration-200 ${openMenu === item ? 'rotate-180' : ''}`} />
+                    {(openMenu === item || isActive(item)) && <span className="absolute -bottom-0.5 left-1/2 h-1 w-1 -translate-x-1/2 rounded-full bg-[#7ee600]" />}
                   </button>
                 )}
               </div>
@@ -278,15 +340,20 @@ export default function Navbar() {
 
           <div className="hidden lg:flex items-center gap-2">
             <Link to="/request-demo"
-              className="btn-primary text-sm px-5 py-2.5"
+              className="group inline-flex items-center gap-3 rounded-xl bg-[#164065] py-2 pl-5 pr-2 text-base font-medium text-white shadow-[0_8px_20px_rgba(20,64,101,0.22)] transition-all hover:-translate-y-0.5 hover:bg-[#0f3555] hover:shadow-[0_12px_26px_rgba(20,64,101,0.28)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#7ee600] focus-visible:ring-offset-2"
               style={{ fontFamily: 'var(--font-heading)' }}
               onClick={() => setOpenMenu(null)}>
-              Request Demo <ArrowRight size={13} />
+              Request Demo
+              <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-[#7ee600] text-[#164065] transition-transform group-hover:translate-x-0.5">
+                <ArrowRight size={14} strokeWidth={2.5} />
+              </span>
             </Link>
           </div>
 
-          <button className="lg:hidden p-2 rounded-xl text-slate-600 hover:text-slate-900 transition-colors"
-            style={{ background: 'rgba(0,0,0,0.05)' }}
+          <button className="lg:hidden p-2.5 rounded-xl text-[#164065] transition-colors hover:bg-[#eef5f8] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#7ee600]"
+            style={{ background: 'rgba(20,64,101,0.06)' }}
+            aria-label={mobileOpen ? 'Close navigation menu' : 'Open navigation menu'}
+            aria-expanded={mobileOpen}
             onClick={() => setMobile(!mobileOpen)}>
             {mobileOpen ? <X size={20} /> : <Menu size={20} />}
           </button>
@@ -296,15 +363,14 @@ export default function Navbar() {
           {openMenu && menus[openMenu] && (
             <motion.div
               key={openMenu}
-              initial={{ opacity: 0, y: -8 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -8 }}
-              transition={{ duration: 0.18, ease: 'easeOut' }}
+              initial={{ opacity: 0, y: 10, scale: 0.985 }}
+              animate={{ opacity: 1, y: 0, scale: 1 }}
+              exit={{ opacity: 0, y: 6, scale: 0.99 }}
+              transition={{ duration: 0.2, ease: [0.22, 1, 0.36, 1] }}
               className={`absolute left-0 right-0 mx-auto ${scrolled ? 'top-16' : 'top-20'}`}
               style={{ maxWidth: '1280px', padding: '0 32px' }}>
-              <div className="rounded-2xl p-5 shadow-2xl"
-                style={{ background: 'rgba(255,255,255,0.99)', border: '1px solid rgba(0,0,0,0.08)', backdropFilter: 'blur(24px)' }}>
-                <MegaPanel name={openMenu} data={menus[openMenu]} close={() => setOpenMenu(null)} navigate={navigate} />
+              <div className="mega-panel overflow-hidden rounded-2xl p-4 shadow-[0_22px_55px_rgba(20,64,101,0.24)]">
+                <MegaPanel name={openMenu} data={menus[openMenu]} close={() => { setActiveMenu(openMenu); setOpenMenu(null) }} navigate={navigate} />
               </div>
             </motion.div>
           )}
@@ -319,30 +385,40 @@ export default function Navbar() {
             exit={{ opacity: 0, height: 0 }}
             transition={{ duration: 0.25 }}
             className="lg:hidden overflow-hidden"
-            style={{ background: 'rgba(255,255,255,0.99)', borderTop: '1px solid rgba(0,0,0,0.06)' }}>
+            style={{ background: 'rgba(255,255,255,0.99)' }}>
             <div className="max-w-7xl mx-auto px-4 py-4 space-y-1 max-h-[75vh] overflow-y-auto">
               {navItems.map(item => (
                 <div key={item}>
-                  {item === 'Contact' ? (
-                    <a href="#contact"
-                      className="block px-4 py-3 rounded-xl text-sm font-medium text-slate-600 hover:text-slate-900 hover:bg-slate-100 transition-all"
+                  {item === 'Home' ? (
+                    <Link to="/"
+                      className={`block px-4 py-3 rounded-xl text-base font-medium transition-all ${isActive(item) ? 'bg-[#164065]/[0.06] text-[#164065]' : 'text-slate-600 hover:text-slate-900 hover:bg-slate-100'}`}
                       style={{ fontFamily: 'var(--font-heading)' }}
-                      onClick={() => setMobile(false)}>
+                      onClick={() => { setMobile(false); setActiveMenu('Home') }}>
+                      Home
+                    </Link>
+                  ) : item === 'Contact' ? (
+                    <a href="/#contact"
+                      className={`block px-4 py-3 rounded-xl text-base font-medium transition-all ${isActive(item) ? 'bg-[#164065]/[0.06] text-[#164065]' : 'text-slate-600 hover:text-slate-900 hover:bg-slate-100'}`}
+                      style={{ fontFamily: 'var(--font-heading)' }}
+                      onClick={goToContact}>
                       Contact
                     </a>
                   ) : item === 'Pricing' ? (
                     <Link to="/pricing"
-                      className="block px-4 py-3 rounded-xl text-sm font-medium text-slate-600 hover:text-slate-900 hover:bg-slate-100 transition-all"
+                      className="block px-4 py-3 rounded-xl text-base font-medium text-slate-600 hover:text-slate-900 hover:bg-slate-100 transition-all"
                       style={{ fontFamily: 'var(--font-heading)' }}
-                      onClick={() => setMobile(false)}>
+                      onClick={() => { setMobile(false); setActiveMenu('Pricing') }}>
                       Pricing
                     </Link>
                   ) : (
                     <>
                       <button
-                        className="w-full flex items-center justify-between px-4 py-3 rounded-xl text-sm font-medium text-slate-700 hover:bg-slate-100 transition-all"
+                        className="w-full flex items-center justify-between px-4 py-3 rounded-xl text-base font-medium text-slate-700 hover:bg-slate-100 transition-all"
                         style={{ fontFamily: 'var(--font-heading)' }}
-                        onClick={() => setMobileExpanded(mobileExpanded === item ? null : item)}>
+                        onClick={() => {
+                          setActiveMenu(item)
+                          setMobileExpanded(mobileExpanded === item ? null : item)
+                        }}>
                         {item}
                         <ChevronDown size={14} className={`transition-transform ${mobileExpanded === item ? 'rotate-180' : ''}`} />
                       </button>
@@ -394,10 +470,13 @@ export default function Navbar() {
               ))}
               <div className="pt-3 pb-1">
                 <Link to="/request-demo"
-                  className="btn-primary w-full justify-center text-sm py-3"
+                  className="group flex w-full items-center justify-between rounded-xl bg-[#164065] py-2 pl-5 pr-2 text-base font-medium text-white shadow-[0_10px_24px_rgba(20,64,101,0.20)] transition-all active:scale-[0.99]"
                   style={{ fontFamily: 'var(--font-heading)' }}
                   onClick={() => setMobile(false)}>
-                  Request Demo <ArrowRight size={13} />
+                  <span className="flex-1 text-center">Request Demo</span>
+                  <span className="flex h-9 w-9 items-center justify-center rounded-lg bg-[#7ee600] text-[#164065]">
+                    <ArrowRight size={14} strokeWidth={2.5} />
+                  </span>
                 </Link>
               </div>
             </div>

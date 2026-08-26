@@ -52,6 +52,8 @@ const row2 = [
   { name: "TEAM", logo: team },
 ]
 
+export const trustedBrands = [...row1, ...row2]
+
 const doubled1 = [...row1, ...row1]
 const doubled2 = [...row2, ...row2]
 

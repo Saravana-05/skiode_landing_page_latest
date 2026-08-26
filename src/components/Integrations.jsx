@@ -72,7 +72,7 @@ export default function Integrations() {
                 <div className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />200 OK
               </div>
             </div>
-            <div className="p-5 font-mono text-sm space-y-2.5" style={{ fontFamily: "'Fira Code',monospace" }}>
+            <div className="p-5 text-sm space-y-2.5" style={{ fontFamily: 'Calibri' }}>
               <div><span className="text-blue-400">POST</span> <span className="text-white/80">/api/v2/workflows/trigger</span></div>
               <div className="text-white/30 text-xs mt-1">// Request payload</div>
               <div className="rounded-xl p-4 space-y-1" style={{ background: "rgba(255,255,255,0.04)", border: "1px solid rgba(255,255,255,0.08)" }}>

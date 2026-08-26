@@ -25,19 +25,19 @@ export default function SkiodeLogo({ variant = "full", size = 36, className = ""
         aria-label="skiode"
       >
         {/* s */}
-        <text x="4" y="36" fontFamily="'Inter','Helvetica Neue',Arial,sans-serif" fontWeight="800" fontSize="34" fill="white">s</text>
+        <text x="4" y="36" fontFamily="Calibri" fontWeight="800" fontSize="34" fill="white">s</text>
         {/* k */}
-        <text x="26" y="36" fontFamily="'Inter','Helvetica Neue',Arial,sans-serif" fontWeight="800" fontSize="34" fill="white">k</text>
+        <text x="26" y="36" fontFamily="Calibri" fontWeight="800" fontSize="34" fill="white">k</text>
         {/* i stem — blue */}
-        <text x="50" y="36" fontFamily="'Inter','Helvetica Neue',Arial,sans-serif" fontWeight="800" fontSize="34" fill="#3b82f6">i</text>
+        <text x="50" y="36" fontFamily="Calibri" fontWeight="800" fontSize="34" fill="#3b82f6">i</text>
         {/* i dot — lime green, replaces the font dot */}
         <circle cx="57" cy="7" r="4.5" fill="#84cc16" />
         {/* o — blue */}
-        <text x="62" y="36" fontFamily="'Inter','Helvetica Neue',Arial,sans-serif" fontWeight="800" fontSize="34" fill="#3b82f6">o</text>
+        <text x="62" y="36" fontFamily="Calibri" fontWeight="800" fontSize="34" fill="#3b82f6">o</text>
         {/* d */}
-        <text x="88" y="36" fontFamily="'Inter','Helvetica Neue',Arial,sans-serif" fontWeight="800" fontSize="34" fill="white">d</text>
+        <text x="88" y="36" fontFamily="Calibri" fontWeight="800" fontSize="34" fill="white">d</text>
         {/* e */}
-        <text x="113" y="36" fontFamily="'Inter','Helvetica Neue',Arial,sans-serif" fontWeight="800" fontSize="34" fill="white">e</text>
+        <text x="113" y="36" fontFamily="Calibri" fontWeight="800" fontSize="34" fill="white">e</text>
       </svg>
     )
   }
@@ -60,19 +60,19 @@ export default function SkiodeLogo({ variant = "full", size = 36, className = ""
       <rect width="880" height="200" rx="36" fill="#3a3a3a" />
 
       {/* s — white */}
-      <text x="60" y="148" fontFamily="'Inter','Helvetica Neue',Arial,sans-serif" fontWeight="800" fontSize="130" fill="white">s</text>
+      <text x="60" y="148" fontFamily="Calibri" fontWeight="800" fontSize="130" fill="white">s</text>
       {/* k — white */}
-      <text x="178" y="148" fontFamily="'Inter','Helvetica Neue',Arial,sans-serif" fontWeight="800" fontSize="130" fill="white">k</text>
+      <text x="178" y="148" fontFamily="Calibri" fontWeight="800" fontSize="130" fill="white">k</text>
       {/* i — blue stem (dotless), green dot manually placed */}
-      <text x="320" y="148" fontFamily="'Inter','Helvetica Neue',Arial,sans-serif" fontWeight="800" fontSize="130" fill="#3b82f6">i</text>
+      <text x="320" y="148" fontFamily="Calibri" fontWeight="800" fontSize="130" fill="#3b82f6">i</text>
       {/* i dot — lime green */}
       <circle cx="344" cy="28" r="20" fill="#84cc16" />
       {/* o — blue */}
-      <text x="368" y="148" fontFamily="'Inter','Helvetica Neue',Arial,sans-serif" fontWeight="800" fontSize="130" fill="#3b82f6">o</text>
+      <text x="368" y="148" fontFamily="Calibri" fontWeight="800" fontSize="130" fill="#3b82f6">o</text>
       {/* d — white */}
-      <text x="518" y="148" fontFamily="'Inter','Helvetica Neue',Arial,sans-serif" fontWeight="800" fontSize="130" fill="white">d</text>
+      <text x="518" y="148" fontFamily="Calibri" fontWeight="800" fontSize="130" fill="white">d</text>
       {/* e — white */}
-      <text x="660" y="148" fontFamily="'Inter','Helvetica Neue',Arial,sans-serif" fontWeight="800" fontSize="130" fill="white">e</text>
+      <text x="660" y="148" fontFamily="Calibri" fontWeight="800" fontSize="130" fill="white">e</text>
     </svg>
   )
 }

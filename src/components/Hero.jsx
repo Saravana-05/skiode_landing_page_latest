@@ -1,9 +1,9 @@
-import { Link } from "react-router-dom"
 import { motion, useScroll, useTransform } from "framer-motion"
-import { ArrowRight, Play, CheckCircle2, TrendingUp, Zap, Smartphone, Monitor } from "lucide-react"
-import { useRef } from "react"
-import platformScreenshot from "../assets/hero_platform.png"
+import { Bot, CheckCircle2, Code2, Plug, TrendingUp, Workflow, Zap } from "lucide-react"
+import { useRef, useState } from "react"
+import platformScreenshot from "../assets/Skiode_Banner.png"
 import mobileScreenshot from "../assets/skiode_mob_screen.jpeg"
+import { trustedBrands } from "./TrustedBrands"
 
 /* Prodmast-style smooth easing */
 const ease = [0.25, 0.46, 0.45, 0.94]
@@ -14,8 +14,23 @@ const smooth = (delay = 0) => ({
   transition: { duration: 0.9, delay, ease },
 })
 
+const brandInitials = (name) => {
+  const words = name.trim().split(/\s+/)
+  return words.length > 1
+    ? words.slice(0, 2).map(word => word[0]).join('').toUpperCase()
+    : name.slice(0, 2).toUpperCase()
+}
+
+const trustedBrandColors = [
+  '#164065', '#2563eb', '#047857', '#7c3aed', '#c2410c', '#be123c',
+  '#0369a1', '#4d7c0f', '#9333ea', '#0f766e', '#b45309', '#4338ca',
+  '#15803d', '#a21caf', '#0e7490', '#b91c1c', '#1d4ed8', '#6d28d9',
+  '#04705f', '#9f1239', '#3f6212', '#075985',
+]
+
 export default function Hero() {
   const ref = useRef(null)
+  const [hoveredBrand, setHoveredBrand] = useState(null)
   const { scrollYProgress } = useScroll({ target: ref, offset: ["start start", "end start"] })
   const bgY = useTransform(scrollYProgress, [0, 1], ["0%", "30%"])
   const imageScale = useTransform(scrollYProgress, [0, 0.5], [1, 1.05])
@@ -24,7 +39,7 @@ export default function Hero() {
   return (
     <section
       ref={ref}
-      className="relative min-h-screen flex items-center pt-20 overflow-hidden"
+      className="relative flex items-center pt-20 overflow-hidden"
       style={{ background: "linear-gradient(135deg,#f8faff 0%,#ffffff 40%,#f0f4ff 70%,#eef6ff 100%)" }}
     >
       {/* Dot pattern */}
@@ -49,7 +64,7 @@ export default function Hero() {
           style={{ background: "radial-gradient(circle,rgba(59,130,246,0.06) 0%,transparent 60%)", filter: "blur(60px)" }} />
       </motion.div>
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 w-full relative">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-[25px] lg:py-[28px] w-full relative">
         <div className="grid lg:grid-cols-12 gap-8 lg:gap-6 items-center">
 
           {/* ── Left: Text content (5 cols) ── */}
@@ -69,7 +84,7 @@ export default function Hero() {
 
             <motion.h1
               {...smooth(0.15)}
-              className="text-4xl sm:text-5xl xl:text-[3.4rem] font-extrabold text-slate-900 leading-[1.1] mb-6 tracking-tight"
+              className="text-4xl sm:text-5xl xl:text-[3.4rem] font-extrabold text-slate-900 leading-[1.1] mb-6 tracking-[0.025em]"
             >
               Simplify Operations,{" "}
               <motion.span
@@ -97,60 +112,39 @@ export default function Hero() {
             </motion.p>
 
             <motion.div
-              {...smooth(0.4)}
-              className="flex flex-col sm:flex-row gap-3 mb-8"
-            >
-              <Link
-                to="/request-demo"
-                className="group inline-flex items-center justify-center gap-2.5 px-7 py-3.5 rounded-2xl font-bold text-sm text-white transition-all duration-300 hover:scale-105 hover:shadow-2xl"
-                style={{
-                  background: "linear-gradient(135deg,#3b82f6,#06b6d4)",
-                  boxShadow: "0 8px 32px rgba(59,130,246,0.45), 0 0 0 1px rgba(96,165,250,0.2)",
-                  fontFamily: "var(--font-heading)",
-                }}
-              >
-                Request Demo
-                <motion.span
-                  className="inline-block"
-                  animate={{ x: [0, 4, 0] }}
-                  transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
-                >
-                  <ArrowRight size={16} />
-                </motion.span>
-              </Link>
-              <a
-                href="#platform"
-                className="inline-flex items-center justify-center gap-2.5 px-7 py-3.5 rounded-2xl font-semibold text-sm text-slate-700 transition-all duration-300 hover:bg-slate-100"
-                style={{ border: "1.5px solid rgba(0,0,0,0.12)" }}
-              >
-                <div className="w-6 h-6 rounded-full border border-slate-300 flex items-center justify-center">
-                  <Play size={10} className="ml-0.5" />
-                </div>
-                Explore Platform
-              </a>
-            </motion.div>
-
-            <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ duration: 0.8, delay: 0.6, ease }}
-              className="flex flex-wrap gap-x-5 gap-y-2 mb-8"
+              className="grid grid-cols-1 sm:grid-cols-4 gap-3 mb-8"
             >
               {[
-                { label: "Low-Code + RPA + AI/ML", color: "#3b82f6" },
-                { label: "Process Orchestration", color: "#8b5cf6" },
-                { label: "50+ Integrations", color: "#10b981" },
-                { label: "Configurable Bots", color: "#f59e0b" },
+                { icon: Code2, label: "Low-Code + RPA + AI/ML", color: "#2563eb", bg: "#eff6ff", border: "#bfdbfe" },
+                { icon: Workflow, label: "Process Orchestration", color: "#164065", bg: "#edf4f8", border: "#c8dbe7" },
+                { icon: Plug, label: "50+ Integrations", color: "#059669", bg: "#ecfdf5", border: "#a7f3d0" },
+                { icon: Bot, label: "Configurable Bots", color: "#65a30d", bg: "#f7fee7", border: "#d9f99d" },
               ].map((t, i) => (
-                <motion.span
+                <motion.div
                   key={t.label}
                   initial={{ opacity: 0, x: -10 }}
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ duration: 0.5, delay: 0.7 + i * 0.08, ease }}
-                  className="flex items-center gap-1.5 text-xs text-slate-500"
+                  whileHover={{ y: -6, scale: 1.03 }}
+                  className="group relative flex items-center px-1 py-2 text-slate-700 sm:min-h-[88px] sm:justify-center sm:p-2"
                 >
-                  <CheckCircle2 size={11} style={{ color: t.color }} /> {t.label}
-                </motion.span>
+                  <span
+                    className="relative hidden sm:flex h-14 w-14 flex-shrink-0 items-center justify-center rounded-2xl border shadow-[0_9px_18px_rgba(20,64,101,0.16),0_2px_5px_rgba(20,64,101,0.10)] transition-all duration-300 before:absolute before:-inset-2 before:-z-10 before:rounded-[20px] before:bg-current before:opacity-0 before:blur-md before:transition-opacity group-hover:-rotate-3 group-hover:scale-110 group-hover:shadow-[0_15px_28px_rgba(20,64,101,0.22)] group-hover:before:opacity-15"
+                    style={{ background: t.bg, borderColor: t.border, color: t.color }}>
+                    <t.icon size={30} strokeWidth={2.1} style={{ color: t.color }} />
+                    <span className="absolute -right-1 -top-1 h-2.5 w-2.5 rounded-full border-2 border-white shadow-sm" style={{ background: t.color }} />
+                  </span>
+                  <span className="text-sm font-normal leading-snug sm:hidden">
+                    {t.label}
+                  </span>
+                  <span className="pointer-events-none absolute bottom-full left-1/2 z-20 mb-3 hidden w-max max-w-[230px] -translate-x-1/2 translate-y-2 rounded-xl border border-[#c8dbe7] bg-white px-4 py-3 text-center text-[20px] font-medium leading-snug text-[#164065] opacity-0 shadow-[0_12px_30px_rgba(20,64,101,0.18)] transition-all duration-200 sm:block sm:group-hover:translate-y-0 sm:group-hover:font-bold sm:group-hover:opacity-100">
+                    {t.label}
+                    <span className="absolute left-1/2 top-full h-2.5 w-2.5 -translate-x-1/2 -translate-y-1/2 rotate-45 border-b border-r border-[#c8dbe7] bg-white" />
+                  </span>
+                </motion.div>
               ))}
             </motion.div>
 
@@ -162,18 +156,42 @@ export default function Hero() {
               className="flex items-center gap-4 pt-6"
               style={{ borderTop: "1px solid rgba(0,0,0,0.07)" }}
             >
-              <div className="flex -space-x-2">
-                {["#3b82f6", "#8b5cf6", "#10b981", "#f59e0b", "#06b6d4"].map((c, i) => (
+              <div className="relative w-52 sm:w-60" aria-label={`${trustedBrands.length} trusted enterprise brands`}>
+                {hoveredBrand && (
                   <motion.div
-                    key={i}
-                    initial={{ opacity: 0, scale: 0 }}
-                    animate={{ opacity: 1, scale: 1 }}
-                    transition={{ duration: 0.4, delay: 0.9 + i * 0.06, type: "spring", stiffness: 300 }}
-                    className="w-7 h-7 rounded-full flex items-center justify-center text-xs font-bold text-white ring-2 ring-white"
-                    style={{ background: `linear-gradient(135deg,${c},${c}88)` }}>
-                    {["A", "M", "S", "R", "J"][i]}
+                    initial={{ opacity: 0, y: 8, scale: 0.94 }}
+                    animate={{ opacity: 1, y: 0, scale: 1 }}
+                    className="pointer-events-none absolute bottom-full left-1/2 z-40 mb-3 flex w-44 -translate-x-1/2 flex-col items-center rounded-xl border border-[#c8dbe7] bg-white p-3.5 shadow-[0_16px_40px_rgba(20,64,101,0.24)]">
+                    <img src={hoveredBrand.logo} alt="" className="h-14 w-full object-contain" />
+                    <span className="mt-2 text-center text-xs font-medium leading-tight text-[#164065]">{hoveredBrand.name}</span>
+                    <span className="absolute left-1/2 top-full h-2.5 w-2.5 -translate-x-1/2 -translate-y-1/2 rotate-45 border-b border-r border-[#c8dbe7] bg-white" />
                   </motion.div>
-                ))}
+                )}
+                <div className="overflow-hidden py-1">
+                  <motion.div
+                    className="flex w-max gap-2"
+                    animate={{ x: ['0%', '-50%'] }}
+                    transition={{ duration: 38, repeat: Infinity, ease: 'linear' }}>
+                    {[...trustedBrands, ...trustedBrands].map((brand, i) => {
+                      const brandIndex = i % trustedBrands.length
+                      const color = trustedBrandColors[brandIndex]
+                      return (
+                        <button
+                          type="button"
+                          key={`${brand.name}-${i}`}
+                          onMouseEnter={() => setHoveredBrand(brand)}
+                          onMouseLeave={() => setHoveredBrand(null)}
+                          onFocus={() => setHoveredBrand(brand)}
+                          onBlur={() => setHoveredBrand(null)}
+                          className="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-lg text-[10px] font-medium tracking-[0.04em] text-white ring-2 ring-white shadow-sm transition-transform hover:-translate-y-0.5 focus:outline-none focus:ring-[#7ee600]"
+                          style={{ background: color }}
+                          aria-label={`Show ${brand.name} logo`}>
+                          {brandInitials(brand.name)}
+                        </button>
+                      )
+                    })}
+                  </motion.div>
+                </div>
               </div>
               <div>
                 <div className="flex items-center gap-1 mb-0.5">
@@ -183,10 +201,10 @@ export default function Hero() {
                       initial={{ opacity: 0, scale: 0 }}
                       animate={{ opacity: 1, scale: 1 }}
                       transition={{ delay: 1.1 + i * 0.05, type: "spring" }}
-                      className="w-2.5 h-2.5 rounded-sm" style={{ background: "#f59e0b" }} />
+                      className="w-2.5 h-2.5 rounded-sm" style={{ background: '#f59e0b' }} />
                   ))}
                 </div>
-                <p className="text-xs text-slate-400">Trusted by 500+ enterprise teams</p>
+                <p className="text-xs text-slate-500">Trusted by {trustedBrands.length} enterprise brands</p>
               </div>
             </motion.div>
           </div>
@@ -197,13 +215,12 @@ export default function Hero() {
             animate={{ opacity: 1, x: 0, filter: "blur(0px)" }}
             transition={{ duration: 1.2, delay: 0.3, ease }}
             style={{ y: imageY }}
-            className="lg:col-span-7 relative"
+            className="relative mt-6 lg:col-span-7 lg:mt-0"
           >
-            <motion.div style={{ scale: imageScale }} className="relative">
+            <motion.div style={{ scale: imageScale }} className="relative pb-14 sm:pb-16 lg:pb-24">
 
               {/* ── Desktop mockup ── */}
-              <div className="relative" style={{ filter: "drop-shadow(0 25px 50px rgba(0,0,0,0.2))" }}>
-                {/* Glow */}
+              <div className="relative mx-auto w-[96%] sm:w-full lg:w-[108%] lg:translate-x-8" style={{ filter: "drop-shadow(0 25px 50px rgba(0,0,0,0.2))" }}>
                 <motion.div
                   animate={{ opacity: [0.15, 0.25, 0.15] }}
                   transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
@@ -213,7 +230,7 @@ export default function Hero() {
                     filter: "blur(25px)",
                   }} />
 
-                <div className="relative rounded-2xl overflow-hidden"
+                <div className="relative overflow-hidden rounded-2xl"
                   style={{ border: "1px solid rgba(0,0,0,0.08)", boxShadow: "0 1px 3px rgba(0,0,0,0.1)" }}>
                   <div className="flex items-center justify-between px-4 py-2.5"
                     style={{ background: "#0d1117", borderBottom: "1px solid rgba(255,255,255,0.07)" }}>
@@ -222,38 +239,17 @@ export default function Hero() {
                       <div className="w-3 h-3 rounded-full bg-yellow-500/70" />
                       <div className="w-3 h-3 rounded-full bg-green-500/70" />
                     </div>
-                    <div className="flex items-center gap-2 px-3 py-1 rounded-lg" style={{ background: "rgba(255,255,255,0.06)" }}>
+                    <div className="flex items-center gap-2 rounded-lg px-3 py-1" style={{ background: "rgba(255,255,255,0.06)" }}>
                       <div className="w-1.5 h-1.5 rounded-full bg-green-400 animate-pulse" />
                       <span className="text-[10px] font-medium" style={{ color: "rgba(255,255,255,0.4)" }}>
                         skiode — Enterprise Workspace
                       </span>
                     </div>
-                    <div className="w-7 h-7 rounded-full flex items-center justify-center text-[10px] font-bold text-white"
-                      style={{ background: "linear-gradient(135deg,#3b82f6,#06b6d4)" }}>A</div>
+                    <div className="flex h-7 w-7 items-center justify-center rounded-full bg-[#2563eb] text-[10px] font-bold text-white">A</div>
                   </div>
 
-                  <img src={platformScreenshot} alt="skiode platform workspace"
-                    className="block w-full h-auto" />
+                  <img src={platformScreenshot} alt="skiode platform workspace" className="block h-auto w-full" />
                 </div>
-
-                {/* Web Platform label */}
-                <motion.div
-                  initial={{ opacity: 0, scale: 0.8 }}
-                  animate={{ opacity: 1, scale: 1, y: [0, -6, 0] }}
-                  transition={{
-                    opacity: { duration: 0.6, delay: 0.8 },
-                    scale: { duration: 0.6, delay: 0.8 },
-                    y: { duration: 4, repeat: Infinity, ease: "easeInOut", delay: 1.5 },
-                  }}
-                  className="absolute -top-4 left-4 flex items-center gap-1.5 rounded-xl px-3 py-2 shadow-lg z-30"
-                  style={{
-                    background: "rgba(59,130,246,0.95)",
-                    backdropFilter: "blur(12px)",
-                    border: "1px solid rgba(96,165,250,0.4)",
-                  }}>
-                  <Monitor size={11} color="white" />
-                  <span className="text-[10px] font-bold text-white">Web Platform</span>
-                </motion.div>
               </div>
 
               {/* ── Phone mockup ── */}
@@ -261,7 +257,7 @@ export default function Hero() {
                 initial={{ opacity: 0, y: 60, scale: 0.9 }}
                 animate={{ opacity: 1, y: 0, scale: 1 }}
                 transition={{ duration: 1, delay: 0.7, ease }}
-                className="absolute right-[-20px] lg:right-[-30px] bottom-[-40px] z-20 hidden sm:block"
+                className="absolute bottom-0 right-0 z-20 block sm:right-1 lg:bottom-24 lg:-right-3"
                 style={{ filter: "drop-shadow(0 20px 40px rgba(0,0,0,0.25))" }}
               >
                 <div className="absolute -inset-3 rounded-[32px] opacity-25 pointer-events-none"
@@ -270,9 +266,8 @@ export default function Hero() {
                     filter: "blur(18px)",
                   }} />
 
-                <div className="relative rounded-[30px] overflow-hidden"
+                <div className="relative w-[124px] overflow-hidden rounded-[22px] sm:w-[150px] sm:rounded-[26px] lg:w-[184px] lg:rounded-[30px]"
                   style={{
-                    width: "170px",
                     border: "4px solid #1a1a2e",
                     boxShadow: "inset 0 0 15px rgba(0,0,0,0.3)",
                     background: "#0d1117",
@@ -309,15 +304,9 @@ export default function Hero() {
                     </div>
                   </div>
 
-                  <div className="relative overflow-hidden" style={{ height: "260px" }}>
+                  <div className="relative h-[168px] overflow-hidden sm:h-[215px] lg:h-[250px]">
                     <img src={mobileScreenshot} alt="skiode mobile app"
-                      style={{
-                        display: "block",
-                        width: "320%",
-                        height: "auto",
-                        objectFit: "cover",
-                        transform: "translateX(-8%) translateY(-3%)",
-                      }} />
+                      className="block h-auto w-full object-cover object-top" />
                     <div className="absolute bottom-0 left-0 right-0 h-12 pointer-events-none"
                       style={{ background: "linear-gradient(transparent, rgba(13,17,23,0.7))" }} />
                   </div>
@@ -348,119 +337,52 @@ export default function Hero() {
                   </div>
                 </div>
 
-                {/* Mobile App label */}
-                <motion.div
-                  initial={{ opacity: 0, scale: 0.8 }}
-                  animate={{ opacity: 1, scale: 1, y: [0, -7, 0] }}
-                  transition={{
-                    opacity: { duration: 0.6, delay: 1 },
-                    scale: { duration: 0.6, delay: 1 },
-                    y: { duration: 3.5, repeat: Infinity, ease: "easeInOut", delay: 1.5 },
-                  }}
-                  className="absolute -top-3 -left-3 flex items-center gap-1.5 rounded-xl px-2.5 py-1.5 shadow-lg z-30"
-                  style={{
-                    background: "rgba(139,92,246,0.95)",
-                    backdropFilter: "blur(12px)",
-                    border: "1px solid rgba(167,139,250,0.4)",
-                  }}>
-                  <Smartphone size={10} color="white" />
-                  <span className="text-[9px] font-bold text-white">Mobile App</span>
-                </motion.div>
-
-                <div className="flex items-center gap-1.5 mt-2.5 justify-center">
-                  <a href="#" className="flex items-center gap-1 rounded-lg px-2 py-1.5 transition-all duration-300 hover:scale-105"
-                    style={{ background: "#000", border: "1px solid rgba(255,255,255,0.15)" }}>
-                    <svg viewBox="0 0 24 24" width="12" height="12" fill="white">
-                      <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/>
-                    </svg>
-                    <div>
-                      <div className="text-[5px] text-white/60 leading-none">Download on the</div>
-                      <div className="text-[8px] font-bold text-white leading-tight">App Store</div>
-                    </div>
-                  </a>
-                  <a href="#" className="flex items-center gap-1 rounded-lg px-2 py-1.5 transition-all duration-300 hover:scale-105"
-                    style={{ background: "#000", border: "1px solid rgba(255,255,255,0.15)" }}>
-                    <svg viewBox="0 0 24 24" width="12" height="12">
-                      <path d="M3.609 1.814L13.792 12 3.61 22.186a.996.996 0 01-.61-.92V2.734a1 1 0 01.609-.92z" fill="#4285F4"/>
-                      <path d="M17.556 8.223L5.124.573l8.668 8.668 3.764-1.018z" fill="#EA4335"/>
-                      <path d="M17.556 15.777l-3.764-3.764L5.124 23.427l12.432-7.65z" fill="#34A853"/>
-                      <path d="M21.395 10.678l-3.839-2.455-4.764 3.764 4.764 3.79 3.839-2.455a1.19 1.19 0 000-2.644z" fill="#FBBC04"/>
-                    </svg>
-                    <div>
-                      <div className="text-[5px] text-white/60 leading-none">GET IT ON</div>
-                      <div className="text-[8px] font-bold text-white leading-tight">Google Play</div>
-                    </div>
-                  </a>
-                </div>
               </motion.div>
 
-              {/* ── Floating stat badges ── */}
+              {/* ── Performance dock ── */}
               <motion.div
-                initial={{ opacity: 0, scale: 0.7 }}
-                animate={{ opacity: 1, scale: 1, y: [0, -10, 0] }}
-                transition={{
-                  opacity: { duration: 0.6, delay: 1.2 },
-                  scale: { duration: 0.6, delay: 1.2, type: "spring" },
-                  y: { duration: 4, repeat: Infinity, ease: "easeInOut", delay: 1.5 },
-                }}
-                className="absolute -top-5 right-12 hidden sm:flex items-center gap-2.5 rounded-2xl px-3.5 py-2.5 shadow-2xl z-30"
-                style={{
-                  background: "rgba(16,185,129,0.95)",
-                  backdropFilter: "blur(12px)",
-                  border: "1px solid rgba(16,185,129,0.5)",
-                }}>
-                <div className="w-7 h-7 rounded-xl flex items-center justify-center bg-white/20">
-                  <Zap size={13} color="white" />
-                </div>
-                <div>
-                  <div className="text-xs font-extrabold text-white">Builds Apps 5x Faster</div>
-                  <div className="text-xs text-white/75">MVP ready in minutes</div>
-                </div>
+                initial={{ opacity: 0, y: 18, scale: 0.96 }}
+                animate={{ opacity: 1, y: 0, scale: 1 }}
+                transition={{ duration: 0.7, delay: 1.1, ease }}
+                className="absolute bottom-24 left-8 z-30 hidden items-center gap-1 rounded-2xl border border-white/15 bg-[#102b3f] p-1.5 shadow-[0_16px_38px_rgba(13,43,63,0.32)] lg:flex"
+                style={{ right: 'calc(-8% - 32px)' }}>
+                {[
+                  { icon: CheckCircle2, value: '70% Faster Cycle Times', label: 'Operational Excellence', color: '#60a5fa' },
+                  { icon: TrendingUp, value: '10x Productivity', label: 'For Individuals & Teams', color: '#a78bfa' },
+                  { icon: Zap, value: 'Builds Apps 5x Faster', label: 'MVP Ready in Minutes', color: '#84cc16' },
+                ].map((item, index) => (
+                  <motion.div
+                    key={item.label}
+                    whileHover={{ y: -3 }}
+                    tabIndex={0}
+                    className="group relative flex min-w-0 flex-1 items-center gap-2.5 rounded-xl px-3 py-1.5 outline-none transition-colors hover:bg-white/10 focus:bg-white/10">
+                    <span className="flex h-9 w-9 flex-shrink-0 items-center justify-center rounded-lg bg-white/10 transition-transform group-hover:scale-110 group-focus:scale-110">
+                      <item.icon size={18} style={{ color: item.color }} />
+                    </span>
+                    <span>
+                      <span className="block text-[16px] font-medium leading-tight text-white">{item.value}</span>
+                    </span>
+                    <span className="pointer-events-none absolute left-1/2 top-full mt-3 w-max max-w-[210px] -translate-x-1/2 -translate-y-2 rounded-lg border border-white/15 bg-[#081d2c] px-3 py-2 text-center text-[13px] leading-tight text-white opacity-0 shadow-[0_10px_28px_rgba(0,0,0,0.28)] transition-all duration-200 group-hover:translate-y-0 group-hover:opacity-100 group-focus:translate-y-0 group-focus:opacity-100">
+                      {item.label}
+                      <span className="absolute bottom-full left-1/2 h-2 w-2 -translate-x-1/2 translate-y-1/2 rotate-45 border-l border-t border-white/15 bg-[#081d2c]" />
+                    </span>
+                    {index < 2 && <span className="ml-auto h-7 w-px bg-white/10" />}
+                  </motion.div>
+                ))}
               </motion.div>
 
-              <motion.div
-                initial={{ opacity: 0, scale: 0.7 }}
-                animate={{ opacity: 1, scale: 1, y: [0, 8, 0] }}
-                transition={{
-                  opacity: { duration: 0.6, delay: 1.4 },
-                  scale: { duration: 0.6, delay: 1.4, type: "spring" },
-                  y: { duration: 5, repeat: Infinity, ease: "easeInOut", delay: 2 },
-                }}
-                className="absolute -bottom-5 left-4 hidden sm:flex items-center gap-2.5 rounded-2xl px-3.5 py-2.5 shadow-2xl z-30"
-                style={{
-                  background: "rgba(59,130,246,0.95)",
-                  backdropFilter: "blur(12px)",
-                  border: "1px solid rgba(96,165,250,0.4)",
-                }}>
-                <div className="w-7 h-7 rounded-xl flex items-center justify-center bg-white/20">
-                  <CheckCircle2 size={13} color="white" />
-                </div>
-                <div>
-                  <div className="text-xs font-extrabold text-white">70% Faster Cycle Times</div>
-                  <div className="text-xs text-white/75">Operational excellence</div>
-                </div>
-              </motion.div>
-
-              <motion.div
-                initial={{ opacity: 0, scale: 0.7 }}
-                animate={{ opacity: 1, scale: 1, y: [0, -8, 0] }}
-                transition={{
-                  opacity: { duration: 0.6, delay: 1.6 },
-                  scale: { duration: 0.6, delay: 1.6, type: "spring" },
-                  y: { duration: 6, repeat: Infinity, ease: "easeInOut", delay: 2.5 },
-                }}
-                className="absolute top-1/2 -left-4 hidden lg:flex items-center gap-2 rounded-xl px-3 py-2 shadow-xl z-30"
-                style={{
-                  background: "rgba(13,27,62,0.95)",
-                  backdropFilter: "blur(12px)",
-                  border: "1px solid rgba(139,92,246,0.3)",
-                }}>
-                <TrendingUp size={12} style={{ color: "#a78bfa" }} />
-                <div>
-                  <div className="text-xs font-bold text-white">10x Productivity</div>
-                  <div style={{ fontSize: "9px" }} className="text-white/40">for individuals & teams</div>
-                </div>
-              </motion.div>
+              <div className="absolute -bottom-3 z-30 hidden items-center gap-3 lg:flex" style={{ right: 'calc(-8% - 32px)' }}>
+                <a href="#" className="flex min-w-[138px] items-center gap-2 rounded-xl bg-black px-4 py-2.5 shadow-lg transition-transform duration-300 hover:-translate-y-0.5">
+                  <svg viewBox="0 0 24 24" width="20" height="20" fill="white">
+                    <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/>
+                  </svg>
+                  <span><span className="block text-[8px] leading-none text-white/60">Download on the</span><span className="block text-[14px] font-medium leading-tight text-white">App Store</span></span>
+                </a>
+                <a href="#" className="flex min-w-[138px] items-center gap-2 rounded-xl bg-black px-4 py-2.5 shadow-lg transition-transform duration-300 hover:-translate-y-0.5">
+                  <svg viewBox="0 0 24 24" width="20" height="20"><path d="M3.609 1.814L13.792 12 3.61 22.186a.996.996 0 01-.61-.92V2.734a1 1 0 01.609-.92z" fill="#4285F4"/><path d="M17.556 8.223L5.124.573l8.668 8.668 3.764-1.018z" fill="#EA4335"/><path d="M17.556 15.777l-3.764-3.764L5.124 23.427l12.432-7.65z" fill="#34A853"/><path d="M21.395 10.678l-3.839-2.455-4.764 3.764 4.764 3.79 3.839-2.455a1.19 1.19 0 000-2.644z" fill="#FBBC04"/></svg>
+                  <span><span className="block text-[8px] leading-none text-white/60">GET IT ON</span><span className="block text-[14px] font-medium leading-tight text-white">Google Play</span></span>
+                </a>
+              </div>
             </motion.div>
           </motion.div>
         </div>
