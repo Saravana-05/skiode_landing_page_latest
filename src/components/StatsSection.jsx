@@ -1,6 +1,6 @@
 import { useRef, useEffect, useState } from "react"
 import { motion, useInView } from "framer-motion"
-import { Zap, TrendingDown, Clock, Eye, Code, Brain, ArrowUpRight } from "lucide-react"
+import { Zap, TrendingDown, Clock, Eye, Code, Brain } from "lucide-react"
 
 /* ── Animated counter ── */
 function Counter({ target, suffix = "", duration = 2000 }) {
@@ -68,7 +68,7 @@ const items = [
 
 export default function StatsSection() {
   return (
-    <section id="stats" className="relative py-16 overflow-hidden">
+    <section id="stats" className="relative pt-8 pb-16 overflow-hidden">
       {/* Background */}
       <div className="absolute inset-0"
         style={{ background: "linear-gradient(180deg, #0d1117 0%, #111827 50%, #0d1117 100%)" }} />
@@ -84,14 +84,14 @@ export default function StatsSection() {
       <div className="absolute bottom-0 right-1/4 w-[400px] h-[400px] rounded-full pointer-events-none"
         style={{ background: "radial-gradient(circle, rgba(139,92,246,0.06) 0%, transparent 60%)", filter: "blur(80px)" }} />
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
+      <div className="max-w-[1600px] mx-auto px-4 sm:px-6 lg:px-8 relative">
         {/* Header */}
-        <div className="text-center mb-16">
+        <div className="text-center mb-8">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="inline-flex items-center gap-2 rounded-full px-5 py-2 text-xs font-semibold mb-6"
+            className="inline-flex items-center gap-2 rounded-full px-5 py-2 text-xs font-semibold mb-3"
             style={{
               background: "rgba(59,130,246,0.1)",
               border: "1px solid rgba(59,130,246,0.2)",
@@ -106,16 +106,9 @@ export default function StatsSection() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.1 }}
-            className="text-4xl sm:text-5xl lg:text-6xl font-extrabold mb-5 leading-tight"
+            className="text-4xl sm:text-5xl lg:text-6xl font-extrabold mb-3 leading-tight"
           >
-            <span className="text-white">Numbers that </span>
-            <span style={{
-              background: "linear-gradient(135deg, #60a5fa, #a78bfa, #f472b6)",
-              WebkitBackgroundClip: "text",
-              WebkitTextFillColor: "transparent",
-            }}>
-              speak louder
-            </span>
+            <span className="text-white">Numbers that speak louder</span>
           </motion.h2>
 
           <motion.p
@@ -130,7 +123,7 @@ export default function StatsSection() {
         </div>
 
         {/* Stats grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3">
           {items.map((s, i) => (
             <motion.div
               key={s.label}
@@ -139,7 +132,7 @@ export default function StatsSection() {
               viewport={{ once: true }}
               transition={{ delay: i * 0.08, duration: 0.5 }}
               whileHover={{ y: -6, scale: 1.02 }}
-              className="group relative rounded-3xl p-6 cursor-default overflow-hidden"
+              className="group relative rounded-2xl p-5 cursor-default overflow-hidden flex flex-col h-full"
               style={{
                 background: "rgba(255,255,255,0.03)",
                 border: "1px solid rgba(255,255,255,0.06)",
@@ -147,28 +140,22 @@ export default function StatsSection() {
               }}
             >
               {/* Hover glow */}
-              <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none rounded-3xl"
+              <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none rounded-2xl"
                 style={{ background: `radial-gradient(circle at 50% 0%, ${s.ring}, transparent 70%)` }} />
 
               {/* Top accent line */}
-              <div className="absolute top-0 left-6 right-6 h-px opacity-0 group-hover:opacity-100 transition-opacity duration-500"
+              <div className="absolute top-0 left-4 right-4 h-px opacity-0 group-hover:opacity-100 transition-opacity duration-500"
                 style={{ background: s.gradient }} />
 
-              <div className="relative">
-                {/* Icon + arrow */}
-                <div className="flex items-start justify-between mb-5">
-                  <div className="w-12 h-12 rounded-2xl flex items-center justify-center transition-transform duration-300 group-hover:scale-110"
-                    style={{ background: `${s.color}12`, border: `1px solid ${s.color}20` }}>
-                    <s.icon size={20} style={{ color: s.color }} />
-                  </div>
-                  <div className="w-8 h-8 rounded-xl flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-300 translate-y-1 group-hover:translate-y-0"
-                    style={{ background: `${s.color}10` }}>
-                    <ArrowUpRight size={14} style={{ color: s.color }} />
-                  </div>
+              <div className="relative flex flex-col flex-1">
+                {/* Icon */}
+                <div className="w-11 h-11 rounded-xl flex items-center justify-center mb-3 transition-transform duration-300 group-hover:scale-110"
+                  style={{ background: `${s.color}12`, border: `1px solid ${s.color}20` }}>
+                  <s.icon size={20} style={{ color: s.color }} />
                 </div>
 
                 {/* Big number */}
-                <div className="text-5xl sm:text-6xl font-black mb-2 tracking-tight transition-all duration-300"
+                <div className="text-3xl sm:text-4xl font-black mb-1.5 tracking-tight transition-all duration-300"
                   style={{
                     background: s.gradient,
                     WebkitBackgroundClip: "text",
@@ -178,21 +165,23 @@ export default function StatsSection() {
                 </div>
 
                 {/* Label */}
-                <h3 className="text-base font-bold text-white/80 mb-1.5">{s.label}</h3>
+                <h3 className="text-sm sm:text-base font-bold text-white/80 mb-1.5 leading-tight">{s.label}</h3>
 
                 {/* Description */}
-                <p className="text-sm leading-relaxed" style={{ color: "rgba(255,255,255,0.3)" }}>{s.desc}</p>
+                <p className="hidden lg:block text-xs leading-snug line-clamp-2" style={{ color: "rgba(255,255,255,0.3)" }}>{s.desc}</p>
 
                 {/* Bottom progress bar decoration */}
-                <div className="mt-5 h-1 rounded-full overflow-hidden" style={{ background: "rgba(255,255,255,0.04)" }}>
-                  <motion.div
-                    initial={{ width: "0%" }}
-                    whileInView={{ width: "100%" }}
-                    viewport={{ once: true }}
-                    transition={{ delay: 0.3 + i * 0.1, duration: 1.5, ease: "easeOut" }}
-                    className="h-full rounded-full"
-                    style={{ background: s.gradient }}
-                  />
+                <div className="mt-auto pt-3">
+                  <div className="h-1 rounded-full overflow-hidden" style={{ background: "rgba(255,255,255,0.04)" }}>
+                    <motion.div
+                      initial={{ width: "0%" }}
+                      whileInView={{ width: "100%" }}
+                      viewport={{ once: true }}
+                      transition={{ delay: 0.3 + i * 0.1, duration: 1.5, ease: "easeOut" }}
+                      className="h-full rounded-full"
+                      style={{ background: s.gradient }}
+                    />
+                  </div>
                 </div>
               </div>
             </motion.div>

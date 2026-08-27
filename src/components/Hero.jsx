@@ -1,9 +1,8 @@
 import { Link } from 'react-router-dom'
 import { motion } from 'framer-motion'
-import { ArrowRight, Bot, CheckCircle2, Code2, Play, Plug, TrendingUp, Workflow, Zap } from 'lucide-react'
-import platformScreenshot from '../assets/Skiode_Banner.png'
-import mobileScreenshot from '../assets/skiode_mob_screen.jpeg'
-import { trustedBrands } from './TrustedBrands'
+import { ArrowRight, Bot, Code2, Play, Plug, Workflow } from 'lucide-react'
+import processFlowScreenshot from '../assets/procee_flow.png'
+import mobileAppScreenshot from '../assets/skiode_mob_screen_enhanced.png'
 
 const ease = [0.22, 1, 0.36, 1]
 const reveal = (delay = 0) => ({
@@ -17,14 +16,6 @@ const capabilities = [
   { icon: Plug, title: 'Integrate', subtitle: 'Easily', color: '#059669', bg: '#eafbf5' },
   { icon: Bot, title: 'Scale', subtitle: 'Confidently', color: '#65a30d', bg: '#f3fbdc' },
 ]
-
-const metrics = [
-  { icon: CheckCircle2, value: '70%', label: 'Faster Cycle Times', color: '#2563eb' },
-  { icon: TrendingUp, value: '10x', label: 'Productivity', color: '#7c3aed' },
-  { icon: Zap, value: '5x', label: 'Faster App Builds', color: '#65a30d' },
-]
-
-const brandColors = ['#1462ee', '#7140ee', '#087e74', '#d80f55', '#3d8b0d']
 
 function StoreBadge({ type }) {
   const apple = type === 'apple'
@@ -43,61 +34,60 @@ function StoreBadge({ type }) {
 export default function Hero() {
   return (
     <section className="relative overflow-hidden bg-[#fbfdff] pt-20">
-      <div className="pointer-events-none absolute -right-[8%] -top-[18%] h-[760px] w-[760px] rounded-full bg-[#dbeafe] opacity-80" />
-      <div className="pointer-events-none absolute right-[5%] top-[18%] h-[520px] w-[520px] rounded-full bg-[#bfdbfe] opacity-55 blur-[2px]" />
-      <div className="pointer-events-none absolute bottom-[3%] left-[34%] h-[360px] w-[600px] -rotate-12 rounded-[50%] bg-[#dbeafe] opacity-55" />
+      <div className="pointer-events-none absolute inset-0 opacity-90" style={{ backgroundImage: 'radial-gradient(circle, rgba(61, 104, 151, 0.28) 1.15px, transparent 1.15px)', backgroundSize: '22px 22px' }} />
+      <div className="pointer-events-none absolute -right-[12%] -top-[28%] h-[760px] w-[760px] rounded-full bg-[#e1efff] opacity-90" />
+      <div className="pointer-events-none absolute right-[2%] top-[14%] h-[500px] w-[500px] rounded-full bg-[#c9e0ff] opacity-55" />
+      <div className="pointer-events-none absolute bottom-[7%] left-[36%] h-[330px] w-[560px] -rotate-12 rounded-[50%] bg-[#e2efff] opacity-75" />
 
-      <div className="relative mx-auto max-w-[1500px] px-4 pb-5 pt-9 sm:px-6 lg:px-10 lg:pt-12">
-        <div className="grid items-center gap-10 lg:grid-cols-12 lg:gap-4">
-          <div className="relative z-20 lg:col-span-5 lg:pb-10">
-            <motion.div {...reveal(0)} className="mb-6 flex flex-wrap items-center gap-4">
+      <div className="relative mx-auto max-w-[1600px] px-5 pb-0 pt-2 sm:px-8 lg:px-12 lg:pt-4 xl:px-14">
+        <div className="grid items-center gap-10 lg:min-h-[650px] lg:grid-cols-12 lg:gap-6">
+          <div className="relative z-20 pb-8 lg:col-span-5">
+            <motion.div {...reveal(0)} className="mb-5 flex flex-wrap items-center gap-4">
               <span className="inline-flex items-center gap-2 rounded-full border border-[#cfe0f3] bg-[#eef6ff] px-4 py-2 text-xs font-medium uppercase text-[#1564df] shadow-sm"><span className="h-2 w-2 rounded-full bg-[#75df00]" /> AI-Led Low-Code Platform</span>
               <span className="text-xs uppercase tracking-[0.12em] text-[#60728e]">Build Today, Scale Tomorrow</span>
             </motion.div>
 
-            <motion.h1 {...reveal(0.1)} className="max-w-[650px] text-[42px] font-bold leading-[1.08] tracking-[0.01em] text-[#061b54] sm:text-[54px] xl:text-[62px]">
+            <motion.h1 {...reveal(0.1)} className="max-w-[650px] text-[37px] font-bold leading-[1.06] tracking-[0.005em] text-[#061b54] sm:text-[49px] xl:text-[55px]">
               Simplify Operations,<span className="block text-[#4385f4]">Automate Processes,</span><span className="block">Amplify ROI</span>
             </motion.h1>
 
-            <motion.p {...reveal(0.2)} className="mt-6 max-w-[570px] text-base leading-[1.6] text-[#34527d] sm:text-lg">skiode helps organizations gain complete visibility, automate operations, and accelerate digital transformation — from idea to working application in weeks, not months.</motion.p>
+            <motion.p {...reveal(0.2)} className="mt-5 max-w-[590px] text-base leading-[1.65] text-[#34527d] sm:text-lg">skiode helps organizations gain complete visibility, automate operations, and accelerate digital transformation — from idea to working application in weeks, not months.</motion.p>
 
-            <motion.div {...reveal(0.3)} className="mt-7 flex flex-wrap items-center gap-4">
+            <motion.div {...reveal(0.3)} className="mt-6 flex flex-wrap items-center gap-4">
               <Link to="/request-demo" className="group inline-flex items-center gap-3 rounded-full bg-[#063b73] px-7 py-3.5 text-sm font-medium text-white shadow-[0_12px_28px_rgba(6,59,115,0.22)] transition-all hover:-translate-y-0.5 hover:bg-[#052f5b]">Get Started Free <ArrowRight size={16} className="transition-transform group-hover:translate-x-1" /></Link>
               <a href="#showcase" className="inline-flex items-center gap-3 text-sm font-medium text-[#163b72]"><span className="flex h-11 w-11 items-center justify-center rounded-full border border-[#80b2ff] bg-white text-[#2873e8] shadow-sm"><Play size={15} fill="currentColor" /></span>See How It Works</a>
             </motion.div>
 
-            <motion.div {...reveal(0.4)} className="mt-9 grid max-w-[560px] grid-cols-2 gap-4 sm:grid-cols-4">
+            <motion.div {...reveal(0.4)} className="mt-9 grid max-w-[580px] grid-cols-2 gap-6 sm:grid-cols-4">
               {capabilities.map(item => (
                 <div key={item.title} className="group"><div className="flex h-16 w-16 items-center justify-center rounded-2xl shadow-[0_10px_25px_rgba(20,64,101,0.10)] transition-transform group-hover:-translate-y-1" style={{ background: item.bg }}><item.icon size={29} style={{ color: item.color }} /></div><div className="mt-3 text-sm leading-tight text-[#102b63]"><span className="block font-medium">{item.title}</span>{item.subtitle}</div></div>
               ))}
             </motion.div>
           </div>
 
-          <motion.div {...reveal(0.18)} className="relative z-10 min-h-[520px] lg:col-span-7 lg:min-h-[650px]">
-            <div className="absolute left-[2%] top-[8%] w-[94%] rotate-[1.5deg] rounded-[28px] bg-[#111827] p-[10px] shadow-[0_28px_65px_rgba(20,64,101,0.25)] sm:left-0 sm:w-[92%] lg:top-[7%]">
-              <div className="overflow-hidden rounded-[19px] bg-white"><img src={platformScreenshot} alt="skiode web application workspace" className="block h-auto w-full" /></div>
-              <div className="absolute -bottom-6 left-[8%] right-[8%] h-7 rounded-b-[50%] bg-[#26364b] shadow-[0_10px_18px_rgba(15,23,42,0.22)]" />
+          <motion.div {...reveal(0.18)} className="relative z-10 min-h-[410px] lg:col-span-7 lg:min-h-[610px]">
+            <div className="absolute left-0 top-[7%] w-[94%] rounded-[26px] border border-[#d9e5f0] bg-white p-2.5 shadow-[0_28px_70px_rgba(24,70,112,0.20)] lg:w-[92%]">
+              <div className="mb-2 flex items-center justify-between px-2 py-1">
+                <div className="flex gap-1.5"><span className="h-2.5 w-2.5 rounded-full bg-[#ff6b6b]" /><span className="h-2.5 w-2.5 rounded-full bg-[#f5b942]" /><span className="h-2.5 w-2.5 rounded-full bg-[#23b26d]" /></div>
+                <span className="rounded-full bg-[#eef5fb] px-3 py-1 text-[10px] uppercase tracking-[0.12em] text-[#47627f]">Process Orchestration</span>
+              </div>
+              <div className="overflow-hidden rounded-[18px] border border-[#e2eaf2] bg-white"><img src={processFlowScreenshot} alt="Skiode process flow web application" className="block h-auto w-full" /></div>
             </div>
 
-            <div className="absolute right-[1%] top-[19%] z-20 w-[29%] min-w-[145px] max-w-[245px] -rotate-[0.5deg] rounded-[34px] border-[7px] border-[#152033] bg-[#152033] p-1.5 shadow-[0_26px_55px_rgba(15,23,42,0.30)] sm:right-0 lg:right-[-2%]">
-              <div className="absolute left-1/2 top-1 h-4 w-20 -translate-x-1/2 rounded-full bg-[#080d16]" />
-              <div className="h-[365px] overflow-hidden rounded-[24px] bg-white sm:h-[430px] lg:h-[500px]"><img src={mobileScreenshot} alt="skiode mobile application" className="block h-auto w-full object-top" /></div>
+            <div className="absolute right-[1%] top-[14%] z-20 w-[29%] min-w-[132px] max-w-[190px] rounded-[22px] border border-[#5f6b7a] bg-white p-1.5 shadow-[0_24px_55px_rgba(29,48,72,0.20),0_0_0_4px_rgba(255,255,255,0.72)]">
+              <div className="aspect-[856/1840] overflow-hidden rounded-[10px] bg-white ring-1 ring-[#e2e8f0]"><img src={mobileAppScreenshot} alt="Skiode mobile application" className="block h-full w-full object-cover object-top" /></div>
             </div>
 
-            <div className="absolute bottom-[4%] left-[11%] z-30 hidden w-[72%] grid-cols-3 rounded-2xl border border-[#cfe0f3] bg-white/95 p-2 shadow-[0_18px_38px_rgba(20,64,101,0.18)] backdrop-blur sm:grid">
-              {metrics.map((item, index) => (
-                <div key={item.value} className="flex items-center gap-2.5 px-3 py-2"><span className="flex h-10 w-10 items-center justify-center rounded-xl bg-[#eef5ff]"><item.icon size={20} style={{ color: item.color }} /></span><span><strong className="block text-base text-[#102b63]">{item.value}</strong><small className="block text-[10px] text-[#49627f]">{item.label}</small></span>{index < metrics.length - 1 && <span className="ml-auto h-8 w-px bg-[#d8e3ec]" />}</div>
-              ))}
+            <div className="absolute bottom-[5%] left-[8%] hidden rounded-2xl border border-white/80 bg-white/95 px-4 py-3 shadow-[0_16px_35px_rgba(20,64,101,0.14)] backdrop-blur sm:block">
+              <span className="block text-[10px] uppercase tracking-[0.13em] text-[#6b7f96]">One connected platform</span>
+              <strong className="mt-1 block text-sm text-[#0b2d62]">Build on web. Run anywhere.</strong>
             </div>
 
-            <div className="absolute right-[8%] top-0 hidden rounded-2xl border border-[#d7e3ed] bg-white px-5 py-3 shadow-[0_12px_30px_rgba(20,64,101,0.13)] xl:flex xl:items-center xl:gap-3"><span className="h-3 w-3 rounded-full bg-[#65b900]" /><span className="text-sm leading-tight text-[#102b63]"><strong className="block">AI Ready</strong>Business Ready</span></div>
+            <div className="absolute bottom-[5%] right-0 z-30 flex items-end gap-2.5">
+              <StoreBadge type="apple" />
+              <StoreBadge type="google" />
+            </div>
           </motion.div>
-        </div>
-
-        <div className="relative z-40 mt-3 flex flex-col gap-5 border-t border-[#dce7f0] bg-white/90 px-1 py-5 backdrop-blur lg:flex-row lg:items-center lg:justify-between">
-          <div className="flex flex-wrap items-center gap-4"><div className="text-[10px] uppercase text-[#687b96]">Trusted by <strong className="block text-sm text-[#1762dd]">{trustedBrands.length}+ Enterprise Brands</strong></div><div className="flex gap-2">{trustedBrands.slice(0, 5).map((brand, index) => (<div key={brand.name} title={brand.name} className="flex h-11 w-11 items-center justify-center rounded-xl text-xs font-medium text-white shadow-sm" style={{ background: brandColors[index] }}>{brand.name.split(/\s+/).map(word => word[0]).join('').slice(0, 2).toUpperCase()}</div>))}<div className="flex h-11 w-11 items-center justify-center rounded-xl bg-[#e8eef6] text-lg text-[#23466f]">•••</div></div></div>
-          <div className="hidden text-xs uppercase tracking-[0.08em] text-[#365678] xl:block">Powering the next generation<br />of operations <ArrowRight className="inline" size={13} /></div>
-          <div className="flex flex-wrap items-center gap-3"><StoreBadge type="apple" /><StoreBadge type="google" /></div>
         </div>
       </div>
     </section>

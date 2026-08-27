@@ -340,11 +340,11 @@ export default function Navbar() {
 
           <div className="hidden lg:flex items-center gap-2">
             <Link to="/request-demo"
-              className="group inline-flex items-center gap-3 rounded-xl bg-[#164065] py-2 pl-5 pr-2 text-base font-medium text-white shadow-[0_8px_20px_rgba(20,64,101,0.22)] transition-all hover:-translate-y-0.5 hover:bg-[#0f3555] hover:shadow-[0_12px_26px_rgba(20,64,101,0.28)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#7ee600] focus-visible:ring-offset-2"
+              className="group inline-flex items-center gap-3 rounded-xl bg-[#164065] py-2 pl-5 pr-2 text-base font-medium text-white shadow-[0_8px_20px_rgba(20,64,101,0.22)] transition-all hover:-translate-y-0.5 hover:bg-[#0f3555] hover:shadow-[0_12px_26px_rgba(20,64,101,0.28)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#39ff14] focus-visible:ring-offset-2"
               style={{ fontFamily: 'var(--font-heading)' }}
               onClick={() => setOpenMenu(null)}>
               Request Demo
-              <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-[#7ee600] text-[#164065] transition-transform group-hover:translate-x-0.5">
+              <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-[#39ff14] text-[#164065] transition-transform group-hover:translate-x-0.5">
                 <ArrowRight size={14} strokeWidth={2.5} />
               </span>
             </Link>
@@ -474,7 +474,7 @@ export default function Navbar() {
                   style={{ fontFamily: 'var(--font-heading)' }}
                   onClick={() => setMobile(false)}>
                   <span className="flex-1 text-center">Request Demo</span>
-                  <span className="flex h-9 w-9 items-center justify-center rounded-lg bg-[#7ee600] text-[#164065]">
+                  <span className="flex h-9 w-9 items-center justify-center rounded-lg bg-[#39ff14] text-[#164065]">
                     <ArrowRight size={14} strokeWidth={2.5} />
                   </span>
                 </Link>

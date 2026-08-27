@@ -3,7 +3,7 @@ import { motion, useInView } from 'framer-motion'
 import {
   GitBranch, Play, Pause, CheckCircle2, ArrowRight, Zap,
   Clock, Bell, ShieldCheck, Split, UserCheck, FileOutput,
-  Workflow, RotateCcw, Sparkles
+  Workflow, RotateCcw, Sparkles, Heart, MousePointer2, WandSparkles
 } from 'lucide-react'
 import processVideo from '../assets/videos_process_flow/process_flow.mp4'
 import scrProcess from '../assets/platform_screenshots/process_flow.png'
@@ -19,13 +19,10 @@ const steps = [
   { icon: RotateCcw,   label: 'Loop & Revise',     color: '#ec4899', desc: 'Send back for revision with comments, re-enter the flow.' },
 ]
 
-const capabilities = [
-  'Drag-and-drop visual builder',
-  'Conditional branching & decision engine',
-  'SLA tracking with auto-escalation',
-  'Parallel & sequential approvals',
-  'AI Wand — auto-suggest flow steps',
-  'Trigger via API, form submit, or schedule',
+const capabilityGroups = [
+  { title: 'Visual Builder', desc: 'Drag, connect and configure workflows without code.', icon: MousePointer2, color: '#6366f1', items: ['Drag-and-drop builder', 'Parallel & sequential approvals'] },
+  { title: 'Intelligent Automation', desc: 'AI Wand suggests the next steps and conditions.', icon: WandSparkles, color: '#10b981', ai: true, items: ['AI Wand — auto-suggest flow steps', 'Trigger via API, form submit, or schedule'] },
+  { title: 'Enterprise Control', desc: 'SLA tracking, escalation, approvals and auditability.', icon: ShieldCheck, color: '#eab308', items: ['Conditional branching & decision engine', 'SLA tracking with auto-escalation'] },
 ]
 
 export default function ProcessFlowShowcase() {
@@ -57,8 +54,8 @@ export default function ProcessFlowShowcase() {
   }
 
   return (
-    <section id="process-flow-showcase" ref={sectionRef} className="py-16 relative overflow-hidden"
-      style={{ background: 'linear-gradient(180deg, #050a18 0%, #0a0f1e 50%, #0d1225 100%)' }}>
+    <section id="process-flow-showcase" ref={sectionRef} className="py-12 sm:py-14 relative overflow-hidden"
+      style={{ background: 'radial-gradient(circle at 50% 18%, #062a2b 0%, #081426 34%, #050a18 72%)' }}>
 
       {/* Background effects */}
       <div className="absolute inset-0 opacity-[0.015] pointer-events-none"
@@ -66,23 +63,40 @@ export default function ProcessFlowShowcase() {
           backgroundImage: 'linear-gradient(rgba(255,255,255,0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.1) 1px, transparent 1px)',
           backgroundSize: '60px 60px',
         }} />
-      <div className="absolute top-1/4 left-1/3 w-[700px] h-[700px] rounded-full pointer-events-none"
-        style={{ background: 'radial-gradient(circle, rgba(139,92,246,0.06) 0%, transparent 60%)', filter: 'blur(120px)' }} />
-      <div className="absolute bottom-0 right-1/4 w-[500px] h-[500px] rounded-full pointer-events-none"
-        style={{ background: 'radial-gradient(circle, rgba(59,130,246,0.04) 0%, transparent 60%)', filter: 'blur(80px)' }} />
+      {/* Abstract workflow heart / energy core */}
+      <div aria-hidden="true" className="absolute -top-2 left-1/2 -translate-x-1/2 w-[720px] max-w-[88vw] h-[350px] pointer-events-none">
+      <motion.svg viewBox="0 0 800 390" preserveAspectRatio="xMidYMid meet"
+        animate={{ scale: [1, 1.018, 1], opacity: [.52, .7, .52] }} transition={{ duration: 7, repeat: Infinity, ease: 'easeInOut' }}
+        className="w-full h-full overflow-visible">
+        <defs>
+          <filter id="heartGlow"><feGaussianBlur stdDeviation="9" result="blur" /><feMerge><feMergeNode in="blur" /><feMergeNode in="SourceGraphic" /></feMerge></filter>
+          <linearGradient id="heartLeft" x1="0" x2="1"><stop stopColor="#10b981" stopOpacity=".12" /><stop offset="1" stopColor="#34d399" stopOpacity=".8" /></linearGradient>
+          <linearGradient id="heartRight" x1="0" x2="1"><stop stopColor="#34d399" stopOpacity=".65" /><stop offset="1" stopColor="#8b5cf6" stopOpacity=".65" /></linearGradient>
+        </defs>
+        <path d="M400 335 C345 278 132 190 150 83 C164 0 300 8 400 113" fill="none" stroke="url(#heartLeft)" strokeWidth="3" filter="url(#heartGlow)" />
+        <path d="M400 335 C455 278 668 190 650 83 C636 0 500 8 400 113" fill="none" stroke="url(#heartRight)" strokeWidth="3" filter="url(#heartGlow)" />
+        <path d="M400 315 C350 262 175 188 188 99 C198 34 302 38 400 130" fill="none" stroke="#34d399" strokeOpacity=".22" />
+        <path d="M400 315 C450 262 625 188 612 99 C602 34 498 38 400 130" fill="none" stroke="#a78bfa" strokeOpacity=".2" />
+      </motion.svg>
+      </div>
+      <div aria-hidden="true" className="absolute top-0 left-1/2 -translate-x-1/2 w-px h-[340px] bg-gradient-to-b from-transparent via-emerald-400/20 to-emerald-400/5 pointer-events-none" />
+      {[18, 31, 67, 81].map((left, i) => (
+        <motion.span key={left} aria-hidden="true" className="absolute top-20 w-1 h-1 rounded-full bg-emerald-300 pointer-events-none"
+          style={{ left: `${left}%` }} animate={{ y: [0, 180, 300], opacity: [0, .7, 0] }} transition={{ duration: 7 + i, delay: i * 1.1, repeat: Infinity, ease: 'linear' }} />
+      ))}
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
 
         {/* Header */}
-        <div className="text-center mb-16">
+        <div className="text-center mb-8 relative">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="inline-flex items-center gap-2.5 rounded-full px-5 py-2 text-xs font-bold mb-6"
-            style={{ background: 'rgba(139,92,246,0.1)', border: '1px solid rgba(139,92,246,0.25)', color: '#a78bfa' }}
+            className="inline-flex items-center gap-2.5 rounded-full px-5 py-2 text-xs font-bold mb-4 backdrop-blur-md"
+            style={{ background: 'rgba(15,23,42,.68)', border: '1px solid rgba(139,92,246,.5)', color: '#f8fafc', boxShadow: '0 0 28px rgba(139,92,246,.18)' }}
           >
-            <GitBranch size={13} /> The Heart of skiode
+            <Heart size={13} /> The Heart of skiode
           </motion.div>
 
           <motion.h2
@@ -90,14 +104,11 @@ export default function ProcessFlowShowcase() {
             whileInView={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
             viewport={{ once: true }}
             transition={{ duration: 0.8, delay: 0.1, ease }}
-            className="text-4xl sm:text-5xl lg:text-6xl font-extrabold mb-5 leading-tight"
+            className="text-4xl sm:text-5xl lg:text-6xl font-black tracking-[-.035em] mb-3 leading-[1.03]"
           >
             <span className="text-white">Design any workflow.</span>
             <br />
-            <span style={{
-              background: 'linear-gradient(135deg, #a78bfa, #60a5fa, #34d399)',
-              WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent',
-            }}>
+            <span className="bg-clip-text text-transparent bg-gradient-to-r from-emerald-400 to-green-300">
               Visually. Instantly.
             </span>
           </motion.h2>
@@ -107,8 +118,7 @@ export default function ProcessFlowShowcase() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.2, ease }}
-            className="text-base sm:text-lg max-w-2xl mx-auto leading-relaxed"
-            style={{ color: 'rgba(255,255,255,0.35)' }}
+            className="text-base sm:text-lg max-w-2xl mx-auto leading-relaxed text-slate-400"
           >
             From simple approvals to complex multi-department orchestrations — drag nodes,
             set conditions, add triggers. No code. Watch it in action.
@@ -116,7 +126,7 @@ export default function ProcessFlowShowcase() {
         </div>
 
         {/* Video + Steps layout */}
-        <div className="grid lg:grid-cols-[1fr_340px] gap-8 items-start">
+        <div className="grid lg:grid-cols-[minmax(0,1fr)_370px] gap-6 items-start">
 
           {/* Left — Video in dark browser frame */}
           <motion.div
@@ -127,7 +137,7 @@ export default function ProcessFlowShowcase() {
             className="relative rounded-2xl overflow-hidden"
             style={{
               border: '1px solid rgba(255,255,255,0.08)',
-              boxShadow: '0 40px 80px rgba(0,0,0,0.5), 0 0 60px rgba(139,92,246,0.06)',
+              boxShadow: '0 40px 80px rgba(0,0,0,0.5), 0 0 70px rgba(16,185,129,.1), 0 0 100px rgba(139,92,246,.06)',
             }}
           >
             {/* Browser chrome */}
@@ -189,9 +199,6 @@ export default function ProcessFlowShowcase() {
                 </motion.div>
               </div>
 
-              {/* Bottom gradient */}
-              <div className="absolute bottom-0 left-0 right-0 h-20 pointer-events-none"
-                style={{ background: 'linear-gradient(transparent, rgba(10,15,26,0.9))' }} />
             </div>
           </motion.div>
 
@@ -201,11 +208,11 @@ export default function ProcessFlowShowcase() {
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.7, delay: 0.25, ease }}
-            className="space-y-2"
+            className="space-y-1 relative min-w-0 lg:pl-1"
           >
             <div className="mb-4">
               <h3 className="text-lg font-extrabold text-white mb-1">How a workflow flows</h3>
-              <p className="text-xs" style={{ color: 'rgba(255,255,255,0.3)' }}>
+              <p className="text-xs text-slate-400">
                 Every process follows your custom path
               </p>
             </div>
@@ -217,7 +224,7 @@ export default function ProcessFlowShowcase() {
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.4, delay: 0.3 + i * 0.07, ease }}
-                className="group flex items-start gap-3 p-3 rounded-xl transition-all duration-300 cursor-default"
+                className="group relative grid grid-cols-[24px_44px_minmax(0,1fr)] gap-2 items-start py-2.5 px-1 rounded-xl transition-all duration-300 cursor-default"
                 style={{ border: '1px solid transparent' }}
                 onMouseEnter={e => {
                   e.currentTarget.style.background = `${step.color}08`
@@ -228,28 +235,30 @@ export default function ProcessFlowShowcase() {
                   e.currentTarget.style.borderColor = 'transparent'
                 }}
               >
-                {/* Step number + icon */}
+                <span className="pt-3 text-[9px] font-bold text-right text-slate-400">0{i + 1}</span>
+                {/* Step icon + contained connector */}
                 <div className="relative flex-shrink-0">
                   <div className="w-10 h-10 rounded-xl flex items-center justify-center transition-transform duration-300 group-hover:scale-110"
-                    style={{ background: `${step.color}12`, border: `1px solid ${step.color}20` }}>
+                    style={{ background: `${step.color}18`, border: `1px solid ${step.color}30`, boxShadow: i === 0 ? `0 0 20px ${step.color}35` : 'none' }}>
                     <step.icon size={16} style={{ color: step.color }} />
                   </div>
                   {i < steps.length - 1 && (
-                    <div className="absolute top-10 left-1/2 -translate-x-1/2 w-px h-3"
-                      style={{ background: 'rgba(255,255,255,0.06)' }} />
+                    <div className="absolute top-10 left-5 -translate-x-1/2 w-px h-5"
+                      style={{ background: `linear-gradient(${step.color}80, rgba(255,255,255,.08))` }} />
                   )}
                 </div>
 
                 {/* Text */}
                 <div className="pt-0.5">
                   <div className="text-sm font-bold text-white mb-0.5">{step.label}</div>
-                  <div className="text-xs leading-relaxed" style={{ color: 'rgba(255,255,255,0.35)' }}>
+                  <div className="text-xs leading-relaxed text-slate-400">
                     {step.desc}
                   </div>
                 </div>
               </motion.div>
             ))}
           </motion.div>
+
         </div>
 
         {/* Capabilities strip */}
@@ -258,24 +267,26 @@ export default function ProcessFlowShowcase() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6, delay: 0.3, ease }}
-          className="mt-12 grid grid-cols-2 sm:grid-cols-3 gap-3"
+          className="mt-7 grid md:grid-cols-3 gap-4"
         >
-          {capabilities.map((cap, i) => (
+          {capabilityGroups.map((group, i) => (
             <motion.div
-              key={cap}
+              key={group.title}
               initial={{ opacity: 0, y: 12 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.4, delay: 0.35 + i * 0.06, ease }}
-              className="flex items-center gap-2.5 px-4 py-3 rounded-xl group cursor-default"
-              style={{ background: 'rgba(255,255,255,0.02)', border: '1px solid rgba(255,255,255,0.06)' }}
+              className="relative overflow-hidden rounded-2xl group cursor-default"
+              style={{ background: 'rgba(8,20,38,.8)', border: `1px solid ${group.ai ? 'rgba(16,185,129,.65)' : 'rgba(255,255,255,.09)'}`, boxShadow: group.ai ? '0 0 34px rgba(16,185,129,.1)' : 'none' }}
             >
-              <CheckCircle2 size={14} className="flex-shrink-0 transition-colors duration-300"
-                style={{ color: 'rgba(139,92,246,0.6)' }} />
-              <span className="text-xs sm:text-sm font-semibold transition-colors duration-300"
-                style={{ color: 'rgba(255,255,255,0.5)' }}>
-                {cap}
-              </span>
+              {group.ai && <span className="absolute right-0 top-0 rounded-bl-xl px-3 py-1.5 text-[9px] font-black tracking-wide text-white bg-violet-600">POWERED BY AI</span>}
+              <div className="flex gap-4 p-5 pb-4">
+                <div className="w-12 h-12 rounded-2xl flex items-center justify-center flex-shrink-0" style={{ background: `${group.color}25`, color: group.color }}><group.icon size={22} /></div>
+                <div><h3 className="text-base font-extrabold text-white">{group.title}</h3><p className="text-xs text-slate-400 mt-1 leading-relaxed">{group.desc}</p></div>
+              </div>
+              <div className="border-t border-white/[.06] px-5 py-3 space-y-2 bg-white/[.015]">
+                {group.items.map(item => <div key={item} className="flex items-center gap-2 text-xs text-slate-300"><CheckCircle2 size={13} style={{ color: group.color }} />{item}</div>)}
+              </div>
             </motion.div>
           ))}
         </motion.div>
@@ -286,12 +297,12 @@ export default function ProcessFlowShowcase() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ delay: 0.4 }}
-          className="flex flex-col sm:flex-row items-center justify-center gap-4 mt-12"
+          className="flex flex-col sm:flex-row items-center justify-center gap-4 mt-6"
         >
           <a href="/request-demo"
             className="inline-flex items-center gap-2.5 px-7 py-3.5 rounded-2xl font-bold text-sm text-white transition-all hover:scale-105"
             style={{
-              background: 'linear-gradient(135deg, #8b5cf6, #6366f1)',
+              background: 'linear-gradient(135deg, #6366f1, #7c3aed)',
               boxShadow: '0 8px 32px rgba(139,92,246,0.35)',
             }}>
             See Process Flow Live <ArrowRight size={14} />

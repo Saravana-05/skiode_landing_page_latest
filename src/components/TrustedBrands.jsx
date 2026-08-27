@@ -78,11 +78,6 @@ function LogoCard({ brand, index }) {
           background: "linear-gradient(135deg, rgba(59,130,246,0.04), rgba(132,204,22,0.04))",
         }}
       />
-      {/* Bottom accent line on hover */}
-      <div
-        className="absolute bottom-0 left-0 right-0 h-0.5 scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"
-        style={{ background: "linear-gradient(90deg, #3b82f6, #84cc16)" }}
-      />
       <img
         src={brand.logo}
         alt={brand.name}

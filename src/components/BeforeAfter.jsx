@@ -20,7 +20,7 @@ const modules = [
   { icon: Cpu, name: "RPA", color: "#ec4899", bg: "#fce7f3" },
   { icon: ScanText, name: "OCR / AI", color: "#10b981", bg: "#d1fae5" },
   { icon: Bot, name: "BOTS", color: "#6366f1", bg: "#e0e7ff" },
-  { icon: Plug, name: "Integration", color: "#06b6d4", bg: "#cffafe" },
+  { icon: Plug, name: "Integration", color: "#3b82f6", bg: "#dbeafe" },
   { icon: BarChart2, name: "Dashboards", color: "#f97316", bg: "#ffedd5" },
   { icon: FolderOpen, name: "DMS", color: "#f59e0b", bg: "#fef3c7" },
   { icon: Users, name: "Users", color: "#3b82f6", bg: "#dbeafe" },
@@ -31,21 +31,21 @@ const modules = [
 
 export default function WhatSkiodeReplaces() {
   return (
-    <section id="before-after" className="py-16 relative overflow-hidden" style={{ background: "linear-gradient(180deg, #f8faff 0%, #ffffff 50%, #f8faff 100%)" }}>
+    <section id="before-after" className="py-10 relative overflow-hidden" style={{ background: "#f8faff" }}>
       <div className="absolute inset-0 dot-pattern-light pointer-events-none" />
 
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative">
 
         {/* Header */}
-        <div className="text-center mb-16">
+        <div className="text-center mb-8">
           <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}
-            className="inline-flex items-center gap-2 rounded-full px-5 py-2 text-xs font-bold mb-5"
+            className="inline-flex items-center gap-2 rounded-full px-5 py-2 text-xs font-bold mb-3"
             style={{ background: "rgba(59,130,246,0.07)", border: "1px solid rgba(59,130,246,0.15)", color: "#3b82f6" }}>
             <Sparkles size={12} /> BPM + Lowcode + RPA + AI — All In One
           </motion.div>
           <motion.h2 initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.1 }}
-            className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-slate-900 mb-5 leading-tight">
-            One platform, <span className="gradient-text-blue">zero fragmentation</span>
+            className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-slate-900 mb-3 leading-tight">
+            One platform, <span style={{ color: "#163e64" }}>zero fragmentation</span>
           </motion.h2>
           <motion.p initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.2 }}
             className="text-lg text-slate-500 max-w-2xl mx-auto leading-relaxed">
@@ -59,13 +59,18 @@ export default function WhatSkiodeReplaces() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ delay: 0.25 }}
-          className="grid lg:grid-cols-[1fr_auto_1fr] gap-0 items-stretch"
+          className="grid lg:grid-cols-[1fr_auto_1fr_auto] gap-0 items-stretch"
         >
           {/* LEFT — chaos panel */}
-          <div className="rounded-2xl lg:rounded-r-none p-8 relative overflow-hidden"
-            style={{ background: "#f8f9fb", border: "1px solid #e2e8f0", borderRight: "none" }}>
+          <div className="rounded-2xl lg:rounded-r-none p-5 relative overflow-hidden flex flex-col"
+            style={{
+              background: "#f8f9fb",
+              border: "1px solid #94a3b8",
+              borderRight: "none",
+              boxShadow: "0 6px 0 #94a3b8, 0 14px 28px rgba(15,23,42,0.10)",
+            }}>
             {/* Label */}
-            <div className="flex items-center gap-2 mb-6">
+            <div className="flex items-center gap-2 mb-4">
               <div className="w-7 h-7 rounded-lg flex items-center justify-center bg-slate-200">
                 <X size={14} className="text-slate-500" strokeWidth={3} />
               </div>
@@ -92,7 +97,7 @@ export default function WhatSkiodeReplaces() {
               ))}
             </div>
             {/* Subtle chaos markers */}
-            <div className="mt-6 flex flex-wrap gap-3 text-xs text-slate-400 font-medium">
+            <div className="mt-auto pt-4 flex flex-nowrap items-center gap-2 text-xs text-slate-400 font-medium whitespace-nowrap overflow-x-auto scrollbar-hide">
               <span>24+ separate licenses</span>
               <span>·</span>
               <span>No unified view</span>
@@ -116,25 +121,25 @@ export default function WhatSkiodeReplaces() {
           </div>
 
           {/* RIGHT — skiode clean panel */}
-          <div className="rounded-2xl lg:rounded-l-none p-8 relative overflow-hidden"
+          <div className="rounded-2xl lg:rounded-l-none p-5 relative overflow-hidden flex flex-col"
             style={{
-              background: "linear-gradient(135deg, #f0f7ff 0%, #f5f0ff 100%)",
-              border: "1px solid #dbeafe",
+              background: "#eff6ff",
+              border: "1px solid #163e64",
               borderLeft: "none",
+              boxShadow: "0 6px 0 #163e64, 0 14px 28px rgba(22,62,100,0.18)",
             }}>
             {/* Label */}
-            <div className="flex items-center gap-2 mb-6">
+            <div className="flex items-center gap-2 mb-4">
               <div className="w-7 h-7 rounded-lg flex items-center justify-center"
-                style={{ background: "linear-gradient(135deg, #3b82f6, #8b5cf6)" }}>
+                style={{ background: "#163e64" }}>
                 <Check size={14} className="text-white" strokeWidth={3} />
               </div>
-              <span className="text-sm font-extrabold uppercase tracking-wider"
-                style={{ background: "linear-gradient(135deg, #3b82f6, #8b5cf6)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }}>
+              <span className="text-sm font-extrabold uppercase tracking-wider" style={{ color: "#163e64" }}>
                 With skiode
               </span>
             </div>
             {/* Clean module grid */}
-            <div className="grid grid-cols-3 sm:grid-cols-4 gap-3">
+            <div className="grid grid-cols-3 gap-2">
               {modules.map((m, i) => (
                 <motion.div
                   key={m.name}
@@ -142,10 +147,10 @@ export default function WhatSkiodeReplaces() {
                   whileInView={{ opacity: 1, scale: 1 }}
                   viewport={{ once: true }}
                   transition={{ delay: 0.4 + i * 0.04 }}
-                  className="flex flex-col items-center gap-2 p-3 rounded-xl bg-white group hover:shadow-lg transition-all duration-300"
+                  className="flex flex-col items-center gap-1.5 p-2 rounded-xl bg-white group hover:shadow-lg transition-all duration-300"
                   style={{ border: "1px solid #e8edf4" }}
                 >
-                  <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-xl flex items-center justify-center transition-transform duration-300 group-hover:scale-110"
+                  <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-xl flex items-center justify-center transition-transform duration-300 group-hover:scale-110"
                     style={{ background: m.bg }}>
                     <m.icon size={20} style={{ color: m.color }} strokeWidth={1.8} />
                   </div>
@@ -154,7 +159,7 @@ export default function WhatSkiodeReplaces() {
               ))}
             </div>
             {/* Benefits */}
-            <div className="mt-6 flex flex-wrap gap-3 text-xs font-semibold" style={{ color: "#3b82f6" }}>
+            <div className="mt-auto pt-4 flex flex-nowrap items-center gap-2 text-xs text-slate-400 font-medium whitespace-nowrap overflow-x-auto scrollbar-hide">
               <span>1 platform</span>
               <span>·</span>
               <span>1 license</span>
@@ -162,14 +167,29 @@ export default function WhatSkiodeReplaces() {
               <span>Zero integration headaches</span>
             </div>
           </div>
+
+          {/* STATS — vertical stack, right of "With skiode" */}
+          <div className="hidden lg:flex flex-col justify-center gap-5 pl-8">
+            {[
+              { num: "50+", label: "Integrations ready" },
+              { num: "5×", label: "Faster app builds" },
+              { num: "70%", label: "Cycle time reduction" },
+              { num: "10×", label: "Productivity boost" },
+            ].map((s, i, arr) => (
+              <div key={s.label} className={i < arr.length - 1 ? "pb-5 border-b" : ""} style={{ borderColor: "#e2e8f0" }}>
+                <div className="text-3xl font-black whitespace-nowrap" style={{ color: "#3b82f6" }}>{s.num}</div>
+                <div className="text-xs text-slate-400 font-semibold mt-1 whitespace-nowrap">{s.label}</div>
+              </div>
+            ))}
+          </div>
         </motion.div>
 
-        {/* Bottom stats */}
+        {/* Bottom stats — mobile/tablet only */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="mt-16 flex flex-wrap items-center justify-center gap-8 sm:gap-12"
+          className="flex lg:hidden flex-wrap items-center justify-center gap-6 sm:gap-10 mt-8"
         >
           {[
             { num: "50+", label: "Integrations ready" },
@@ -178,7 +198,7 @@ export default function WhatSkiodeReplaces() {
             { num: "10×", label: "Productivity boost" },
           ].map(s => (
             <div key={s.label} className="text-center">
-              <div className="text-3xl sm:text-4xl font-black gradient-text-blue">{s.num}</div>
+              <div className="text-3xl sm:text-4xl font-black" style={{ color: "#3b82f6" }}>{s.num}</div>
               <div className="text-sm text-slate-400 font-semibold mt-1">{s.label}</div>
             </div>
           ))}
