@@ -41,9 +41,6 @@ const gridPositions = [
   { col: 1.5, row: 3 },
 ]
 
-const CELL = 140
-const GAP = 16
-
 /* Floating animation — each card gently bobs at its own rhythm */
 const floatVariants = (i) => ({
   animate: {
@@ -70,7 +67,7 @@ const glowPulse = {
   },
 }
 
-function LogoCard({ logo, i, x, y, isHighlighted }) {
+function LogoCard({ logo, i, col, row, isHighlighted }) {
   return (
     <motion.div
       key={logo.name + i}
@@ -85,7 +82,10 @@ function LogoCard({ logo, i, x, y, isHighlighted }) {
         damping: 14,
       }}
       className="absolute"
-      style={{ left: `${x}px`, top: `${y}px` }}
+      style={{
+        left: `calc(${col} * (var(--cell) + var(--gap)))`,
+        top: `calc(${row} * (var(--cell) + var(--gap)))`,
+      }}
     >
       <motion.div
         variants={floatVariants(i)}
@@ -98,11 +98,10 @@ function LogoCard({ logo, i, x, y, isHighlighted }) {
           transition: { duration: 0.3 },
         }}
         {...(isHighlighted ? glowPulse : {})}
-        className="rounded-2xl bg-white border border-slate-100 shadow-sm hover:shadow-xl flex items-center justify-center cursor-default transition-colors duration-300 hover:border-blue-200"
+        className="rounded-2xl bg-white border border-slate-100 shadow-sm hover:shadow-xl flex items-center justify-center cursor-default transition-colors duration-300 hover:border-blue-200 p-2 sm:p-3 md:p-4 lg:p-[22px]"
         style={{
-          width: `${CELL}px`,
-          height: `${CELL}px`,
-          padding: '22px',
+          width: 'var(--cell)',
+          height: 'var(--cell)',
         }}
       >
         <motion.img
@@ -143,7 +142,7 @@ export default function IntegrationsShowcase() {
 
             <motion.h2
               initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.1 }}
-              className="text-[36px] font-extrabold leading-tight mb-3" style={{ color: '#0a2342' }}
+              className="text-[26px] sm:text-[30px] lg:text-[36px] font-extrabold leading-tight mb-3" style={{ color: '#0a2342' }}
             >
               Built-in integrations with{' '}
               <span className="text-[#2563eb]">
@@ -162,30 +161,28 @@ export default function IntegrationsShowcase() {
           </div>
 
           {/* ─── Right: Diamond logo grid ─── */}
-          <div className="lg:w-[56%] flex justify-center lg:justify-end">
+          <div className="lg:w-[56%] flex justify-center lg:justify-end overflow-x-hidden w-full">
             <div
-              className="relative"
+              className="relative [--cell:52px] [--gap:8px] sm:[--cell:84px] sm:[--gap:10px] md:[--cell:104px] md:[--gap:12px] lg:[--cell:140px] lg:[--gap:16px]"
               style={{
-                width: `${3.5 * CELL + 3 * GAP}px`,
-                height: `${4 * CELL + 3 * GAP}px`,
+                width: 'calc(3.5 * var(--cell) + 3 * var(--gap))',
+                height: 'calc(4 * var(--cell) + 3 * var(--gap))',
               }}
             >
               {logos.map((logo, i) => {
                 const pos = gridPositions[i]
-                const x = pos.col * (CELL + GAP)
-                const y = pos.row * (CELL + GAP)
                 const isHighlighted = i === 4 // center card gets pulse glow
 
                 return (
-                  <LogoCard key={logo.name + i} logo={logo} i={i} x={x} y={y} isHighlighted={isHighlighted} />
+                  <LogoCard key={logo.name + i} logo={logo} i={i} col={pos.col} row={pos.row} isHighlighted={isHighlighted} />
                 )
               })}
 
               {/* Decorative ghost cards */}
               <div className="absolute rounded-2xl bg-blue-50/50 border border-blue-100/50"
-                style={{ width: `${CELL}px`, height: `${CELL}px`, left: `${2.5 * (CELL + GAP)}px`, top: `${3 * (CELL + GAP)}px`, opacity: 0.4 }} />
+                style={{ width: 'var(--cell)', height: 'var(--cell)', left: 'calc(2.5 * (var(--cell) + var(--gap)))', top: 'calc(3 * (var(--cell) + var(--gap)))', opacity: 0.4 }} />
               <div className="absolute rounded-2xl bg-blue-50/40 border border-blue-100/40"
-                style={{ width: `${CELL}px`, height: `${CELL}px`, left: `${0.5 * (CELL + GAP)}px`, top: `${3 * (CELL + GAP)}px`, opacity: 0.3 }} />
+                style={{ width: 'var(--cell)', height: 'var(--cell)', left: 'calc(0.5 * (var(--cell) + var(--gap)))', top: 'calc(3 * (var(--cell) + var(--gap)))', opacity: 0.3 }} />
             </div>
           </div>
         </div>

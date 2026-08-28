@@ -437,6 +437,16 @@ section {
   background: #2563eb;
 }
 
+@media (min-width: 1024px) {
+  html {
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+  ::-webkit-scrollbar {
+    display: none;
+  }
+}
+
 /* Selection */
 ::selection {
   background: rgba(59, 130, 246, 0.2);

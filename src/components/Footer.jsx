@@ -58,6 +58,7 @@ const columns = [
 export default function Footer() {
   return (
     <footer
+      id="footer"
       className="skiode-footer relative overflow-hidden text-white"
       style={{ backgroundColor: '#071827', color: '#ffffff' }}
     >
@@ -81,10 +82,10 @@ export default function Footer() {
         <div className="grid gap-10 py-11 lg:grid-cols-[1.2fr_3fr]">
           {/* Brand and contact */}
           <div className="max-w-sm">
-            <Link to="/" aria-label="Skiode home" className="inline-flex">
+            <Link to="/" aria-label="Skiode home" className="-mt-3 inline-flex">
               <img src={skiodeLogo} alt="skiode" className="h-auto w-56 object-contain sm:w-64" />
             </Link>
-            <p className="mt-5 text-sm leading-6 text-slate-400">AI-powered low-code platform for building applications, automating workflows, and running intelligent business operations from one connected workspace.</p>
+            <p className="mt-5 text-sm leading-6 text-slate-400">AI-powered low-code for teams who'd rather build than wait. Forms, workflows, automation, and AI — unified workspace, start to finish.</p>
 
             <div className="mt-6 space-y-3 text-sm text-slate-300">
               <a href="mailto:admin@skiode.com" className="group flex items-center gap-3 transition-colors hover:text-white"><span className="flex h-9 w-9 items-center justify-center rounded-lg border border-white/10 bg-white/5 text-emerald-400"><Mail size={15} /></span><span><small className="block text-[10px] uppercase tracking-wider text-slate-500">Email us</small>admin@skiode.com</span></a>

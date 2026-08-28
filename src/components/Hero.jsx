@@ -33,7 +33,7 @@ function StoreBadge({ type }) {
 
 export default function Hero() {
   return (
-    <section className="relative overflow-hidden bg-[#fbfdff] pt-14 sm:pt-16">
+    <section className="relative overflow-hidden bg-[#fbfdff] pt-24 sm:pt-24 lg:pt-20">
       <div className="pointer-events-none absolute inset-0 opacity-90" style={{ backgroundImage: 'radial-gradient(circle, rgba(61, 104, 151, 0.28) 1.15px, transparent 1.15px)', backgroundSize: '22px 22px' }} />
       <div className="pointer-events-none absolute -right-[12%] -top-[28%] h-[760px] w-[760px] rounded-full bg-[#e1efff] opacity-90" />
       <div className="pointer-events-none absolute right-[2%] top-[14%] h-[500px] w-[500px] rounded-full bg-[#c9e0ff] opacity-55" />

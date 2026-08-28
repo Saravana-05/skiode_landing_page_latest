@@ -55,11 +55,11 @@ export default function FinalCTA() {
       <div className="absolute inset-0 z-[3] hidden lg:block pointer-events-none">
         {capabilities.map((item, index) => (
           <motion.div key={item.label} initial={{ opacity: 0, x: item.side === 'left' ? -20 : 20 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ delay: .12 + index * .05 }} whileHover={{ y: -4 }}
-            className="group absolute w-[270px] rounded-[22px] border bg-white/95 p-3.5 text-left shadow-[0_12px_30px_rgba(18,58,89,.09)] backdrop-blur-sm pointer-events-auto transition-all duration-300"
+            className={`group absolute rounded-[22px] border bg-white/95 p-3.5 text-left shadow-[0_12px_30px_rgba(18,58,89,.09)] backdrop-blur-sm pointer-events-auto transition-all duration-300 ${item.label === 'Workflow Approval' ? 'w-[300px]' : 'w-[270px]'}`}
             style={{ top: item.top, left: item.side === 'left' ? '3.5%' : 'auto', right: item.side === 'right' ? '3.5%' : 'auto', borderColor: `${item.color}35` }}>
             <div className="flex items-center gap-3">
               <span className="flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-2xl transition-all duration-300 group-hover:scale-105" style={{ background: `${item.color}16`, color: item.color }}><item.icon size={22} /></span>
-              <span className="min-w-0 flex-1"><strong className="block text-base font-extrabold text-[#0b1730]">{item.label}</strong><span className="mt-1 block text-xs leading-snug text-slate-500">{item.desc}</span></span>
+              <span className="min-w-0 flex-1"><strong className={`block text-base font-extrabold text-[#0b1730] ${item.label === 'Workflow Approval' ? 'whitespace-nowrap' : ''}`}>{item.label}</strong><span className="mt-1 block text-xs leading-snug text-slate-500">{item.desc}</span></span>
               <ArrowRight size={18} style={{ color: item.color }} className="transition-transform duration-300 group-hover:translate-x-1" />
             </div>
           </motion.div>
@@ -71,19 +71,19 @@ export default function FinalCTA() {
           <Zap size={12} className="transition-transform group-hover:translate-x-0.5" /> Get Started Today
         </motion.div>
 
-        <motion.h2 initial={{ opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: .08 }} className="text-4xl font-black leading-[1.04] tracking-[-.035em] text-[#0b1730] sm:text-5xl lg:text-[54px]">
-          Turn manual processes into<br className="hidden sm:block" /><span style={{ color: '#164065' }}>digital business advantages</span>
+        <motion.h2 initial={{ opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: .08 }} className="text-[26px] font-black leading-[1.04] tracking-[-.035em] text-[#0b1730] sm:text-[30px] lg:whitespace-nowrap lg:text-[35px]">
+          Turn manual processes into <span style={{ color: '#164065' }}>automated workflows</span>
         </motion.h2>
 
         <motion.p initial={{ opacity: 0, y: 18 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: .16 }} className="mx-auto mt-6 max-w-2xl text-base leading-7 text-slate-500">
-          Whether it's employee onboarding, procurement approvals, customer service, contract management, or manufacturing operations — skiode brings every step, approval, document, and status update into a single digital platform.
+          Whether it's employee onboarding, procurement approvals, or contract management — skiode brings every step into one shared system.
         </motion.p>
 
         <motion.div initial={{ opacity: 0, y: 18 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: .24 }} className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row">
           <Link to="/request-demo" className="group inline-flex items-center gap-3 rounded-xl py-2 pl-6 pr-2 text-base font-semibold text-white shadow-[0_10px_28px_rgba(11,23,48,.22)] transition-all hover:-translate-y-1 hover:shadow-[0_14px_32px_rgba(11,23,48,.28)]" style={{ background: '#0b1730', color: '#ffffff' }}>
             Request Demo<span className="flex h-9 w-9 items-center justify-center rounded-lg bg-[#39ff14] text-[#0b1730] shadow-[0_0_16px_rgba(57,255,20,.2)] transition-all group-hover:translate-x-0.5 group-hover:shadow-[0_0_20px_rgba(57,255,20,.4)]"><ArrowRight size={15} strokeWidth={2.5} /></span>
           </Link>
-          <a href="#platform" className="inline-flex items-center gap-2 rounded-xl border border-slate-300 bg-white/80 px-7 py-3.5 text-base font-bold text-[#0b1730] transition-all hover:-translate-y-1 hover:bg-white">Explore Platform <ArrowRight size={15} /></a>
+          <a href="https://studio.skiode.com/auth/login" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 rounded-xl border border-slate-300 bg-white/80 px-7 py-3.5 text-base font-bold text-[#0b1730] transition-all hover:-translate-y-1 hover:bg-white">Explore Platform <ArrowRight size={15} /></a>
         </motion.div>
 
         <div className="mt-8 grid grid-cols-1 gap-3 text-left sm:grid-cols-2 lg:hidden">

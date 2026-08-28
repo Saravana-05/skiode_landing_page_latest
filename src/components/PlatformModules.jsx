@@ -164,7 +164,7 @@ export default function PlatformModules() {
             <span style={{
               background: "linear-gradient(135deg, #3b82f6 0%, #8b5cf6 50%, #ec4899 100%)",
               WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent",
-            }}>digital advantages</span>
+            }}>digital business advantages</span>
           </motion.h2>
 
           <motion.p initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.15 }}

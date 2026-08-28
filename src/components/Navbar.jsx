@@ -7,7 +7,8 @@ import {
   Plug, LayoutGrid, Building2, HeartPulse,
   Cpu, Factory, Truck,
   FlaskConical, ShoppingCart, CreditCard,
-  Compass, Award, Zap, Eye, Workflow, MonitorDot, Link2
+  Compass, Award, Zap, Eye, Workflow, MonitorDot, Link2,
+  HelpCircle, MessageCircle, PanelBottom
 } from 'lucide-react'
 import skiodeLogo from '../../logo/Trimmed_skiode_logo_drkBlue_forlightbg.png'
 
@@ -88,6 +89,9 @@ const menus = {
       { icon: LayoutGrid, title: 'Platform Overview',      desc: 'All modules at a glance', link: '/#platform-overview' },
       { icon: Workflow,   title: 'Process Flow',           desc: 'Visual workflow automation', link: '/#process-flow-showcase' },
       { icon: Link2,      title: 'Integrations',           desc: '50+ connectors and APIs', link: '/#integrations-showcase' },
+      { icon: MessageCircle, title: 'Customer Stories',    desc: 'What our customers say', link: '/#testimonials' },
+      { icon: HelpCircle, title: 'FAQs',                   desc: 'Answers to common questions', link: '/#faq' },
+      { icon: PanelBottom, title: 'Footer',                desc: 'Site map and contact details', link: '/#footer' },
     ],
     cta: { label: 'View Full Homepage', link: '/' },
   },
@@ -454,7 +458,7 @@ export default function Navbar() {
                             {(menus[item].groups
                               ? menus[item].groups.flatMap(g => g.items)
                               : menus[item].items
-                            ).slice(0, 8).map(it => (
+                            ).slice(0, 10).map(it => (
                               <a key={it.title} href={it.link || '#'}
                                 className="flex items-center gap-2.5 px-3 py-2 rounded-xl hover:bg-slate-100 transition-all"
                                 onClick={(e) => {

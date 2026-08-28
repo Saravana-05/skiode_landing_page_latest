@@ -122,6 +122,8 @@ export default function InteractiveShowcase() {
   const [progress, setProgress] = useState(0)
   const timerRef = useRef(null)
   const progressRef = useRef(null)
+  const tabBarRef = useRef(null)
+  const tabRefs = useRef([])
   const current = slides[active]
 
   /* ── Autoplay logic ── */
@@ -156,6 +158,15 @@ export default function InteractiveShowcase() {
       clearInterval(progressRef.current)
     }
   }, [active, isPlaying, goNext])
+
+  useEffect(() => {
+    const tabBar = tabBarRef.current
+    const activeTab = tabRefs.current[active]
+    if (!tabBar || !activeTab || window.innerWidth >= 1024) return
+
+    const left = activeTab.offsetLeft - ((tabBar.clientWidth - activeTab.offsetWidth) / 2)
+    tabBar.scrollTo({ left: Math.max(0, left), behavior: 'smooth' })
+  }, [active])
 
   const handleTabClick = (i) => {
     setActive(i)
@@ -196,7 +207,7 @@ export default function InteractiveShowcase() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.1 }}
-            className="text-4xl sm:text-5xl lg:text-6xl font-extrabold mb-3 leading-tight">
+            className="text-[36px] sm:text-5xl lg:text-6xl font-extrabold mb-3 leading-tight">
             <span className="text-white">Experience the </span>
             <span style={{ color: "#39ff14", textShadow: "0 0 16px rgba(57,255,20,.25)" }}>
               Platform Live
@@ -223,7 +234,7 @@ export default function InteractiveShowcase() {
         >
           {/* ── Left — module menu ── */}
           <div className="lg:w-64 flex-shrink-0">
-            <div className="flex flex-row lg:flex-col gap-1.5 overflow-x-auto lg:overflow-visible hide-scrollbar rounded-2xl p-2"
+            <div ref={tabBarRef} className="flex flex-row lg:flex-col gap-1.5 overflow-x-auto lg:overflow-visible hide-scrollbar rounded-2xl p-2 scroll-smooth"
               style={{ background: "rgba(255,255,255,0.03)", border: "1px solid rgba(255,255,255,0.06)" }}>
               {/* Play/Pause — mobile only, inline with scroller */}
               <button
@@ -241,7 +252,10 @@ export default function InteractiveShowcase() {
                 return (
                   <button
                     key={slide.id}
+                    ref={element => { tabRefs.current[i] = element }}
                     onClick={() => handleTabClick(i)}
+                    role="tab"
+                    aria-selected={isActive}
                     className="relative flex items-center gap-2.5 px-3.5 py-2.5 rounded-xl text-xs font-semibold whitespace-nowrap transition-all duration-300 flex-shrink-0 lg:w-full lg:text-left"
                     style={{
                       background: isActive ? `${slide.color}15` : "transparent",
@@ -295,9 +309,9 @@ export default function InteractiveShowcase() {
                 <div className="w-2.5 h-2.5 rounded-full" style={{ background: "#febc2e" }} />
                 <div className="w-2.5 h-2.5 rounded-full" style={{ background: "#28c840" }} />
               </div>
-              <div className="flex items-center gap-2 px-4 py-1 rounded-lg" style={{ background: "rgba(255,255,255,0.04)" }}>
+              <div className="hidden min-w-0 items-center gap-2 px-4 py-1 rounded-lg sm:flex" style={{ background: "rgba(255,255,255,0.04)" }}>
                 <div className="w-1.5 h-1.5 rounded-full animate-pulse" style={{ background: current.color }} />
-                <span className="text-[10px] font-medium" style={{ color: "rgba(255,255,255,0.25)" }}>
+                <span className="truncate text-[10px] font-medium" style={{ color: "rgba(255,255,255,0.25)" }}>
                   skiode — {current.tagline}
                 </span>
               </div>
@@ -310,7 +324,7 @@ export default function InteractiveShowcase() {
             </div>
 
             {/* Content */}
-            <div className="relative" style={{ aspectRatio: "16/8.5", minHeight: "380px" }}>
+            <div className="relative min-h-[440px] sm:min-h-[380px]" style={{ aspectRatio: "16/8.5" }}>
               <AnimatePresence mode="wait">
                 <motion.div
                   key={current.id}
@@ -331,8 +345,8 @@ export default function InteractiveShowcase() {
                     style={{ background: "rgba(13,17,23,0.85)" }} />
 
                   {/* Bottom info overlay */}
-                  <div className="absolute bottom-0 left-0 right-0 px-6 pb-5 flex items-end justify-between">
-                    <div>
+                  <div className="absolute bottom-0 left-0 right-0 flex flex-col items-start gap-3 px-4 pb-4 sm:flex-row sm:items-end sm:justify-between sm:px-6 sm:pb-5">
+                    <div className="min-w-0">
                       <div className="flex items-center gap-2 mb-1.5">
                         <div className="w-6 h-6 rounded-lg flex items-center justify-center"
                           style={{ background: `${current.color}20` }}>
@@ -340,13 +354,13 @@ export default function InteractiveShowcase() {
                         </div>
                         <span className="text-sm font-bold text-white">{current.tagline}</span>
                       </div>
-                      <p className="text-xs max-w-lg" style={{ color: "rgba(255,255,255,0.4)" }}>
+                      <p className="max-w-lg text-[11px] leading-relaxed sm:text-xs" style={{ color: "rgba(255,255,255,0.55)" }}>
                         {current.desc}
                       </p>
                     </div>
 
                     {/* Navigation arrows */}
-                    <div className="flex items-center gap-2 flex-shrink-0 ml-4">
+                    <div className="flex flex-shrink-0 items-center gap-2 sm:ml-4">
                       <button onClick={goPrev}
                         className="w-8 h-8 rounded-xl flex items-center justify-center transition-all hover:scale-110"
                         style={{ background: "rgba(255,255,255,0.06)", border: "1px solid rgba(255,255,255,0.08)" }}>
