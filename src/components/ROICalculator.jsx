@@ -16,7 +16,7 @@ function Slider({ label, icon: Icon, color, min, max, step, value, onChange, for
         <span className="text-sm font-extrabold" style={{ color }}>{format(value)}</span>
       </div>
       <div className="relative h-2 rounded-full bg-slate-100">
-        <div className="absolute left-0 top-0 h-full rounded-full" style={{ width: `${pct}%`, background: `linear-gradient(90deg,${color},${color}99)` }} />
+        <div className="absolute left-0 top-0 h-full rounded-full" style={{ width: `${pct}%`, background: "#164065" }} />
         <input type="range" min={min} max={max} step={step} value={value} onChange={e => onChange(+e.target.value)}
           className="absolute inset-0 w-full h-full opacity-0 cursor-pointer" />
         <div className="absolute top-1/2 -translate-y-1/2 w-4 h-4 rounded-full border-2 border-white shadow-lg" style={{ left: `calc(${pct}% - 8px)`, background: color }} />
@@ -46,7 +46,7 @@ export default function ROICalculator() {
   const fmtH = v => `${v}h`
 
   return (
-    <section className="py-24" id="roi" style={{ background: "linear-gradient(135deg,#f0f4ff 0%,#eef6ff 100%)" }}>
+    <section className="py-12" id="roi" style={{ background: "#f1f5f7" }}>
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-14">
           <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}
@@ -67,7 +67,7 @@ export default function ROICalculator() {
         <div className="grid lg:grid-cols-2 gap-8 items-start">
           {/* Sliders */}
           <motion.div initial={{ opacity: 0, x: -30 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }}
-            className="rounded-3xl p-8 space-y-7"
+            className="rounded-3xl p-6 space-y-5"
             style={{ background: "#ffffff", border: "1px solid rgba(0,0,0,0.08)", boxShadow: "0 4px 24px rgba(0,0,0,0.06)" }}>
             <h3 className="font-extrabold text-slate-900 text-lg mb-2">Your Organization</h3>
             <Slider label="Total Employees" icon={Users} color="#3b82f6" min={10} max={500} step={5} value={employees} onChange={setEmployees} format={v => `${v} people`} />
@@ -104,7 +104,7 @@ export default function ROICalculator() {
 
             <motion.button whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}
               className="w-full py-4 rounded-2xl font-extrabold text-slate-900 text-base flex items-center justify-center gap-2 mt-2"
-              style={{ background: "linear-gradient(135deg,#a3e635,#4ade80)" }}>
+              style={{ background: "#0a2342", color: "#39ff14" }}>
               Get Custom ROI Analysis <ArrowRight size={16} />
             </motion.button>
           </motion.div>

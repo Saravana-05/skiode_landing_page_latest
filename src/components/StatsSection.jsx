@@ -31,7 +31,7 @@ const items = [
   {
     icon: Zap, val: "5", suffix: "x", label: "Faster App Builds",
     desc: "Build production apps in weeks — not months",
-    color: "#3b82f6", gradient: "linear-gradient(135deg, #3b82f6, #60a5fa)",
+    color: "#39ff14", gradient: "linear-gradient(135deg, #39ff14, #10b981)",
     ring: "rgba(59,130,246,0.15)",
   },
   {
@@ -68,7 +68,7 @@ const items = [
 
 export default function StatsSection() {
   return (
-    <section id="stats" className="relative pt-8 pb-16 overflow-hidden">
+    <section id="stats" className="homepage-section relative overflow-hidden">
       {/* Background */}
       <div className="absolute inset-0"
         style={{ background: "linear-gradient(180deg, #0d1117 0%, #111827 50%, #0d1117 100%)" }} />
@@ -91,13 +91,13 @@ export default function StatsSection() {
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="inline-flex items-center gap-2 rounded-full px-5 py-2 text-xs font-semibold mb-3"
+            className="section-eyebrow inline-flex items-center gap-2 rounded-full px-5 py-2 font-semibold mb-3"
             style={{
               background: "rgba(59,130,246,0.1)",
               border: "1px solid rgba(59,130,246,0.2)",
-              color: "#60a5fa",
+              color: "#ffffff",
             }}>
-            <div className="w-1.5 h-1.5 rounded-full bg-blue-400 animate-pulse" />
+            <div className="w-1.5 h-1.5 rounded-full bg-[#39ff14] animate-pulse" />
             Real Results, Real Impact
           </motion.div>
 
@@ -116,7 +116,7 @@ export default function StatsSection() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.2 }}
-            className="text-base sm:text-lg max-w-xl mx-auto"
+            className="section-lead text-base sm:text-lg max-w-none mx-auto"
             style={{ color: "rgba(255,255,255,0.4)" }}>
             Teams that adopt skiode see immediate improvements in speed, efficiency, and visibility.
           </motion.p>

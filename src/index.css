@@ -2,6 +2,18 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Footer colors are declared explicitly so the footer remains stable during HMR. */
+.skiode-footer {
+  background-color: #071827 !important;
+  color: #ffffff;
+  isolation: isolate;
+}
+
+.skiode-footer h2,
+.skiode-footer h3 {
+  color: #ffffff !important;
+}
+
 /* ── Brand fonts ── */
 :root {
   --font-heading: 'Inter', sans-serif;
@@ -15,6 +27,31 @@
   --c-dark: #3a3a3a;
   --c-navy: #0a0f1e;
   --c-navy2: #0f172a;
+}
+
+/* Homepage section rhythm and typography */
+.homepage-section {
+  padding-top: 2rem !important;
+  padding-bottom: 2rem !important;
+}
+
+.homepage-section h1,
+.homepage-section h2 {
+  font-size: clamp(2.25rem, 3.5vw, 3rem) !important;
+  line-height: 1.08 !important;
+}
+
+.homepage-section .section-eyebrow {
+  font-size: 0.75rem !important;
+  line-height: 1rem !important;
+}
+
+@media (min-width: 1024px) {
+  .homepage-section h1,
+  .homepage-section h2,
+  .homepage-section .section-lead {
+    white-space: nowrap;
+  }
 }
 
 @layer base {
@@ -245,7 +282,7 @@
   }
 
   .mega-item:hover {
-    background: #ffffff;
+    background: rgba(20, 64, 101, 0.06);
     border-color: #c8d9e4;
     border-radius: 10px;
     box-shadow: 0 7px 18px rgba(20, 64, 101, 0.09);
@@ -253,26 +290,29 @@
   }
 
   .mega-panel {
-    background: #dfeaf1;
+    background-color: #fbfdff;
+    background-image: radial-gradient(circle, rgba(61, 104, 151, 0.28) 1.15px, transparent 1.15px);
+    background-size: 22px 22px;
     border: 1px solid #bfd2df;
-    color: #123a59;
+    color: #164065;
   }
 
   .mega-group {
-    background: #edf4f8;
+    background: rgba(255, 255, 255, 0.72);
     border: 1px solid #cedde7;
   }
 
   .mega-panel .mega-label {
-    color: #527089 !important;
+    color: #164065 !important;
   }
 
   .mega-panel .mega-title {
-    color: #123a59 !important;
+    color: #164065 !important;
   }
 
   .mega-panel .mega-copy {
-    color: #557086 !important;
+    color: #164065 !important;
+    opacity: 0.72;
   }
 
   .mega-panel .mega-icon {
@@ -301,60 +341,65 @@
 }
 
 @media (prefers-color-scheme: dark) {
+  /* Mega menu keeps the same light, dotted navy-on-white look regardless of
+     system theme — the rest of the site doesn't implement dark mode. */
   .mega-panel {
-    background: #0c2639;
-    border-color: #2b5269;
-    box-shadow: 0 24px 70px rgba(3, 15, 25, 0.48);
+    background-color: #fbfdff;
+    background-image: radial-gradient(circle, rgba(61, 104, 151, 0.28) 1.15px, transparent 1.15px);
+    background-size: 22px 22px;
+    border-color: #bfd2df;
+    box-shadow: 0 22px 55px rgba(20, 64, 101, 0.24);
   }
 
   .mega-panel .mega-label {
-    color: #91b4c9 !important;
+    color: #164065 !important;
   }
 
   .mega-panel .mega-title {
-    color: #f3f9fc !important;
+    color: #164065 !important;
   }
 
   .mega-panel .mega-copy {
-    color: #b6ccda !important;
+    color: #164065 !important;
+    opacity: 0.72;
   }
 
   .mega-panel .mega-icon {
-    background: #8de51c !important;
-    border-color: #8de51c !important;
+    background: #164065 !important;
+    border-color: #164065 !important;
   }
 
   .mega-panel .mega-icon svg {
-    color: #0c2639 !important;
+    color: #ffffff !important;
   }
 
   .mega-panel .mega-item:hover {
-    background: #173b51;
-    border-color: #3b647b;
-    box-shadow: 0 8px 20px rgba(2, 12, 20, 0.28);
+    background: rgba(20, 64, 101, 0.06);
+    border-color: #c8d9e4;
+    box-shadow: 0 7px 18px rgba(20, 64, 101, 0.09);
   }
 
   .mega-panel .mega-group {
-    background: #112f43;
-    border-color: #294f65;
+    background: rgba(255, 255, 255, 0.72);
+    border-color: #cedde7;
   }
 
   .mega-panel .mega-feature {
-    background: #17384d;
-    border-color: #315b72;
+    background: #ffffff;
+    border-color: #bfd2df;
   }
 
   .mega-panel .mega-footer {
-    border-color: #315b72;
+    border-color: #c8dbe7;
   }
 
   .mega-panel .mega-footer-link {
-    background: #245672;
+    background: #164065;
     color: #ffffff !important;
   }
 
   .mega-panel .mega-footer-link:hover {
-    background: #2d6685;
+    background: #0f3555;
   }
 }
 

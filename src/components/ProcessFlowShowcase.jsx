@@ -1,9 +1,9 @@
 import { useRef, useState, useEffect } from 'react'
 import { motion, useInView } from 'framer-motion'
 import {
-  GitBranch, Play, Pause, CheckCircle2, ArrowRight, Zap,
-  Clock, Bell, ShieldCheck, Split, UserCheck, FileOutput,
-  Workflow, RotateCcw, Sparkles, Heart, MousePointer2, WandSparkles
+  GitBranch, Play, Pause, CheckCircle2, Zap,
+  Bell, ShieldCheck, Split, UserCheck, FileOutput,
+  RotateCcw, Heart, MousePointer2, WandSparkles
 } from 'lucide-react'
 import processVideo from '../assets/videos_process_flow/process_flow.mp4'
 import scrProcess from '../assets/platform_screenshots/process_flow.png'
@@ -31,16 +31,43 @@ export default function ProcessFlowShowcase() {
   const isInView = useInView(sectionRef, { once: false, margin: '-100px' })
   const [playing, setPlaying] = useState(false)
   const [hasInteracted, setHasInteracted] = useState(false)
+  const [autoStep, setAutoStep] = useState(0)
+  const [interactionStep, setInteractionStep] = useState(null)
+  const collapseTimerRef = useRef(null)
+  const visibleStep = interactionStep ?? (playing ? autoStep : null)
 
   useEffect(() => {
-    if (!videoRef.current) return
-    if (isInView && !hasInteracted) {
-      videoRef.current.play().then(() => setPlaying(true)).catch(() => {})
-    } else if (!isInView && !hasInteracted) {
-      videoRef.current.pause()
-      setPlaying(false)
-    }
+    if (!videoRef.current || hasInteracted) return
+    // Debounced so a fast scroll-past doesn't fire play() then pause()
+    // back-to-back, which janks the in-flight smooth-scroll animation.
+    const timer = setTimeout(() => {
+      if (isInView) {
+        videoRef.current.play().then(() => setPlaying(true)).catch(() => {})
+      } else {
+        videoRef.current.pause()
+        setPlaying(false)
+      }
+    }, 200)
+    return () => clearTimeout(timer)
   }, [isInView, hasInteracted])
+
+  useEffect(() => {
+    if (!playing) return
+    const timer = setInterval(() => setAutoStep(step => (step + 1) % steps.length), 2400)
+    return () => clearInterval(timer)
+  }, [playing])
+
+  useEffect(() => () => clearTimeout(collapseTimerRef.current), [])
+
+  const openStep = (index) => {
+    clearTimeout(collapseTimerRef.current)
+    setInteractionStep(index)
+  }
+
+  const closeStep = () => {
+    clearTimeout(collapseTimerRef.current)
+    collapseTimerRef.current = setTimeout(() => setInteractionStep(null), 100)
+  }
 
   const togglePlay = () => {
     setHasInteracted(true)
@@ -54,7 +81,7 @@ export default function ProcessFlowShowcase() {
   }
 
   return (
-    <section id="process-flow-showcase" ref={sectionRef} className="py-12 sm:py-14 relative overflow-hidden"
+    <section id="process-flow-showcase" ref={sectionRef} className="homepage-section relative overflow-hidden"
       style={{ background: 'radial-gradient(circle at 50% 18%, #062a2b 0%, #081426 34%, #050a18 72%)' }}>
 
       {/* Background effects */}
@@ -93,7 +120,7 @@ export default function ProcessFlowShowcase() {
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="inline-flex items-center gap-2.5 rounded-full px-5 py-2 text-xs font-bold mb-4 backdrop-blur-md"
+            className="section-eyebrow inline-flex items-center gap-2.5 rounded-full px-5 py-2 font-bold mb-3 backdrop-blur-md"
             style={{ background: 'rgba(15,23,42,.68)', border: '1px solid rgba(139,92,246,.5)', color: '#f8fafc', boxShadow: '0 0 28px rgba(139,92,246,.18)' }}
           >
             <Heart size={13} /> The Heart of skiode
@@ -106,9 +133,8 @@ export default function ProcessFlowShowcase() {
             transition={{ duration: 0.8, delay: 0.1, ease }}
             className="text-4xl sm:text-5xl lg:text-6xl font-black tracking-[-.035em] mb-3 leading-[1.03]"
           >
-            <span className="text-white">Design any workflow.</span>
-            <br />
-            <span className="bg-clip-text text-transparent bg-gradient-to-r from-emerald-400 to-green-300">
+            <span className="text-white">Design any workflow. </span>
+            <span style={{ color: '#39ff14', textShadow: '0 0 18px rgba(57,255,20,.28)' }}>
               Visually. Instantly.
             </span>
           </motion.h2>
@@ -118,7 +144,7 @@ export default function ProcessFlowShowcase() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.2, ease }}
-            className="text-base sm:text-lg max-w-2xl mx-auto leading-relaxed text-slate-400"
+            className="section-lead text-base sm:text-lg max-w-none mx-auto leading-relaxed text-slate-400"
           >
             From simple approvals to complex multi-department orchestrations — drag nodes,
             set conditions, add triggers. No code. Watch it in action.
@@ -196,8 +222,9 @@ export default function ProcessFlowShowcase() {
                     ? <Pause size={24} className="text-white" />
                     : <Play size={24} className="text-white ml-1" />
                   }
-                </motion.div>
-              </div>
+        </motion.div>
+
+      </div>
 
             </div>
           </motion.div>
@@ -217,46 +244,59 @@ export default function ProcessFlowShowcase() {
               </p>
             </div>
 
-            {steps.map((step, i) => (
-              <motion.div
-                key={step.label}
-                initial={{ opacity: 0, x: 20 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.4, delay: 0.3 + i * 0.07, ease }}
-                className="group relative grid grid-cols-[24px_44px_minmax(0,1fr)] gap-2 items-start py-2.5 px-1 rounded-xl transition-all duration-300 cursor-default"
-                style={{ border: '1px solid transparent' }}
-                onMouseEnter={e => {
-                  e.currentTarget.style.background = `${step.color}08`
-                  e.currentTarget.style.borderColor = `${step.color}20`
-                }}
-                onMouseLeave={e => {
-                  e.currentTarget.style.background = 'transparent'
-                  e.currentTarget.style.borderColor = 'transparent'
-                }}
-              >
-                <span className="pt-3 text-[9px] font-bold text-right text-slate-400">0{i + 1}</span>
-                {/* Step icon + contained connector */}
-                <div className="relative flex-shrink-0">
-                  <div className="w-10 h-10 rounded-xl flex items-center justify-center transition-transform duration-300 group-hover:scale-110"
-                    style={{ background: `${step.color}18`, border: `1px solid ${step.color}30`, boxShadow: i === 0 ? `0 0 20px ${step.color}35` : 'none' }}>
-                    <step.icon size={16} style={{ color: step.color }} />
-                  </div>
-                  {i < steps.length - 1 && (
-                    <div className="absolute top-10 left-5 -translate-x-1/2 w-px h-5"
-                      style={{ background: `linear-gradient(${step.color}80, rgba(255,255,255,.08))` }} />
-                  )}
-                </div>
+            <div className="space-y-1" role="list" aria-label="Workflow steps">
+              {steps.map((step, i) => {
+                const isActive = visibleStep === i
+                return (
+                  <motion.button
+                    type="button"
+                    role="listitem"
+                    key={step.label}
+                    initial={{ opacity: 0, x: 20 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.4, delay: 0.3 + i * 0.07, ease }}
+                    onMouseEnter={() => openStep(i)}
+                    onMouseLeave={closeStep}
+                    onFocus={() => openStep(i)}
+                    onBlur={closeStep}
+                    onClick={() => setInteractionStep(current => current === i ? null : i)}
+                    aria-expanded={isActive}
+                    className="group relative w-full grid grid-cols-[22px_14px_38px_minmax(0,1fr)] gap-2 items-start px-2 py-2 rounded-xl text-left transition-colors duration-300"
+                    style={{
+                      background: isActive ? `${step.color}0d` : 'transparent',
+                      border: `1px solid ${isActive ? `${step.color}2b` : 'transparent'}`,
+                      boxShadow: isActive ? `0 8px 24px ${step.color}0f` : 'none',
+                    }}
+                  >
+                    <span className="pt-2.5 text-[9px] font-bold text-right text-slate-500">0{i + 1}</span>
 
-                {/* Text */}
-                <div className="pt-0.5">
-                  <div className="text-sm font-bold text-white mb-0.5">{step.label}</div>
-                  <div className="text-xs leading-relaxed text-slate-400">
-                    {step.desc}
-                  </div>
-                </div>
-              </motion.div>
-            ))}
+                    <span className="relative flex justify-center pt-3">
+                      {i > 0 && <span className="absolute bottom-1/2 left-1/2 -translate-x-1/2 w-px h-6 bg-white/10" />}
+                      {i < steps.length - 1 && <span className="absolute top-1/2 left-1/2 -translate-x-1/2 w-px h-8 bg-white/10" />}
+                      <motion.span animate={{ scale: isActive ? [1, 1.3, 1] : 1 }} transition={{ duration: 1.8, repeat: isActive ? Infinity : 0 }}
+                        className="relative z-10 w-2 h-2 rounded-full"
+                        style={{ background: isActive ? step.color : '#526475', boxShadow: isActive ? `0 0 14px ${step.color}` : 'none' }} />
+                    </span>
+
+                    <span className="w-9 h-9 rounded-lg flex items-center justify-center transition-all duration-300"
+                      style={{ background: `${step.color}${isActive ? '22' : '12'}`, border: `1px solid ${step.color}${isActive ? '45' : '22'}`, color: step.color, transform: isActive ? 'scale(1.05)' : 'scale(1)', boxShadow: isActive ? `0 0 16px ${step.color}25` : 'none' }}>
+                      <step.icon size={15} />
+                    </span>
+
+                    <span className="min-w-0 pt-2">
+                      <span className="block text-sm font-bold text-white leading-tight">{step.label}</span>
+                      <motion.span initial={false}
+                        animate={{ height: isActive ? 'auto' : 0, opacity: isActive ? 1 : 0, y: isActive ? 0 : -4, marginTop: isActive ? 5 : 0 }}
+                        transition={{ duration: 0.28, ease }}
+                        className="block overflow-hidden text-xs leading-relaxed text-slate-400">
+                        {step.desc}
+                      </motion.span>
+                    </span>
+                  </motion.button>
+                )
+              })}
+            </div>
           </motion.div>
 
         </div>
@@ -291,36 +331,6 @@ export default function ProcessFlowShowcase() {
           ))}
         </motion.div>
 
-        {/* Bottom CTA */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ delay: 0.4 }}
-          className="flex flex-col sm:flex-row items-center justify-center gap-4 mt-6"
-        >
-          <a href="/request-demo"
-            className="inline-flex items-center gap-2.5 px-7 py-3.5 rounded-2xl font-bold text-sm text-white transition-all hover:scale-105"
-            style={{
-              background: 'linear-gradient(135deg, #6366f1, #7c3aed)',
-              boxShadow: '0 8px 32px rgba(139,92,246,0.35)',
-            }}>
-            See Process Flow Live <ArrowRight size={14} />
-          </a>
-          <div className="flex items-center gap-3 text-xs" style={{ color: 'rgba(255,255,255,0.2)' }}>
-            <span className="flex items-center gap-1.5">
-              <Workflow size={11} /> Visual Builder
-            </span>
-            <span>·</span>
-            <span className="flex items-center gap-1.5">
-              <Sparkles size={11} /> AI Wand
-            </span>
-            <span>·</span>
-            <span className="flex items-center gap-1.5">
-              <Clock size={11} /> SLA Tracking
-            </span>
-          </div>
-        </motion.div>
       </div>
     </section>
   )

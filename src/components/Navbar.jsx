@@ -93,6 +93,25 @@ const menus = {
   },
 }
 
+/* Scrolls to an element accounting for the fixed header, then snaps to
+   correct for any layout shift caused by auto-playing carousels ticking
+   mid-animation (recomputed since the target's position may have moved). */
+function scrollToId(id) {
+  const targetTop = () => {
+    const el = document.getElementById(id)
+    if (!el) return null
+    const headerHeight = document.querySelector('header')?.offsetHeight || 80
+    return el.getBoundingClientRect().top + window.scrollY - headerHeight - 16
+  }
+  const top = targetTop()
+  if (top === null) return
+  window.scrollTo({ top, behavior: 'smooth' })
+  setTimeout(() => {
+    const correctedTop = targetTop()
+    if (correctedTop !== null) window.scrollTo({ top: correctedTop, behavior: 'auto' })
+  }, 700)
+}
+
 /* ── Dropdown panel ── */
 function MegaPanel({ name, data, close, navigate }) {
   const handleClick = (e, link) => {
@@ -102,21 +121,15 @@ function MegaPanel({ name, data, close, navigate }) {
       if (link.startsWith('/#')) {
         // Hash link on home page
         if (window.location.pathname === '/') {
-          const el = document.getElementById(link.slice(2))
-          if (el) { el.scrollIntoView({ behavior: 'smooth' }); return }
+          scrollToId(link.slice(2))
+          return
         }
         navigate('/')
-        setTimeout(() => {
-          const el = document.getElementById(link.slice(2))
-          if (el) el.scrollIntoView({ behavior: 'smooth' })
-        }, 300)
+        setTimeout(() => scrollToId(link.slice(2)), 300)
       } else if (link.includes('#')) {
         const [path, hash] = link.split('#')
         navigate(path)
-        setTimeout(() => {
-          const el = document.getElementById(hash)
-          if (el) el.scrollIntoView({ behavior: 'smooth' })
-        }, 300)
+        setTimeout(() => scrollToId(hash), 300)
       } else {
         navigate(link)
       }
@@ -273,7 +286,16 @@ export default function Navbar() {
     setMobile(false)
     setActiveMenu('Contact')
     if (location.pathname !== '/') navigate('/')
-    setTimeout(() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' }), location.pathname === '/' ? 0 : 300)
+    setTimeout(() => scrollToId('contact'), location.pathname === '/' ? 0 : 300)
+  }
+
+  const goHome = (event) => {
+    event.preventDefault()
+    setOpenMenu(null)
+    setMobile(false)
+    setActiveMenu('Home')
+    if (location.pathname !== '/') navigate('/')
+    setTimeout(() => window.scrollTo({ top: 0, behavior: 'smooth' }), location.pathname === '/' ? 0 : 300)
   }
 
   return (
@@ -282,7 +304,7 @@ export default function Navbar() {
       <nav className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8" aria-label="Primary navigation">
         <div className={`flex items-center justify-between transition-all duration-300 ${scrolled ? 'h-16' : 'h-20'}`}>
           <div className="flex items-center gap-3">
-            <Link to="/" className="flex items-center flex-shrink-0 rounded-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#7ee600] focus-visible:ring-offset-4" onClick={() => { setOpenMenu(null); setActiveMenu('Home') }} aria-label="Skiode home">
+            <Link to="/" className="flex items-center flex-shrink-0 rounded-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#7ee600] focus-visible:ring-offset-4" onClick={goHome} aria-label="Skiode home">
               <img src={skiodeLogo} alt="skiode" className="w-auto object-contain transition-all duration-300" style={{ height: scrolled ? 37 : 46 }} />
             </Link>
           </div>
@@ -294,7 +316,7 @@ export default function Navbar() {
                   <Link to="/"
                     className={`relative px-3.5 py-2 text-base font-medium transition-colors rounded-xl hover:bg-white ${isActive(item) ? 'bg-white text-[#164065] shadow-sm' : 'text-[#49647a] hover:text-[#164065]'}`}
                     style={{ fontFamily: 'var(--font-heading)' }}
-                    onClick={() => { setOpenMenu(null); setActiveMenu('Home') }}>
+                    onClick={goHome}>
                     Home
                     {isActive(item) && <span className="absolute -bottom-0.5 left-1/2 h-1 w-1 -translate-x-1/2 rounded-full bg-[#7ee600]" />}
                   </Link>
@@ -393,7 +415,7 @@ export default function Navbar() {
                     <Link to="/"
                       className={`block px-4 py-3 rounded-xl text-base font-medium transition-all ${isActive(item) ? 'bg-[#164065]/[0.06] text-[#164065]' : 'text-slate-600 hover:text-slate-900 hover:bg-slate-100'}`}
                       style={{ fontFamily: 'var(--font-heading)' }}
-                      onClick={() => { setMobile(false); setActiveMenu('Home') }}>
+                      onClick={goHome}>
                       Home
                     </Link>
                   ) : item === 'Contact' ? (
@@ -444,10 +466,7 @@ export default function Navbar() {
                                         ? ['/', it.link.slice(2)]
                                         : it.link.split('#')
                                       navigate(path)
-                                      setTimeout(() => {
-                                        const el = document.getElementById(hash)
-                                        if (el) el.scrollIntoView({ behavior: 'smooth' })
-                                      }, 300)
+                                      setTimeout(() => scrollToId(hash), 300)
                                     } else {
                                       navigate(it.link)
                                     }

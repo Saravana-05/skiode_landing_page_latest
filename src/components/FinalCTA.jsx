@@ -1,89 +1,104 @@
-import { Link } from "react-router-dom"
-import { motion } from "framer-motion"
-import { ArrowRight, CalendarDays, CheckCircle2, Zap, Brain, ScanText, Bot, BarChart2, GitBranch, FileText } from "lucide-react"
+import { Link } from 'react-router-dom'
+import { motion } from 'framer-motion'
+import { ArrowRight, CheckCircle2, Zap, Brain, ScanText, Bot, BarChart2, GitBranch, FileText } from 'lucide-react'
+import ecosystemBackground from '../assets/cta/skiode-digital-ecosystem-bg.png'
 
-const badges = [
-  { icon:FileText, label:"Form Builder", c:"#3b82f6" },
-  { icon:Brain, label:"AI/ML Engine", c:"#8b5cf6" },
-  { icon:ScanText, label:"OCR Extraction", c:"#10b981" },
-  { icon:GitBranch, label:"Workflow Approval", c:"#f59e0b" },
-  { icon:BarChart2, label:"ROI Analytics", c:"#06b6d4" },
-  { icon:Bot, label:"Bot Automation", c:"#ec4899" },
+const capabilities = [
+  { icon: FileText, label: 'Form Builder', desc: 'Build powerful forms in minutes', color: '#287fea', side: 'left', top: '17%' },
+  { icon: ScanText, label: 'OCR Extraction', desc: 'Turn documents into usable data', color: '#10b981', side: 'left', top: '43%' },
+  { icon: BarChart2, label: 'ROI Analytics', desc: 'Measure impact, drive growth', color: '#06b6d4', side: 'left', top: '69%' },
+  { icon: Brain, label: 'AI/ML Engine', desc: 'Smarter decisions, bigger outcomes', color: '#8b5cf6', side: 'right', top: '17%' },
+  { icon: GitBranch, label: 'Workflow Approval', desc: 'Keep work moving, without delays', color: '#f59e0b', side: 'right', top: '43%' },
+  { icon: Bot, label: 'Bot Automation', desc: 'Automate repetitive tasks, save time', color: '#ec4899', side: 'right', top: '69%' },
+]
+
+const trustItems = ['No credit card required', 'Setup in minutes', 'Enterprise-grade security', 'SOC 2 compliant', 'Cancel anytime']
+
+const connectorPaths = [
+  { d: 'M 183 145 C 225 145, 258 165, 304 190', color: '#287fea', endX: 304, endY: 190 },
+  { d: 'M 183 300 C 228 300, 261 300, 304 300', color: '#10b981', endX: 304, endY: 300 },
+  { d: 'M 183 455 C 225 455, 258 435, 304 410', color: '#06b6d4', endX: 304, endY: 410 },
+  { d: 'M 817 145 C 775 145, 742 165, 696 190', color: '#8b5cf6', endX: 696, endY: 190 },
+  { d: 'M 817 300 C 772 300, 739 300, 696 300', color: '#f59e0b', endX: 696, endY: 300 },
+  { d: 'M 817 455 C 775 455, 742 435, 696 410', color: '#ec4899', endX: 696, endY: 410 },
 ]
 
 export default function FinalCTA() {
   return (
-    <section id="contact" className="py-16 relative overflow-hidden">
-      <div className="absolute inset-0" style={{background:"linear-gradient(135deg,#f0f4ff 0%,#eef6ff 50%,#f8faff 100%)"}} />
-      <div className="absolute inset-0 dot-pattern-light" />
-      <div className="absolute top-0 left-1/4 w-96 h-96 rounded-full pointer-events-none" style={{background:"radial-gradient(circle,rgba(59,130,246,0.08) 0%,transparent 70%)",filter:"blur(80px)"}} />
-      <div className="absolute bottom-0 right-1/4 w-96 h-96 rounded-full pointer-events-none" style={{background:"radial-gradient(circle,rgba(132,204,22,0.06) 0%,transparent 70%)",filter:"blur(80px)"}} />
+    <section id="contact" className="relative overflow-hidden py-10 sm:py-12" style={{ background: '#f7faff' }}>
+      <img src={ecosystemBackground} alt="" aria-hidden="true" className="absolute inset-0 h-full w-full object-cover object-center pointer-events-none select-none" />
+      <div className="absolute inset-0 bg-white/5 pointer-events-none" />
 
-      {/* Floating feature badges */}
-      <div className="absolute inset-0 hidden lg:block pointer-events-none">
-        {badges.map((b,i) => (
-          <motion.div key={b.label} animate={{y:[0,-12+i%2*24,0]}} transition={{duration:4+i*0.5,repeat:Infinity,ease:"easeInOut",delay:i*0.8}}
-            className="absolute flex items-center gap-2 rounded-2xl px-3 py-2.5"
-            style={{
-              top:`${15+i*12}%`,
-              left: i%2===0?"3%":"auto",
-              right: i%2===1?"3%":"auto",
-              background:"rgba(255,255,255,0.9)",
-              border:`1px solid ${b.c}20`,
-              backdropFilter:"blur(12px)",
-              boxShadow:"0 2px 12px rgba(0,0,0,0.06)",
-            }}>
-            <div className="w-6 h-6 rounded-lg flex items-center justify-center" style={{background:`${b.c}15`}}>
-              <b.icon size={12} style={{color:b.c}} />
+      {/* Visible paths connect each capability card to the central platform. */}
+      <svg className="pointer-events-none absolute inset-0 z-[2] hidden h-full w-full lg:block" viewBox="0 0 1000 600" preserveAspectRatio="none" aria-hidden="true">
+        {connectorPaths.map((path, index) => (
+          <g key={path.d}>
+            <motion.path
+              d={path.d}
+              fill="none"
+              stroke={path.color}
+              strokeWidth="1.35"
+              strokeLinecap="round"
+              strokeDasharray="3 5"
+              opacity=".65"
+              initial={{ pathLength: 0, opacity: 0 }}
+              whileInView={{ pathLength: 1, opacity: .65 }}
+              viewport={{ once: true }}
+              transition={{ duration: .8, delay: .2 + index * .07 }}
+            />
+            <circle cx={path.endX} cy={path.endY} r="7" fill={path.color} opacity=".1" />
+            <circle cx={path.endX} cy={path.endY} r="3" fill="#ffffff" stroke={path.color} strokeWidth="1.5" />
+          </g>
+        ))}
+      </svg>
+
+      <div className="absolute inset-0 z-[3] hidden lg:block pointer-events-none">
+        {capabilities.map((item, index) => (
+          <motion.div key={item.label} initial={{ opacity: 0, x: item.side === 'left' ? -20 : 20 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ delay: .12 + index * .05 }} whileHover={{ y: -4 }}
+            className="group absolute w-[270px] rounded-[22px] border bg-white/95 p-3.5 text-left shadow-[0_12px_30px_rgba(18,58,89,.09)] backdrop-blur-sm pointer-events-auto transition-all duration-300"
+            style={{ top: item.top, left: item.side === 'left' ? '3.5%' : 'auto', right: item.side === 'right' ? '3.5%' : 'auto', borderColor: `${item.color}35` }}>
+            <div className="flex items-center gap-3">
+              <span className="flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-2xl transition-all duration-300 group-hover:scale-105" style={{ background: `${item.color}16`, color: item.color }}><item.icon size={22} /></span>
+              <span className="min-w-0 flex-1"><strong className="block text-base font-extrabold text-[#0b1730]">{item.label}</strong><span className="mt-1 block text-xs leading-snug text-slate-500">{item.desc}</span></span>
+              <ArrowRight size={18} style={{ color: item.color }} className="transition-transform duration-300 group-hover:translate-x-1" />
             </div>
-            <span className="text-xs font-bold text-slate-700">{b.label}</span>
           </motion.div>
         ))}
       </div>
 
-      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative text-center">
-        <motion.div initial={{opacity:0,y:20}} whileInView={{opacity:1,y:0}} viewport={{once:true}}
-          className="inline-flex items-center gap-2 rounded-full px-4 py-1.5 text-xs font-semibold mb-7"
-          style={{background:"rgba(59,130,246,0.07)",border:"1px solid rgba(59,130,246,0.2)",color:"#2563eb",fontFamily:"var(--font-heading)"}}>
-          <Zap size={11} /> Get Started Today
+      <div className="relative z-10 mx-auto max-w-4xl px-4 text-center sm:px-6 lg:px-8">
+        <motion.div initial={{ opacity: 0, y: 15 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="group mb-5 inline-flex items-center gap-2 rounded-full border border-blue-200 bg-white/80 px-4 py-2 text-xs font-bold text-[#287fea] shadow-[0_5px_18px_rgba(40,127,234,.1)] backdrop-blur">
+          <Zap size={12} className="transition-transform group-hover:translate-x-0.5" /> Get Started Today
         </motion.div>
 
-        <motion.h2 initial={{opacity:0,y:30}} whileInView={{opacity:1,y:0}} viewport={{once:true}} transition={{delay:0.1}}
-          className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-slate-900 mb-6 leading-tight"
-          style={{fontFamily:"var(--font-heading)"}}>
-          Turn manual processes into<br className="hidden sm:block" />
-          <span className="gradient-text-blue"> digital business advantages</span>
+        <motion.h2 initial={{ opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: .08 }} className="text-4xl font-black leading-[1.04] tracking-[-.035em] text-[#0b1730] sm:text-5xl lg:text-[54px]">
+          Turn manual processes into<br className="hidden sm:block" /><span style={{ color: '#164065' }}>digital business advantages</span>
         </motion.h2>
 
-        <motion.p initial={{opacity:0,y:20}} whileInView={{opacity:1,y:0}} viewport={{once:true}} transition={{delay:0.2}}
-          className="text-lg text-slate-500 mb-10 max-w-2xl mx-auto leading-relaxed"
-          style={{fontFamily:"var(--font-body)"}}>
-          Whether it's employee onboarding, procurement approvals, customer service, contract management,
-          or manufacturing operations — skiode brings every step, approval, document, and status update
-          into a single digital platform.
+        <motion.p initial={{ opacity: 0, y: 18 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: .16 }} className="mx-auto mt-6 max-w-2xl text-base leading-7 text-slate-500">
+          Whether it's employee onboarding, procurement approvals, customer service, contract management, or manufacturing operations — skiode brings every step, approval, document, and status update into a single digital platform.
         </motion.p>
 
-        <motion.div initial={{opacity:0,y:20}} whileInView={{opacity:1,y:0}} viewport={{once:true}} transition={{delay:0.3}}
-          className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-10">
-          <Link to="/request-demo" className="inline-flex items-center justify-center gap-2 px-8 py-4 rounded-2xl font-bold text-base text-white transition-all hover:scale-105"
-            style={{background:"linear-gradient(135deg,#3b82f6,#84cc16)",boxShadow:"0 12px 40px rgba(59,130,246,0.25)",fontFamily:"var(--font-heading)"}}>
-            <CalendarDays size={18} /> Request Demo
+        <motion.div initial={{ opacity: 0, y: 18 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: .24 }} className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row">
+          <Link to="/request-demo" className="group inline-flex items-center gap-3 rounded-xl py-2 pl-6 pr-2 text-base font-semibold text-white shadow-[0_10px_28px_rgba(11,23,48,.22)] transition-all hover:-translate-y-1 hover:shadow-[0_14px_32px_rgba(11,23,48,.28)]" style={{ background: '#0b1730', color: '#ffffff' }}>
+            Request Demo<span className="flex h-9 w-9 items-center justify-center rounded-lg bg-[#39ff14] text-[#0b1730] shadow-[0_0_16px_rgba(57,255,20,.2)] transition-all group-hover:translate-x-0.5 group-hover:shadow-[0_0_20px_rgba(57,255,20,.4)]"><ArrowRight size={15} strokeWidth={2.5} /></span>
           </Link>
-          <a href="#platform" className="inline-flex items-center justify-center gap-2 px-8 py-4 rounded-2xl font-bold text-base text-slate-700 transition-all hover:bg-slate-100"
-            style={{border:"1.5px solid rgba(0,0,0,0.12)",fontFamily:"var(--font-heading)"}}>
-            Explore Platform <ArrowRight size={16} />
-          </a>
+          <a href="#platform" className="inline-flex items-center gap-2 rounded-xl border border-slate-300 bg-white/80 px-7 py-3.5 text-base font-bold text-[#0b1730] transition-all hover:-translate-y-1 hover:bg-white">Explore Platform <ArrowRight size={15} /></a>
         </motion.div>
 
-        <motion.div initial={{opacity:0,y:10}} whileInView={{opacity:1,y:0}} viewport={{once:true}} transition={{delay:0.4}}
-          className="flex flex-wrap items-center justify-center gap-6 text-xs text-slate-400">
-          {["No credit card required","Setup in minutes","Enterprise-grade security","SOC 2 compliant","Cancel anytime"].map(t => (
-            <span key={t} className="flex items-center gap-1.5">
-              <CheckCircle2 size={12} style={{color:"#84cc16"}} /> {t}
-            </span>
-          ))}
+        <div className="mt-8 grid grid-cols-1 gap-3 text-left sm:grid-cols-2 lg:hidden">
+          {capabilities.map(item => <div key={item.label} className="flex items-center gap-3 rounded-2xl border bg-white/85 p-3 shadow-sm" style={{ borderColor: `${item.color}20` }}><span className="flex h-9 w-9 items-center justify-center rounded-xl" style={{ background: `${item.color}12`, color: item.color }}><item.icon size={16} /></span><span><strong className="block text-sm text-[#0b1730]">{item.label}</strong><span className="text-[10px] text-slate-500">{item.desc}</span></span></div>)}
+        </div>
+
+        <motion.div initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }} transition={{ delay: .32 }} className="mt-8 flex flex-wrap items-center justify-center gap-x-5 gap-y-2 text-xs text-slate-500">
+          {trustItems.map(item => <span key={item} className="flex items-center gap-1.5"><CheckCircle2 size={13} className="text-emerald-500" />{item}</span>)}
         </motion.div>
+
+        <div className="mt-12 text-[10px] font-bold uppercase tracking-[.25em] text-blue-400">People · Processes · Possibilities</div>
       </div>
+
+      <div className="absolute bottom-8 left-8 hidden -rotate-3 text-xs italic leading-relaxed text-blue-400/40 xl:block">Smarter<br />Workflows<br />Happier People</div>
+      <div className="absolute bottom-8 right-8 hidden rotate-3 text-xs italic leading-relaxed text-blue-400/40 xl:block">One Platform<br />Greater Impact</div>
     </section>
   )
 }

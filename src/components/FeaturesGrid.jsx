@@ -70,42 +70,37 @@ const features = [
 
 export default function FeaturesGrid() {
   return (
-    <section className="py-24 relative overflow-hidden" style={{ background: 'linear-gradient(180deg, #f8faff 0%, #ffffff 50%, #f0f4ff 100%)' }}>
-      {/* Decorative background */}
-      <div className="absolute inset-0 pointer-events-none">
-        <div className="absolute top-20 left-10 w-72 h-72 rounded-full opacity-30" style={{ background: 'radial-gradient(circle, rgba(59,130,246,0.08), transparent 70%)' }} />
-        <div className="absolute bottom-20 right-10 w-96 h-96 rounded-full opacity-30" style={{ background: 'radial-gradient(circle, rgba(132,204,22,0.08), transparent 70%)' }} />
-      </div>
+    <section className="py-12 relative overflow-hidden" style={{ background: '#f7faf9' }}>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         {/* Header */}
-        <div className="text-center mb-16">
+        <div className="text-center mb-8">
           <motion.div
             initial={{ opacity: 0, y: 30, filter: 'blur(6px)' }} whileInView={{ opacity: 1, y: 0, filter: 'blur(0px)' }} viewport={{ once: true, margin: '-80px' }}
             transition={{ duration: 0.7, ease: [0.25, 0.46, 0.45, 0.94] }}
-            className="inline-flex items-center gap-2 rounded-full px-5 py-2 text-sm font-bold mb-5"
-            style={{ background: 'linear-gradient(135deg, rgba(59,130,246,0.1), rgba(132,204,22,0.1))', border: '1px solid rgba(59,130,246,0.2)', color: '#3b82f6' }}>
+            className="inline-flex items-center gap-2 rounded-full px-5 py-2 text-[12px] font-bold mb-3"
+            style={{ background: 'rgba(22,64,101,0.08)', border: '1px solid rgba(22,64,101,0.24)', color: '#0a2342' }}>
             ✦ Platform Features
           </motion.div>
           <motion.h2
             initial={{ opacity: 0, y: 40, filter: 'blur(8px)' }} whileInView={{ opacity: 1, y: 0, filter: 'blur(0px)' }} viewport={{ once: true, margin: '-80px' }}
             transition={{ duration: 0.8, delay: 0.1, ease: [0.25, 0.46, 0.45, 0.94] }}
-            className="text-4xl sm:text-5xl font-extrabold text-slate-900 mb-5 leading-tight">
+            className="text-[36px] font-extrabold mb-3 leading-tight" style={{ color: '#0a2342' }}>
             Everything you need.{' '}
-            <span className="bg-clip-text text-transparent bg-gradient-to-r from-blue-600 via-indigo-500 to-violet-600">
+            <span style={{ color: '#164065' }}>
               Nothing you don't.
             </span>
           </motion.h2>
           <motion.p
             initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, margin: '-60px' }}
             transition={{ duration: 0.7, delay: 0.2, ease: [0.25, 0.46, 0.45, 0.94] }}
-            className="text-lg text-slate-500 max-w-2xl mx-auto leading-relaxed">
+            className="text-[12px] text-slate-500 max-w-2xl mx-auto leading-relaxed">
             A complete low-code platform with 8 powerful capabilities to digitize, automate, and scale your business operations.
           </motion.p>
         </div>
 
         {/* Feature cards grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
           {features.map((f, i) => (
             <motion.div
               key={f.title}
@@ -114,20 +109,14 @@ export default function FeaturesGrid() {
               viewport={{ once: true, margin: '-40px' }}
               transition={{ duration: 0.6, delay: i * 0.08, ease: [0.25, 0.46, 0.45, 0.94] }}
               whileHover={{ y: -8, scale: 1.03, transition: { duration: 0.3, ease: 'easeOut' } }}
-              className="group relative rounded-2xl p-6 bg-white border border-slate-100 shadow-sm hover:shadow-xl transition-all duration-300 cursor-default overflow-hidden"
+              className="group relative rounded-2xl p-5 bg-white border border-slate-100 shadow-sm hover:shadow-xl transition-all duration-300 cursor-default overflow-hidden"
             >
-              {/* Hover glow */}
-              <div
-                className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-2xl"
-                style={{ background: `radial-gradient(circle at 50% 0%, ${f.color}08, transparent 70%)` }}
-              />
-
               {/* Top color accent line */}
               <div className="absolute top-0 left-6 right-6 h-0.5 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300"
-                style={{ background: `linear-gradient(90deg, transparent, ${f.color}, transparent)` }} />
+                style={{ background: '#164065' }} />
 
               {/* Icon */}
-              <div className="relative mb-5">
+              <div className="relative mb-3">
                 <div
                   className="w-14 h-14 rounded-2xl flex items-center justify-center transition-transform duration-300 group-hover:scale-110"
                   style={{ background: `${f.color}12`, border: `1px solid ${f.color}20` }}

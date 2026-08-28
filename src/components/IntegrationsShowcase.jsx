@@ -1,5 +1,5 @@
 import { motion, useAnimationControls } from 'framer-motion'
-import { ArrowRight, Zap } from 'lucide-react'
+import { Zap } from 'lucide-react'
 import { useEffect, useState } from 'react'
 
 /* ─── PPT Slide 22 logos ─── */
@@ -126,31 +126,27 @@ function LogoCard({ logo, i, x, y, isHighlighted }) {
 
 export default function IntegrationsShowcase() {
   return (
-    <section id="integrations-showcase" className="py-16 relative overflow-hidden" style={{ background: 'linear-gradient(180deg, #ffffff 0%, #f8faff 50%, #f0f4ff 100%)' }}>
-      {/* Decorative background */}
-      <div className="absolute inset-0 pointer-events-none">
-        <div className="absolute top-20 right-0 w-[500px] h-[500px] opacity-20" style={{ background: 'radial-gradient(circle, rgba(59,130,246,0.1), transparent 70%)' }} />
-      </div>
+    <section id="integrations-showcase" className="py-8 sm:py-10 relative overflow-hidden" style={{ background: '#f8fafc' }}>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        <div className="flex flex-col lg:flex-row items-center gap-12 lg:gap-20">
+        <div className="flex flex-col lg:flex-row items-center gap-6 lg:gap-10">
 
           {/* ─── Left: Text content ─── */}
           <div className="lg:w-[44%] text-center lg:text-left">
             <motion.div
               initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}
-              className="inline-flex items-center gap-2 rounded-full px-5 py-2 text-sm font-bold mb-6"
-              style={{ background: 'rgba(59,130,246,0.08)', border: '1px solid rgba(59,130,246,0.2)', color: '#3b82f6' }}
+              className="inline-flex items-center gap-2 rounded-full px-5 py-2 text-[12px] font-bold mb-3"
+              style={{ background: 'rgba(18,58,89,0.08)', border: '1px solid rgba(18,58,89,0.2)', color: '#123a59' }}
             >
               <Zap size={14} /> Integrations
             </motion.div>
 
             <motion.h2
               initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.1 }}
-              className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-slate-900 leading-tight mb-5"
+              className="text-[36px] font-extrabold leading-tight mb-3" style={{ color: '#0a2342' }}
             >
               Built-in integrations with{' '}
-              <span className="bg-clip-text text-transparent bg-gradient-to-r from-blue-600 to-indigo-600">
+              <span className="text-[#2563eb]">
                 50+ industry products
               </span>{' '}
               and leading tools
@@ -158,25 +154,11 @@ export default function IntegrationsShowcase() {
 
             <motion.p
               initial={{ opacity: 0, y: 15 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.2 }}
-              className="text-lg text-slate-500 leading-relaxed mb-8 max-w-lg mx-auto lg:mx-0"
+              className="text-[12px] text-slate-500 leading-relaxed max-w-lg mx-auto lg:mx-0"
             >
               Connect skiode with your enterprise systems — ERP, CRM, cloud platforms, and business tools. No custom code needed.
             </motion.p>
 
-            <motion.div
-              initial={{ opacity: 0, y: 15 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.3 }}
-              className="flex flex-wrap gap-3 justify-center lg:justify-start"
-            >
-              <a href="#contact"
-                className="inline-flex items-center gap-2 px-7 py-3.5 rounded-full text-sm font-bold text-white transition-all hover:scale-105 hover:shadow-lg"
-                style={{ background: 'linear-gradient(135deg, #3b82f6, #6366f1)' }}>
-                Request a Demo
-              </a>
-              <a href="#contact"
-                className="inline-flex items-center gap-2 px-7 py-3.5 rounded-full text-sm font-bold text-slate-700 bg-white border border-slate-200 hover:border-slate-300 transition-all hover:scale-105 shadow-sm">
-                View All Integrations <ArrowRight size={14} />
-              </a>
-            </motion.div>
           </div>
 
           {/* ─── Right: Diamond logo grid ─── */}

@@ -3,6 +3,7 @@ import { useEffect } from 'react'
 import Navbar from './components/Navbar'
 import Footer from './components/Footer'
 import ChatBot from './components/ChatBot'
+import LaunchExperience from './components/LaunchExperience'
 import Home from './pages/Home'
 import PlatformPage from './pages/PlatformPage'
 import PricingPage from './pages/PricingPage'
@@ -20,13 +21,14 @@ import IntegrationsPage from './pages/platform/IntegrationsPage'
 
 function ScrollToTop() {
   const { pathname } = useLocation()
-  useEffect(() => { window.scrollTo(0, 0) }, [pathname])
+  useEffect(() => { window.scrollTo({ top: 0, left: 0, behavior: 'auto' }) }, [pathname])
   return null
 }
 
 export default function App() {
   return (
     <div className="overflow-x-hidden">
+      <LaunchExperience />
       <ScrollToTop />
       <Navbar />
       <Routes>

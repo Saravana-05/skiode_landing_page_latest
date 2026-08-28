@@ -26,7 +26,7 @@ const slides = [
     id: "workspace",
     label: "Workspace",
     icon: Monitor,
-    color: "#3b82f6",
+    color: "#39ff14",
     image: scrMain,
     tagline: "Project Workspace",
     desc: "Manage your organization resources and monitor real-time performance. Active Workflows, Automations, Forms Processed — all at a glance.",
@@ -35,7 +35,7 @@ const slides = [
     id: "forms",
     label: "Forms & Data",
     icon: FileText,
-    color: "#3b82f6",
+    color: "#39ff14",
     image: scrForms,
     tagline: "Form Architectural Designer",
     desc: "Drag and drop fields to structure your core data record. 20+ field types — Text, Number, Date, Dropdown, File, Signature, Table, Rich Text and more.",
@@ -163,7 +163,7 @@ export default function InteractiveShowcase() {
   }
 
   return (
-    <section id="showcase" className="py-10 relative overflow-hidden"
+    <section id="showcase" className="homepage-section relative overflow-hidden"
       style={{ background: "#0d1117" }}>
 
       {/* Background effects */}
@@ -185,9 +185,9 @@ export default function InteractiveShowcase() {
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="inline-flex items-center gap-2 rounded-full px-5 py-2 text-xs font-bold mb-3"
-            style={{ background: "rgba(59,130,246,0.1)", border: "1px solid rgba(59,130,246,0.2)", color: "#60a5fa" }}>
-            <div className="w-1.5 h-1.5 rounded-full bg-blue-400 animate-pulse" />
+            className="section-eyebrow inline-flex items-center gap-2 rounded-full px-5 py-2 font-bold mb-3"
+            style={{ background: "rgba(255,255,255,0.06)", border: "1px solid rgba(255,255,255,0.18)", color: "#ffffff" }}>
+            <div className="w-1.5 h-1.5 rounded-full bg-[#39ff14] animate-pulse" />
             Interactive Platform Tour
           </motion.div>
 
@@ -198,7 +198,7 @@ export default function InteractiveShowcase() {
             transition={{ delay: 0.1 }}
             className="text-4xl sm:text-5xl lg:text-6xl font-extrabold mb-3 leading-tight">
             <span className="text-white">Experience the </span>
-            <span style={{ color: "#3b82f6" }}>
+            <span style={{ color: "#39ff14", textShadow: "0 0 16px rgba(57,255,20,.25)" }}>
               Platform Live
             </span>
           </motion.h2>
@@ -208,7 +208,7 @@ export default function InteractiveShowcase() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.2 }}
-            className="text-base max-w-lg mx-auto" style={{ color: "rgba(255,255,255,0.35)" }}>
+            className="section-lead text-base max-w-none mx-auto" style={{ color: "rgba(255,255,255,0.55)" }}>
             Explore every module of skiode — click a tab or sit back and watch the tour.
           </motion.p>
         </div>

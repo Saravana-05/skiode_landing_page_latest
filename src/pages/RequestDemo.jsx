@@ -141,7 +141,7 @@ export default function RequestDemo() {
   }
 
   return (
-    <main className="min-h-screen pt-16" style={{ background: 'linear-gradient(135deg,#f8faff 0%,#ffffff 60%,#f0f4ff 100%)' }}>
+    <main className="min-h-screen pt-16" style={{ background: '#f7faf9' }}>
 
       {/* Toast */}
       {toast && (
@@ -155,36 +155,36 @@ export default function RequestDemo() {
       )}
 
       {/* Hero band */}
-      <div className="text-center py-14 px-4 relative">
+      <div className="text-center py-8 px-4 relative">
         <div className="absolute inset-0 dot-pattern-light opacity-50 pointer-events-none" />
         <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}
-          className="inline-flex items-center gap-2 rounded-full px-4 py-1.5 text-xs font-semibold mb-4"
-          style={{ fontFamily: 'var(--font-heading)', background: 'rgba(59,130,246,0.07)', border: '1px solid rgba(59,130,246,0.2)', color: '#2563eb' }}>
+          className="inline-flex items-center gap-2 rounded-full px-4 py-1.5 text-[12px] font-semibold mb-3"
+          style={{ fontFamily: 'var(--font-heading)', background: 'rgba(22,64,101,0.08)', border: '1px solid rgba(22,64,101,0.24)', color: '#0a2342' }}>
           <Star size={11} /> Personalised Platform Demo
         </motion.div>
         <motion.h1 initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1 }}
-          className="text-3xl sm:text-5xl font-extrabold text-slate-900 mb-4"
+          className="text-[36px] font-extrabold mb-3"
           style={{ fontFamily: 'var(--font-heading)' }}>
-          Request a <span className="gradient-text-brand">Personalised Demo</span>
+          Request a <span style={{ color: '#164065' }}>Personalised Demo</span>
         </motion.h1>
         <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.2 }}
-          className="text-lg max-w-2xl mx-auto" style={{ color: '#64748b', fontFamily: 'var(--font-body)' }}>
+          className="text-[12px] max-w-2xl mx-auto" style={{ color: '#64748b', fontFamily: 'var(--font-body)' }}>
           See how our AI-powered low-code platform helps your team build apps, automate workflows, and improve operations faster.
         </motion.p>
       </div>
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-20">
-        <div className="grid lg:grid-cols-5 gap-10 items-start">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-10">
+        <div className="grid lg:grid-cols-5 gap-6 items-start">
 
           {/* ── Left: value prop ── */}
-          <div className="lg:col-span-2 space-y-8">
+          <div className="lg:col-span-2 space-y-5">
             <motion.div initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: 0.15 }}>
-              <h2 className="text-xl font-bold text-slate-900 mb-5"
-                style={{ fontFamily: 'var(--font-heading)' }}>What you will see in the demo</h2>
+              <h2 className="text-[12px] font-bold uppercase tracking-wide mb-3" style={{ color: '#0a2342', fontFamily: 'var(--font-heading)' }}
+                >What you will see in the demo</h2>
               <div className="space-y-2.5">
                 {demoPoints.map((p, i) => (
                   <motion.div key={i} initial={{ opacity: 0, x: -16 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: 0.2 + i * 0.06 }}
-                    className="flex items-start gap-3 px-4 py-3 rounded-2xl"
+                    className="flex items-start gap-3 px-4 py-2.5 rounded-2xl"
                     style={{ background: '#f8fafc', border: '1px solid rgba(0,0,0,0.06)' }}>
                     <div className="w-7 h-7 rounded-xl flex items-center justify-center flex-shrink-0 mt-0.5"
                       style={{ background: 'rgba(59,130,246,0.15)' }}>
@@ -200,21 +200,21 @@ export default function RequestDemo() {
 
             {/* Timeline */}
             <motion.div initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: 0.5 }}>
-              <h3 className="text-base font-bold text-slate-900 mb-4"
+              <h3 className="text-[12px] font-bold uppercase tracking-wide mb-3"
                 style={{ fontFamily: 'var(--font-heading)' }}>How it works</h3>
               <div className="space-y-0">
                 {timeline.map((t, i) => (
                   <div key={i} className="flex gap-4">
                     <div className="flex flex-col items-center">
                       <div className="w-9 h-9 rounded-xl flex items-center justify-center font-extrabold text-xs flex-shrink-0"
-                        style={{ background: 'linear-gradient(135deg,#3b82f6,#84cc16)', color: 'white', fontFamily: 'var(--font-heading)' }}>
+                        style={{ background: '#0a2342', color: '#39ff14', fontFamily: 'var(--font-heading)' }}>
                         {t.n}
                       </div>
                       {i < timeline.length - 1 && (
                         <div className="w-px flex-1 my-1" style={{ background: 'rgba(59,130,246,0.2)', minHeight: 24 }} />
                       )}
                     </div>
-                    <div className="pb-5">
+                    <div className="pb-3">
                       <div className="text-sm font-semibold text-slate-800" style={{ fontFamily: 'var(--font-heading)' }}>{t.label}</div>
                       <div className="text-xs mt-0.5" style={{ color: '#94a3b8', fontFamily: 'var(--font-body)' }}>{t.desc}</div>
                     </div>
@@ -244,15 +244,15 @@ export default function RequestDemo() {
             style={{ background: 'white', boxShadow: '0 20px 60px rgba(0,0,0,0.08)', border: '1px solid rgba(0,0,0,0.06)' }}>
 
             {/* Form header */}
-            <div className="px-7 py-5 border-b border-slate-100"
-              style={{ background: 'linear-gradient(135deg,#f8faff,#eef3ff)' }}>
-              <h2 className="text-xl font-extrabold text-slate-900" style={{ fontFamily: 'var(--font-heading)' }}>Book Your Demo</h2>
+            <div className="px-6 py-4 border-b border-slate-100"
+              style={{ background: '#f4f7f9' }}>
+              <h2 className="text-[12px] font-extrabold uppercase tracking-wide" style={{ color: '#0a2342', fontFamily: 'var(--font-heading)' }}>Book Your Demo</h2>
               <p className="text-sm text-slate-500 mt-1" style={{ fontFamily: 'var(--font-body)' }}>
                 Fill in the form and our team will reach out within one business day.
               </p>
             </div>
 
-            <form onSubmit={handleSubmit} noValidate className="px-7 py-6 space-y-4">
+            <form onSubmit={handleSubmit} noValidate className="px-6 py-5 space-y-3">
               {/* Row 1 */}
               <div className="grid sm:grid-cols-2 gap-4">
                 <Field label="Full Name" required error={errors.fullName}>
@@ -331,7 +331,7 @@ export default function RequestDemo() {
                         className="px-3 py-1.5 rounded-xl text-xs font-semibold transition-all"
                         style={{
                           fontFamily: 'var(--font-heading)',
-                          background: sel ? 'linear-gradient(135deg,#3b82f6,#2563eb)' : '#f1f5f9',
+                          background: sel ? '#0a2342' : '#f1f5f9',
                           color: sel ? 'white' : '#475569',
                           border: `1px solid ${sel ? '#3b82f6' : '#e2e8f0'}`,
                           boxShadow: sel ? '0 2px 8px rgba(59,130,246,0.25)' : 'none',
@@ -376,7 +376,7 @@ export default function RequestDemo() {
               {/* Submit */}
               <button type="submit" disabled={loading}
                 className="w-full flex items-center justify-center gap-2 py-3.5 rounded-2xl font-bold text-white transition-all hover:scale-[1.01] disabled:opacity-60"
-                style={{ fontFamily: 'var(--font-heading)', background: 'linear-gradient(135deg,#3b82f6,#2563eb)', boxShadow: '0 8px 24px rgba(59,130,246,0.3)', fontSize: 15 }}>
+                style={{ fontFamily: 'var(--font-heading)', background: '#0a2342', color: '#39ff14', boxShadow: '0 8px 24px rgba(10,35,66,0.22)', fontSize: 15 }}>
                 {loading ? (
                   <><div className="w-4 h-4 rounded-full border-2 border-white/30 border-t-white animate-spin" /> Processing…</>
                 ) : (

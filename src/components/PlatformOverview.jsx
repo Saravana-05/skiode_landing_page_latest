@@ -78,7 +78,7 @@ export default function PlatformOverview() {
   const pillar = pillars[active]
 
   return (
-    <section id="platform-overview" className="py-14 sm:py-16 relative overflow-hidden" style={{ background: 'linear-gradient(180deg, #ffffff 0%, #f8fafc 52%, #edf4f8 100%)' }}>
+    <section id="platform-overview" className="homepage-section relative overflow-hidden" style={{ background: 'linear-gradient(180deg, #ffffff 0%, #f8fafc 52%, #edf4f8 100%)' }}>
       <div className="absolute inset-0 pointer-events-none opacity-30"
         style={{ backgroundImage: 'radial-gradient(circle, rgba(18,58,89,0.08) 1px, transparent 1px)', backgroundSize: '32px 32px' }} />
 
@@ -91,7 +91,7 @@ export default function PlatformOverview() {
             whileInView={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
             viewport={{ once: true }}
             transition={{ duration: 0.7, ease }}
-            className="inline-flex items-center gap-2 rounded-full px-5 py-2 text-sm font-bold mb-3"
+            className="section-eyebrow inline-flex items-center gap-2 rounded-full px-5 py-2 font-bold mb-3"
             style={{ background: 'rgba(18,58,89,0.08)', border: '1px solid rgba(18,58,89,0.24)', color: brandColor }}
           >
             <Zap size={14} /> Platform Overview
@@ -115,7 +115,7 @@ export default function PlatformOverview() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.7, delay: 0.2, ease }}
-            className="text-base sm:text-lg text-slate-500 max-w-2xl mx-auto leading-relaxed"
+            className="section-lead text-base sm:text-lg text-slate-500 max-w-none mx-auto leading-relaxed"
           >
             Build, automate, connect, and deploy — all from one visual workspace.
           </motion.p>

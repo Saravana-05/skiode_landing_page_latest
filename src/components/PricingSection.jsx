@@ -59,16 +59,12 @@ const deliveryPoints = [
 
 export default function PricingSection() {
   return (
-    <section id="pricing" className="pt-6 pb-12 relative overflow-hidden" style={{ background: 'linear-gradient(180deg, #ffffff 0%, #f8faff 50%, #f0f4ff 100%)' }}>
-      <div className="absolute inset-0 pointer-events-none">
-        <div className="absolute top-20 left-10 w-72 h-72 rounded-full opacity-30" style={{ background: 'radial-gradient(circle, rgba(59,130,246,0.08), transparent 70%)' }} />
-        <div className="absolute bottom-20 right-10 w-96 h-96 rounded-full opacity-30" style={{ background: 'radial-gradient(circle, rgba(132,204,22,0.08), transparent 70%)' }} />
-      </div>
+    <section id="pricing" className="pt-4 pb-8 relative overflow-hidden" style={{ background: '#f7faf9' }}>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         {/* Offerings pills */}
         <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.15 }}
-          className="flex flex-wrap justify-center gap-3 mb-8">
+          className="flex flex-wrap justify-center gap-2 mb-5">
           {offerings.map(o => (
             <span key={o.label} className="px-4 py-2 rounded-full text-sm font-semibold"
               style={{ background: `${o.color}10`, color: o.color, border: `1px solid ${o.color}20` }}>
@@ -78,7 +74,7 @@ export default function PricingSection() {
         </motion.div>
 
         {/* Plan Cards */}
-        <div className="grid md:grid-cols-3 gap-6 mb-8">
+        <div className="grid md:grid-cols-3 gap-4 mb-5">
           {plans.map((plan, i) => (
             <motion.div
               key={plan.name}
@@ -91,12 +87,12 @@ export default function PricingSection() {
             >
               {plan.popular && (
                 <div className="absolute -top-3.5 left-1/2 -translate-x-1/2 px-4 py-1 rounded-full text-xs font-bold text-white"
-                  style={{ background: 'linear-gradient(135deg, #3b82f6, #6366f1)' }}>
+                  style={{ background: '#0a2342', color: '#39ff14' }}>
                   Most Popular
                 </div>
               )}
 
-              <div className="flex items-center gap-3 mb-5">
+              <div className="flex items-center gap-3 mb-3">
                 <div className="w-12 h-12 rounded-2xl flex items-center justify-center"
                   style={{ background: `${plan.color}12`, border: `1px solid ${plan.color}20` }}>
                   <plan.icon size={22} style={{ color: plan.color }} />
@@ -107,12 +103,12 @@ export default function PricingSection() {
                 </div>
               </div>
 
-              <div className="mb-6">
+              <div className="mb-4">
                 <span className="text-4xl font-extrabold" style={{ color: plan.color }}>Free</span>
                 <span className="text-sm text-slate-400 ml-2">for 3 months</span>
               </div>
 
-              <ul className="space-y-3 mb-8 flex-1">
+              <ul className="space-y-2 mb-5 flex-1">
                 {plan.features.map(f => (
                   <li key={f} className="flex items-start gap-2.5 text-sm text-slate-600">
                     <Check size={16} className="mt-0.5 flex-shrink-0" style={{ color: plan.color }} />
@@ -123,7 +119,7 @@ export default function PricingSection() {
 
               <a href="#contact"
                 className={`w-full text-center block py-3 rounded-xl text-sm font-bold transition-all hover:scale-[1.02] ${plan.popular ? 'text-white shadow-md' : 'text-slate-700 bg-slate-50 hover:bg-slate-100 border border-slate-200'}`}
-                style={plan.popular ? { background: 'linear-gradient(135deg, #3b82f6, #6366f1)' } : {}}>
+                style={plan.popular ? { background: '#0a2342', color: '#39ff14' } : {}}>
                 Get Started Free
               </a>
             </motion.div>
@@ -136,13 +132,13 @@ export default function PricingSection() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ delay: 0.2, ease }}
-          className="text-center mb-8"
+          className="text-center mb-5"
         >
           <div className="inline-flex flex-col sm:flex-row items-center gap-4 p-6 rounded-3xl bg-white border border-slate-100"
             style={{ boxShadow: '0 8px 40px rgba(0,0,0,0.06)' }}>
             <div className="flex items-center gap-3">
               <div className="w-12 h-12 rounded-2xl flex items-center justify-center"
-                style={{ background: 'linear-gradient(135deg, rgba(59,130,246,0.1), rgba(139,92,246,0.1))', border: '1px solid rgba(59,130,246,0.15)' }}>
+                style={{ background: 'rgba(22,64,101,0.08)', border: '1px solid rgba(22,64,101,0.2)' }}>
                 <Calculator size={22} className="text-blue-500" />
               </div>
               <div className="text-left">
@@ -152,7 +148,7 @@ export default function PricingSection() {
             </div>
             <a href="https://calculator.skyaicode.com" target="_blank" rel="noopener noreferrer"
               className="inline-flex items-center gap-2 px-6 py-3 rounded-xl text-sm font-bold text-white transition-all hover:scale-105 flex-shrink-0"
-              style={{ background: 'linear-gradient(135deg, #3b82f6, #6366f1)', boxShadow: '0 4px 16px rgba(59,130,246,0.3)' }}>
+              style={{ background: '#0a2342', color: '#39ff14', boxShadow: '0 4px 16px rgba(10,35,66,0.22)' }}>
               <Calculator size={16} />
               Open Calculator
               <ArrowRight size={14} />

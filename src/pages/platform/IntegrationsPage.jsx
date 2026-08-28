@@ -35,10 +35,10 @@ const stats = [
 ]
 
 const features = [
-  { icon: Code, label: 'REST & SOAP APIs', desc: 'Pre-built adapters with auto-auth for any endpoint', gradient: 'from-blue-500 to-cyan-400' },
-  { icon: RefreshCw, label: 'Real-Time Sync', desc: 'Bi-directional webhooks, polling, or event triggers', gradient: 'from-violet-500 to-purple-400' },
-  { icon: Shield, label: 'Secure Auth', desc: 'OAuth 2.0, API keys, certs — encrypted at rest', gradient: 'from-emerald-500 to-teal-400' },
-  { icon: Cloud, label: '50+ Connectors', desc: 'ERP, CRM, HRMS, email, storage and more', gradient: 'from-amber-500 to-orange-400' },
+  { icon: Code, label: 'REST & SOAP APIs', desc: 'Pre-built adapters with auto-auth for any endpoint' },
+  { icon: RefreshCw, label: 'Real-Time Sync', desc: 'Bi-directional webhooks, polling, or event triggers' },
+  { icon: Shield, label: 'Secure Auth', desc: 'OAuth 2.0, API keys, certs — encrypted at rest' },
+  { icon: Cloud, label: '50+ Connectors', desc: 'ERP, CRM, HRMS, email, storage and more' },
 ]
 
 export default function IntegrationsPage() {
@@ -59,44 +59,34 @@ export default function IntegrationsPage() {
   return (
     <>
       {/* ── Hero ── */}
-      <section className="pt-28 pb-16 relative overflow-hidden"
-        style={{ background: 'linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #0f172a 100%)' }}>
-        {/* Animated grid */}
-        <div className="absolute inset-0 pointer-events-none opacity-[0.07]"
-          style={{ backgroundImage: 'linear-gradient(#10b981 1px, transparent 1px), linear-gradient(90deg, #10b981 1px, transparent 1px)', backgroundSize: '60px 60px' }} />
-        {/* Glow orbs */}
-        <div className="absolute top-20 left-1/4 w-96 h-96 rounded-full pointer-events-none"
-          style={{ background: 'radial-gradient(circle, rgba(16,185,129,0.15) 0%, transparent 70%)' }} />
-        <div className="absolute bottom-0 right-1/4 w-80 h-80 rounded-full pointer-events-none"
-          style={{ background: 'radial-gradient(circle, rgba(59,130,246,0.12) 0%, transparent 70%)' }} />
+      <section className="pt-24 pb-10 relative overflow-hidden" style={{ background: '#164065' }}>
+        <div className="absolute inset-0 pointer-events-none opacity-[0.06]"
+          style={{ backgroundImage: 'linear-gradient(rgba(255,255,255,1) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,1) 1px, transparent 1px)', backgroundSize: '60px 60px' }} />
 
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-          <div className="text-center mb-12">
+          <div className="text-center mb-8">
             <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, ease }}
-              className="inline-flex items-center gap-2 rounded-full px-5 py-2 text-sm font-bold mb-6"
-              style={{ background: 'rgba(16,185,129,0.1)', border: '1px solid rgba(16,185,129,0.25)', color: '#34d399' }}>
-              <Cable size={16} /> Integrations Hub
+              className="inline-flex items-center gap-2 rounded-full px-5 py-2 text-xs font-bold mb-4"
+              style={{ background: 'rgba(255,255,255,0.1)', border: '1px solid rgba(255,255,255,0.25)', color: '#ffffff' }}>
+              <Cable size={14} /> Integrations Hub
             </motion.div>
             <motion.h1 initial={{ opacity: 0, y: 30, filter: 'blur(8px)' }} animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
               transition={{ duration: 0.7, delay: 0.1, ease }}
-              className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-white mb-6 leading-tight">
-              Connect everything.{' '}
-              <span className="bg-clip-text text-transparent" style={{ backgroundImage: 'linear-gradient(135deg, #34d399, #06b6d4, #818cf8)' }}>
-                Seamlessly.
-              </span>
+              className="text-4xl font-extrabold mb-4 leading-tight" style={{ color: '#39ff14' }}>
+              Connect everything. Seamlessly.
             </motion.h1>
             <motion.p initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2, ease }}
-              className="text-lg text-slate-400 mb-8 max-w-2xl mx-auto leading-relaxed">
+              className="text-lg text-slate-300 mb-6 max-w-2xl mx-auto leading-relaxed">
               50+ pre-built connectors for Oracle, SAP, NetSuite, Dynamics 365, Google, Microsoft, and more.
               Bi-directional sync with zero-code configuration.
             </motion.p>
             <motion.div initial={{ opacity: 0, y: 15 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.3, ease }}
               className="flex flex-wrap gap-4 justify-center">
-              <Link to="/request-demo" className="inline-flex items-center gap-2 text-base font-bold text-white px-8 py-3.5 rounded-2xl transition-all hover:scale-105"
-                style={{ background: 'linear-gradient(135deg, #10b981, #06b6d4)', boxShadow: '0 4px 24px rgba(16,185,129,0.4)' }}>
+              <Link to="/request-demo" className="inline-flex items-center gap-2 text-base font-bold px-8 py-3.5 rounded-2xl transition-all hover:scale-105"
+                style={{ background: '#ffffff', color: '#164065', boxShadow: '0 4px 24px rgba(0,0,0,0.2)' }}>
                 Explore Integrations <ArrowRight size={18} />
               </Link>
-              <Link to="/platform" className="inline-flex items-center gap-2 text-base font-bold text-slate-300 hover:text-white px-7 py-3.5 rounded-2xl border border-slate-600 hover:border-slate-400 transition-all"
+              <Link to="/platform" className="inline-flex items-center gap-2 text-base font-bold text-white/80 hover:text-white px-7 py-3.5 rounded-2xl border border-white/25 hover:border-white/50 transition-all"
                 style={{ background: 'rgba(255,255,255,0.04)' }}>
                 Back to Platform
               </Link>
@@ -105,15 +95,15 @@ export default function IntegrationsPage() {
 
           {/* Stats bar */}
           <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.4, ease }}
-            className="grid grid-cols-2 sm:grid-cols-4 gap-4 max-w-3xl mx-auto">
+            className="grid grid-cols-2 sm:grid-cols-4 gap-3 max-w-3xl mx-auto">
             {stats.map((s, i) => (
               <motion.div key={s.label} initial={{ opacity: 0, scale: 0.9 }} animate={{ opacity: 1, scale: 1 }}
                 transition={{ delay: 0.5 + i * 0.1, ease }}
                 className="text-center p-4 rounded-2xl"
                 style={{ background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.08)', backdropFilter: 'blur(12px)' }}>
-                <s.icon size={20} className="text-emerald-400 mx-auto mb-2" />
+                <s.icon size={20} className="text-white/70 mx-auto mb-2" />
                 <div className="text-2xl font-extrabold text-white">{s.value}</div>
-                <div className="text-xs text-slate-400 font-semibold">{s.label}</div>
+                <div className="text-xs text-slate-300 font-semibold">{s.label}</div>
               </motion.div>
             ))}
           </motion.div>
@@ -121,10 +111,10 @@ export default function IntegrationsPage() {
       </section>
 
       {/* ── Live Connection Demo ── */}
-      <section className="py-20 bg-white">
+      <section className="py-12 bg-white">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl sm:text-4xl font-extrabold text-slate-900 mb-3">Watch it connect — live</h2>
+          <div className="text-center mb-8">
+            <h2 className="text-4xl font-extrabold mb-3" style={{ color: '#164065' }}>Watch it connect — live</h2>
             <p className="text-base text-slate-500">Each connector authenticates, maps fields, and syncs in seconds</p>
           </div>
 
@@ -198,8 +188,8 @@ export default function IntegrationsPage() {
               {/* Sync pipeline */}
               {phase !== 'connecting' && (
                 <motion.div initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }}
-                  className="rounded-2xl p-5 mb-4" style={{ background: 'linear-gradient(135deg, #f0fdf4, #ecfeff)', border: '1px solid #d1fae5' }}>
-                  <div className="text-xs font-bold text-emerald-700 uppercase tracking-widest mb-3 flex items-center gap-2">
+                  className="rounded-2xl p-5 mb-4" style={{ background: 'rgba(22,64,101,0.04)', border: '1px solid rgba(22,64,101,0.15)' }}>
+                  <div className="text-xs font-bold uppercase tracking-widest mb-3 flex items-center gap-2" style={{ color: '#164065' }}>
                     <Workflow size={14} /> Data Sync Pipeline
                   </div>
                   <div className="flex items-center gap-2">
@@ -225,9 +215,9 @@ export default function IntegrationsPage() {
               {phase === 'done' && (
                 <motion.div initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }}
                   className="flex items-center gap-3 px-5 py-3.5 rounded-2xl"
-                  style={{ background: 'linear-gradient(135deg, rgba(16,185,129,0.08), rgba(6,182,212,0.08))', border: '1px solid rgba(16,185,129,0.2)' }}>
-                  <Sparkles size={16} className="text-emerald-500" />
-                  <span className="text-sm font-bold text-emerald-600">7 connectors active · Bi-directional sync · Real-time webhooks enabled</span>
+                  style={{ background: 'rgba(22,64,101,0.06)', border: '1px solid rgba(22,64,101,0.2)' }}>
+                  <Sparkles size={16} style={{ color: '#164065' }} />
+                  <span className="text-sm font-bold" style={{ color: '#164065' }}>7 connectors active · Bi-directional sync · Real-time webhooks enabled</span>
                 </motion.div>
               )}
             </div>
@@ -236,11 +226,11 @@ export default function IntegrationsPage() {
       </section>
 
       {/* ── Bento Connector Grid ── */}
-      <section className="py-20" style={{ background: '#0f172a' }}>
+      <section className="py-12" style={{ background: '#164065' }}>
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl sm:text-4xl font-extrabold text-white mb-3">Your entire tech stack, connected</h2>
-            <p className="text-base text-slate-400">Pre-built connectors ready to go in minutes</p>
+          <div className="text-center mb-8">
+            <h2 className="text-4xl font-extrabold mb-3" style={{ color: '#39ff14' }}>Your entire tech stack, connected</h2>
+            <p className="text-base text-slate-300">Pre-built connectors ready to go in minutes</p>
           </div>
 
           <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-5">
@@ -250,7 +240,7 @@ export default function IntegrationsPage() {
                 className="group relative p-6 rounded-3xl cursor-pointer transition-all duration-300 hover:scale-[1.03]"
                 style={{ background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.08)', backdropFilter: 'blur(12px)' }}>
                 <div className="absolute inset-0 rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity"
-                  style={{ background: `linear-gradient(135deg, ${c.color}15, transparent)`, border: `1px solid ${c.color}30` }} />
+                  style={{ background: `${c.color}12`, border: `1px solid ${c.color}30` }} />
                 <div className="relative z-10">
                   <div className="w-16 h-16 rounded-2xl bg-white flex items-center justify-center overflow-hidden mb-4 group-hover:shadow-lg transition-shadow"
                     style={{ boxShadow: `0 4px 20px ${c.color}15` }}>
@@ -267,42 +257,42 @@ export default function IntegrationsPage() {
             <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }} transition={{ delay: 0.45, ease }}
               className="group relative p-6 rounded-3xl cursor-pointer transition-all duration-300 hover:scale-[1.03] flex flex-col items-center justify-center text-center"
-              style={{ background: 'rgba(255,255,255,0.04)', border: '2px dashed rgba(16,185,129,0.3)' }}>
+              style={{ background: 'rgba(255,255,255,0.04)', border: '2px dashed rgba(57,255,20,0.35)' }}>
               <div className="w-16 h-16 rounded-2xl flex items-center justify-center mb-4"
-                style={{ background: 'rgba(16,185,129,0.1)' }}>
-                <Plug size={28} className="text-emerald-400" />
+                style={{ background: 'rgba(57,255,20,0.12)' }}>
+                <Plug size={28} style={{ color: '#39ff14' }} />
               </div>
-              <h3 className="text-lg font-extrabold text-emerald-400 mb-1">50+ More</h3>
-              <p className="text-sm text-slate-500">REST · SOAP · GraphQL · Custom</p>
+              <h3 className="text-lg font-extrabold mb-1" style={{ color: '#39ff14' }}>50+ More</h3>
+              <p className="text-sm text-slate-300">REST · SOAP · GraphQL · Custom</p>
             </motion.div>
           </div>
         </div>
       </section>
 
       {/* ── How It Works ── */}
-      <section className="py-20 bg-white">
+      <section className="py-12 bg-white">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-14">
-            <h2 className="text-3xl sm:text-4xl font-extrabold text-slate-900 mb-3">Three steps. Zero code.</h2>
+          <div className="text-center mb-8">
+            <h2 className="text-4xl font-extrabold mb-3" style={{ color: '#164065' }}>Three steps. Zero code.</h2>
             <p className="text-base text-slate-500">From connector to live sync in under 5 minutes</p>
           </div>
           <div className="grid sm:grid-cols-3 gap-8">
             {[
-              { step: '01', title: 'Choose Connector', desc: 'Pick from 50+ pre-built connectors or add a custom REST/SOAP endpoint. OAuth, API keys, and certificates all supported out of the box.', icon: Plug, gradient: 'from-blue-500 to-cyan-400' },
-              { step: '02', title: 'Map & Configure', desc: 'Visually drag-and-drop to map fields between skiode and your system. Set sync direction, schedule, and transformation rules.', icon: ArrowLeftRight, gradient: 'from-violet-500 to-purple-400' },
-              { step: '03', title: 'Sync & Monitor', desc: 'Go live with real-time or scheduled sync. Every data exchange is logged — auto-retry on failures, alerts when you need them.', icon: RefreshCw, gradient: 'from-emerald-500 to-teal-400' },
+              { step: '01', title: 'Choose Connector', desc: 'Pick from 50+ pre-built connectors or add a custom REST/SOAP endpoint. OAuth, API keys, and certificates all supported out of the box.', icon: Plug },
+              { step: '02', title: 'Map & Configure', desc: 'Visually drag-and-drop to map fields between skiode and your system. Set sync direction, schedule, and transformation rules.', icon: ArrowLeftRight },
+              { step: '03', title: 'Sync & Monitor', desc: 'Go live with real-time or scheduled sync. Every data exchange is logged — auto-retry on failures, alerts when you need them.', icon: RefreshCw },
             ].map((s, i) => (
               <motion.div key={s.step} initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }} transition={{ delay: i * 0.15, ease }}
                 className="relative group">
                 <div className="p-8 rounded-3xl border border-slate-100 bg-white hover:shadow-xl transition-all duration-300 h-full">
                   <div className="flex items-center gap-4 mb-6">
-                    <div className={`w-14 h-14 rounded-2xl bg-gradient-to-br ${s.gradient} flex items-center justify-center shadow-lg`}>
+                    <div className="w-14 h-14 rounded-2xl flex items-center justify-center shadow-lg" style={{ background: '#164065' }}>
                       <s.icon size={26} className="text-white" />
                     </div>
                     <span className="text-5xl font-black text-slate-100">{s.step}</span>
                   </div>
-                  <h3 className="text-xl font-extrabold text-slate-900 mb-3">{s.title}</h3>
+                  <h3 className="text-xl font-extrabold mb-3" style={{ color: '#164065' }}>{s.title}</h3>
                   <p className="text-sm text-slate-500 leading-relaxed">{s.desc}</p>
                 </div>
               </motion.div>
@@ -312,18 +302,18 @@ export default function IntegrationsPage() {
       </section>
 
       {/* ── Feature Cards ── */}
-      <section className="py-20" style={{ background: 'linear-gradient(180deg, #f8fafc 0%, #ffffff 100%)' }}>
+      <section className="py-12" style={{ background: '#f8fafc' }}>
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
             {features.map((f, i) => (
               <motion.div key={f.label} initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }} transition={{ delay: i * 0.1, ease }}
-                className="group p-6 rounded-3xl border border-slate-100 bg-white hover:shadow-xl transition-all duration-300 hover:border-transparent"
-                style={{ hover: { borderImage: `linear-gradient(135deg, ${f.gradient}) 1` } }}>
-                <div className={`w-12 h-12 rounded-2xl bg-gradient-to-br ${f.gradient} flex items-center justify-center mb-4 shadow-lg group-hover:scale-110 transition-transform`}>
+                className="group p-6 rounded-3xl border border-slate-100 bg-white hover:shadow-xl transition-all duration-300">
+                <div className="w-12 h-12 rounded-2xl flex items-center justify-center mb-4 shadow-lg group-hover:scale-110 transition-transform"
+                  style={{ background: '#164065' }}>
                   <f.icon size={22} className="text-white" />
                 </div>
-                <h3 className="text-base font-extrabold text-slate-900 mb-2">{f.label}</h3>
+                <h3 className="text-base font-extrabold mb-2" style={{ color: '#164065' }}>{f.label}</h3>
                 <p className="text-sm text-slate-500 leading-relaxed">{f.desc}</p>
               </motion.div>
             ))}
@@ -332,10 +322,10 @@ export default function IntegrationsPage() {
       </section>
 
       {/* ── Real Screenshot ── */}
-      <section className="py-20 bg-white">
+      <section className="py-12 bg-white">
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-10">
-            <h2 className="text-3xl sm:text-4xl font-extrabold text-slate-900 mb-3">See it in action</h2>
+          <div className="text-center mb-6">
+            <h2 className="text-4xl font-extrabold mb-3" style={{ color: '#164065' }}>See it in action</h2>
             <p className="text-base text-slate-500">The actual skiode integrations manager</p>
           </div>
           <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}
@@ -349,21 +339,6 @@ export default function IntegrationsPage() {
             </div>
             <img src={integrationsScreenshot} alt="skiode Integrations" className="w-full" />
           </motion.div>
-        </div>
-      </section>
-
-      {/* ── CTA ── */}
-      <section className="py-20 relative overflow-hidden"
-        style={{ background: 'linear-gradient(135deg, #0f172a 0%, #1e293b 100%)' }}>
-        <div className="absolute inset-0 pointer-events-none opacity-[0.05]"
-          style={{ backgroundImage: 'linear-gradient(#10b981 1px, transparent 1px), linear-gradient(90deg, #10b981 1px, transparent 1px)', backgroundSize: '60px 60px' }} />
-        <div className="max-w-3xl mx-auto px-4 text-center relative z-10">
-          <h2 className="text-3xl sm:text-4xl font-extrabold text-white mb-4">Ready to connect your systems?</h2>
-          <p className="text-base text-slate-400 mb-8">Set up integrations in minutes with zero-code connectors</p>
-          <Link to="/request-demo" className="inline-flex items-center gap-2 text-base font-bold text-white px-8 py-4 rounded-2xl transition-all hover:scale-105"
-            style={{ background: 'linear-gradient(135deg, #10b981, #06b6d4)', boxShadow: '0 4px 24px rgba(16,185,129,0.4)' }}>
-            Request Demo <ArrowRight size={18} />
-          </Link>
         </div>
       </section>
     </>

@@ -62,29 +62,25 @@ export default function HowItWorks() {
   const step = steps[active]
 
   return (
-    <section className="py-28 relative overflow-hidden bg-white">
-      <div className="absolute inset-0 dot-pattern-light pointer-events-none opacity-50" />
+    <section className="py-12 relative overflow-hidden bg-white">
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
 
         {/* Header */}
-        <div className="text-center mb-14">
+        <div className="text-center mb-8">
           <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}
-            className="inline-flex items-center gap-2.5 rounded-full px-6 py-2.5 text-sm font-extrabold mb-6"
-            style={{ background: "linear-gradient(135deg, rgba(59,130,246,0.1), rgba(139,92,246,0.1))", border: "1px solid rgba(59,130,246,0.2)", color: "#2563eb" }}>
+            className="inline-flex items-center gap-2.5 rounded-full px-6 py-2.5 text-[12px] font-extrabold mb-3"
+            style={{ background: "rgba(22,64,101,0.08)", border: "1px solid rgba(22,64,101,0.24)", color: "#0a2342" }}>
             <Sparkles size={14} /> Platform Walkthrough
           </motion.div>
 
           <motion.h2 initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.1 }}
-            className="text-5xl sm:text-6xl lg:text-7xl font-black text-slate-900 mb-5 leading-[1.08] tracking-tight">
-            How <span style={{
-              background: "linear-gradient(135deg, #3b82f6, #8b5cf6)",
-              WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent",
-            }}>skiode</span> works
+            className="text-[36px] font-black mb-3 leading-[1.08] tracking-tight" style={{ color: '#0a2342' }}>
+            How <span style={{ color: '#164065' }}>skiode</span> works
           </motion.h2>
 
           <motion.p initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.15 }}
-            className="text-lg sm:text-xl text-slate-500 max-w-lg mx-auto leading-relaxed font-medium">
+            className="text-[12px] text-slate-500 max-w-lg mx-auto leading-relaxed font-medium">
             6 steps. No code. From idea to live app.
           </motion.p>
         </div>
@@ -95,13 +91,13 @@ export default function HowItWorks() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ delay: 0.2 }}
-          className="grid grid-cols-3 sm:grid-cols-6 gap-2 mb-8"
+          className="grid grid-cols-3 sm:grid-cols-6 gap-2 mb-5"
         >
           {steps.map((s, i) => {
             const isActive = i === active
             return (
               <button key={s.num} onClick={() => setActive(i)}
-                className="relative flex flex-col items-center gap-2 py-4 px-2 rounded-2xl transition-all duration-300"
+                className="relative flex flex-col items-center gap-2 py-3 px-2 rounded-2xl transition-all duration-300"
                 style={{
                   background: isActive ? "white" : "transparent",
                   border: isActive ? `2px solid ${s.color}` : "2px solid transparent",
@@ -155,9 +151,9 @@ export default function HowItWorks() {
               </div>
 
               {/* Right — Bold headline + capability pills */}
-              <div className="p-8 sm:p-10 flex flex-col justify-center">
+              <div className="p-6 sm:p-7 flex flex-col justify-center">
                 {/* Step badge */}
-                <div className="flex items-center gap-3 mb-5">
+                <div className="flex items-center gap-3 mb-3">
                   <div className="w-10 h-10 rounded-xl flex items-center justify-center"
                     style={{ background: `${step.color}12` }}>
                     <step.icon size={20} style={{ color: step.color }} />
@@ -168,12 +164,12 @@ export default function HowItWorks() {
                 </div>
 
                 {/* Title */}
-                <h3 className="text-3xl sm:text-4xl font-black text-slate-900 mb-3 leading-tight">
+                <h3 className="text-[12px] font-black uppercase tracking-wide mb-2 leading-tight" style={{ color: '#0a2342' }}>
                   {step.title}
                 </h3>
 
                 {/* Bold one-liner */}
-                <p className="text-lg sm:text-xl font-semibold text-slate-600 mb-6 leading-relaxed">
+                <p className="text-base font-semibold text-slate-600 mb-4 leading-relaxed">
                   {step.bold}
                 </p>
 

@@ -236,7 +236,7 @@ function ProcessFlow({ cs }) {
               <div className="w-px h-8" style={{ background: `${cs.accent}25` }} />
             )}
           </div>
-          <div className="pb-4 pt-1">
+          <div className="pb-2 pt-1">
             <p className="text-sm text-slate-600 leading-relaxed">{step}</p>
           </div>
         </motion.div>
@@ -259,14 +259,14 @@ function CaseStudyCard({ cs, index, isReversed }) {
         boxShadow: "0 8px 40px rgba(0,0,0,0.06)",
       }}
     >
-      {/* Top accent gradient */}
-      <div className="h-1.5" style={{ background: `linear-gradient(90deg, ${cs.accent}, ${cs.accent}60, transparent)` }} />
+      {/* Top accent */}
+      <div className="h-1.5" style={{ background: "#164065" }} />
 
       {/* Header */}
-      <div className="px-6 sm:px-10 pt-8 pb-6">
+      <div className="px-6 sm:px-8 pt-5 pb-4">
         <div className="flex flex-col sm:flex-row items-start sm:items-center gap-3 mb-2">
           <span className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider"
-            style={{ background: cs.accentLight, color: cs.accent, border: `1px solid ${cs.accent}20` }}>
+            style={{ background: "rgba(22,64,101,0.08)", color: "#0a2342", border: "1px solid rgba(22,64,101,0.24)" }}>
             <Sparkles size={11} /> {cs.industry}
           </span>
           <span className="text-xs text-slate-400">Case Study #{index + 1}</span>
@@ -280,38 +280,38 @@ function CaseStudyCard({ cs, index, isReversed }) {
         {/* Image + Challenge side */}
         <div className={`relative ${isReversed ? 'lg:col-start-2' : ''}`}>
           {cs.image && (
-            <div className="relative mx-6 sm:mx-10 mb-6 rounded-2xl overflow-hidden"
+            <div className="relative mx-6 sm:mx-8 mb-4 rounded-2xl overflow-hidden"
               style={{ height: "220px", boxShadow: `0 12px 40px ${cs.accent}15` }}>
               <img src={cs.image} alt={cs.industry}
                 className="w-full h-full object-cover" />
               <div className="absolute inset-0 pointer-events-none"
-                style={{ background: `linear-gradient(180deg, transparent 50%, ${cs.accent}15 100%)` }} />
+                style={{ background: "rgba(10,35,66,0.08)" }} />
             </div>
           )}
 
           {/* Challenge */}
-          <div className="mx-6 sm:mx-10 mb-6">
-            <div className="rounded-2xl p-5"
-              style={{ background: "linear-gradient(135deg, #fff1f2, #fef2f2)", border: "1.5px solid #fecdd3" }}>
-              <div className="flex items-center gap-2 mb-3">
+          <div className="mx-6 sm:mx-8 mb-4">
+            <div className="rounded-2xl p-4"
+              style={{ background: "#f5f7f9", border: "1.5px solid rgba(10,35,66,0.16)" }}>
+              <div className="flex items-center gap-2 mb-2">
                 <div className="w-7 h-7 rounded-lg flex items-center justify-center bg-red-100">
                   <span className="text-sm">⚠️</span>
                 </div>
-                <span className="text-xs font-extrabold text-red-500 uppercase tracking-wider">The Challenge</span>
+                <span className="text-[12px] font-extrabold uppercase tracking-wider" style={{ color: "#0a2342" }}>The Challenge</span>
               </div>
               <p className="text-sm text-slate-600 leading-relaxed">{cs.challenge}</p>
             </div>
           </div>
 
           {/* Solution */}
-          <div className="mx-6 sm:mx-10 mb-8">
-            <div className="rounded-2xl p-5"
-              style={{ background: "linear-gradient(135deg, #f0fdf4, #ecfdf5)", border: "1.5px solid #86efac" }}>
-              <div className="flex items-center gap-2 mb-3">
+          <div className="mx-6 sm:mx-8 mb-5">
+            <div className="rounded-2xl p-4"
+              style={{ background: "rgba(22,64,101,0.06)", border: "1.5px solid rgba(22,64,101,0.2)" }}>
+              <div className="flex items-center gap-2 mb-2">
                 <div className="w-7 h-7 rounded-lg flex items-center justify-center bg-emerald-100">
-                  <Zap size={13} className="text-emerald-500" />
+                  <Zap size={13} style={{ color: "#164065" }} />
                 </div>
-                <span className="text-xs font-extrabold text-emerald-600 uppercase tracking-wider">The Solution</span>
+                <span className="text-[12px] font-extrabold uppercase tracking-wider" style={{ color: "#0a2342" }}>The Solution</span>
               </div>
               <p className="text-sm text-slate-600 leading-relaxed">{cs.solution}</p>
             </div>
@@ -319,15 +319,15 @@ function CaseStudyCard({ cs, index, isReversed }) {
         </div>
 
         {/* Features + Benefits side */}
-        <div className={`px-6 sm:px-10 pb-8 ${isReversed ? 'lg:col-start-1' : ''}`}>
+        <div className={`px-6 sm:px-8 pb-5 ${isReversed ? 'lg:col-start-1' : ''}`}>
           {/* skiode Features Used */}
-          <div className="mb-7">
-            <div className="flex items-center gap-2 mb-4">
+          <div className="mb-5">
+            <div className="flex items-center gap-2 mb-3">
               <div className="w-7 h-7 rounded-lg flex items-center justify-center"
                 style={{ background: cs.accentLight }}>
                 <Settings size={13} style={{ color: cs.accent }} />
               </div>
-              <span className="text-xs font-extrabold text-slate-400 uppercase tracking-wider">skiode Features Leveraged</span>
+              <span className="text-[12px] font-extrabold uppercase tracking-wider" style={{ color: "#0a2342" }}>skiode Features Leveraged</span>
             </div>
             <div className="grid grid-cols-2 gap-2">
               {cs.features.map((f) => {
@@ -335,7 +335,7 @@ function CaseStudyCard({ cs, index, isReversed }) {
                 const Icon = feat.icon
                 return (
                   <div key={f}
-                    className="flex items-center gap-2.5 px-3.5 py-2.5 rounded-xl transition-all hover:scale-[1.02]"
+                    className="flex items-center gap-2.5 px-3.5 py-2 rounded-xl transition-all hover:scale-[1.02]"
                     style={{ background: `${feat.color}08`, border: `1px solid ${feat.color}12` }}>
                     <div className="w-6 h-6 rounded-lg flex items-center justify-center flex-shrink-0"
                       style={{ background: `${feat.color}15` }}>
@@ -350,11 +350,11 @@ function CaseStudyCard({ cs, index, isReversed }) {
 
           {/* Benefits Delivered — Process Flow */}
           <div>
-            <div className="flex items-center gap-2 mb-4">
+            <div className="flex items-center gap-2 mb-3">
               <div className="w-7 h-7 rounded-lg flex items-center justify-center bg-emerald-50">
                 <CheckCircle2 size={13} className="text-emerald-500" />
               </div>
-              <span className="text-xs font-extrabold text-slate-400 uppercase tracking-wider">Benefits Delivered</span>
+              <span className="text-[12px] font-extrabold uppercase tracking-wider" style={{ color: "#0a2342" }}>Benefits Delivered</span>
             </div>
             <ProcessFlow cs={cs} />
           </div>
@@ -367,40 +367,28 @@ function CaseStudyCard({ cs, index, isReversed }) {
 export default function UseCases() {
   return (
     <div className="min-h-screen pt-20"
-      style={{ background: "linear-gradient(180deg, #f8faff 0%, #ffffff 20%, #f0f4ff 60%, #f8faff 100%)" }}>
+      style={{ background: "#f7faf9" }}>
 
       {/* Hero header */}
-      <div className="relative overflow-hidden py-20 sm:py-28">
-        {/* Background effects */}
-        <div className="absolute inset-0 pointer-events-none">
-          <div className="absolute top-0 left-1/4 w-[500px] h-[500px] rounded-full"
-            style={{ background: "radial-gradient(circle, rgba(59,130,246,0.06) 0%, transparent 60%)", filter: "blur(80px)" }} />
-          <div className="absolute bottom-0 right-1/4 w-[400px] h-[400px] rounded-full"
-            style={{ background: "radial-gradient(circle, rgba(139,92,246,0.05) 0%, transparent 60%)", filter: "blur(80px)" }} />
-        </div>
-
+      <div className="relative overflow-hidden py-8 sm:py-9">
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative">
           <motion.div {...fade}
-            className="inline-flex items-center gap-2 rounded-full px-5 py-2 text-xs font-bold mb-6"
-            style={{ background: "rgba(59,130,246,0.08)", border: "1px solid rgba(59,130,246,0.15)", color: "#3b82f6" }}>
-            <div className="w-1.5 h-1.5 rounded-full bg-blue-400 animate-pulse" />
+            className="inline-flex items-center gap-2 rounded-full px-5 py-2 text-[12px] font-bold mb-3"
+            style={{ background: "rgba(22,64,101,0.08)", border: "1px solid rgba(22,64,101,0.24)", color: "#0a2342" }}>
+            <div className="w-1.5 h-1.5 rounded-full animate-pulse" style={{ background: "#164065" }} />
             Real-World Impact · 8 Case Studies
           </motion.div>
 
           <motion.h1 {...fade} transition={{ delay: 0.1 }}
-            className="text-4xl sm:text-5xl lg:text-[3.5rem] font-extrabold text-slate-900 mb-6 leading-tight tracking-tight">
+            className="text-[36px] font-extrabold mb-2 leading-tight tracking-tight" style={{ color: "#0a2342" }}>
             Solutions Delivered{" "}
-            <span style={{
-              background: "linear-gradient(135deg, #3b82f6, #8b5cf6, #ec4899)",
-              WebkitBackgroundClip: "text",
-              WebkitTextFillColor: "transparent",
-            }}>
+            <span style={{ color: "#164065" }}>
               Across Industries
             </span>
           </motion.h1>
 
           <motion.p {...fade} transition={{ delay: 0.2 }}
-            className="text-base sm:text-lg text-slate-500 max-w-2xl mx-auto mb-10 leading-relaxed">
+            className="text-[12px] text-slate-500 max-w-2xl mx-auto mb-4 leading-relaxed">
             From pharmaceutical sale orders to RPA-powered Oracle integrations — explore how skiode transforms
             enterprise operations with real case studies from our customers.
           </motion.p>
@@ -413,11 +401,11 @@ export default function UseCases() {
                 className="inline-flex items-center gap-2 px-4 py-2 rounded-full text-xs font-semibold transition-all hover:scale-105 hover:shadow-md cursor-pointer"
                 style={{
                   background: "white",
-                  color: cs.accent,
-                  border: `1.5px solid ${cs.accent}25`,
-                  boxShadow: `0 2px 8px ${cs.accent}08`,
+                  color: "#0a2342",
+                  border: "1.5px solid rgba(10,35,66,0.14)",
+                  boxShadow: "0 2px 8px rgba(10,35,66,0.05)",
                 }}>
-                <div className="w-1.5 h-1.5 rounded-full" style={{ background: cs.accent }} />
+                <div className="w-1.5 h-1.5 rounded-full" style={{ background: "#164065" }} />
                 {cs.industry}
                 <ArrowUpRight size={10} />
               </a>
@@ -427,42 +415,36 @@ export default function UseCases() {
       </div>
 
       {/* Case studies */}
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 pb-20 space-y-10">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 pb-8 space-y-4">
         {caseStudies.map((cs, i) => (
           <CaseStudyCard key={cs.id} cs={cs} index={i} isReversed={i % 2 === 1} />
         ))}
       </div>
 
       {/* Bottom CTA */}
-      <div className="relative py-20 overflow-hidden"
-        style={{ background: "linear-gradient(135deg, #0d1117, #1a1a2e)" }}>
-        <div className="absolute inset-0 opacity-[0.03] pointer-events-none"
-          style={{
-            backgroundImage: "linear-gradient(rgba(255,255,255,0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.1) 1px, transparent 1px)",
-            backgroundSize: "60px 60px",
-          }} />
-        <div className="absolute top-0 left-1/3 w-[400px] h-[400px] rounded-full pointer-events-none"
-          style={{ background: "radial-gradient(circle, rgba(59,130,246,0.1) 0%, transparent 60%)", filter: "blur(80px)" }} />
+      <div className="relative py-8 overflow-hidden"
+        style={{ background: "#0a2342" }}>
 
         <div className="max-w-3xl mx-auto px-4 text-center relative">
           <motion.div {...fade}>
-            <div className="inline-flex items-center gap-2 rounded-full px-4 py-1.5 text-xs font-semibold mb-6"
-              style={{ background: "rgba(59,130,246,0.15)", border: "1px solid rgba(59,130,246,0.25)", color: "#60a5fa" }}>
+            <div className="inline-flex items-center gap-2 rounded-full px-4 py-1.5 text-xs font-semibold mb-4"
+              style={{ background: "rgba(57,255,20,0.1)", border: "1px solid rgba(57,255,20,0.45)", color: "#39ff14" }}>
               <Sparkles size={11} /> Ready to Transform?
             </div>
-            <h2 className="text-3xl sm:text-4xl font-extrabold text-white mb-4 leading-tight">
+            <h2 className="text-3xl sm:text-4xl font-extrabold text-white mb-3 leading-tight">
               Have a similar challenge?
             </h2>
-            <p className="text-base mb-8 leading-relaxed" style={{ color: "rgba(255,255,255,0.4)" }}>
+            <p className="text-base mb-5 leading-relaxed" style={{ color: "rgba(255,255,255,0.4)" }}>
               Our team can assess your requirements and deliver a working solution in weeks — not months.
               Up to 2 weeks of assessment as an investment for solution strategy.
             </p>
             <div className="flex flex-col sm:flex-row items-center justify-center gap-3">
               <Link to="/request-demo"
-                className="inline-flex items-center gap-2.5 px-8 py-4 rounded-2xl font-bold text-sm text-white transition-all hover:scale-105"
+                className="inline-flex items-center gap-2.5 px-8 py-3 rounded-2xl font-bold text-sm text-white transition-all hover:scale-105"
                 style={{
-                  background: "linear-gradient(135deg, #3b82f6, #06b6d4)",
-                  boxShadow: "0 8px 32px rgba(59,130,246,0.45), 0 0 0 1px rgba(96,165,250,0.2)",
+                  background: "#39ff14",
+                  color: "#0a2342",
+                  boxShadow: "0 8px 24px rgba(57,255,20,0.2)",
                 }}>
                 Request Demo <ArrowRight size={15} />
               </Link>

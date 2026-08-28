@@ -98,22 +98,22 @@ function LogoCard({ brand, index }) {
 
 export default function TrustedBrands() {
   return (
-    <section id="trusted-brands" className="relative py-14 overflow-hidden" style={{ background: "linear-gradient(180deg, #f8faff 0%, #ffffff 50%, #f8faff 100%)" }}>
+    <section id="trusted-brands" className="homepage-section relative overflow-hidden" style={{ background: "linear-gradient(180deg, #f8faff 0%, #ffffff 50%, #f8faff 100%)" }}>
       {/* Subtle background pattern */}
       <div className="absolute inset-0 dot-pattern-light opacity-30 pointer-events-none" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
         {/* Header */}
-        <div className="text-center mb-14">
+        <div className="text-center mb-8">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="inline-flex items-center gap-2 rounded-full px-5 py-2 text-xs font-semibold mb-5"
+            className="section-eyebrow inline-flex items-center gap-2 rounded-full px-5 py-2 font-semibold mb-3"
             style={{
               background: "linear-gradient(135deg, rgba(59,130,246,0.08), rgba(132,204,22,0.08))",
               border: "1px solid rgba(59,130,246,0.15)",
-              color: "#3b82f6",
+              color: "#123a59",
             }}
           >
             <span style={{ fontSize: "14px" }}>✦</span> Trusted Worldwide
@@ -129,9 +129,7 @@ export default function TrustedBrands() {
             Brands That{" "}
             <span
               style={{
-                background: "linear-gradient(135deg, #3b82f6, #06b6d4)",
-                WebkitBackgroundClip: "text",
-                WebkitTextFillColor: "transparent",
+                color: "#123a59",
               }}
             >
               Trust Us
@@ -143,7 +141,7 @@ export default function TrustedBrands() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.2 }}
-            className="text-base text-slate-500 max-w-lg mx-auto"
+            className="section-lead text-base text-slate-500 max-w-none mx-auto"
           >
             From healthcare to manufacturing, enterprises across industries rely on skiode to power their operations.
           </motion.p>
@@ -201,7 +199,7 @@ export default function TrustedBrands() {
             { num: "6+", label: "Countries" },
           ].map((stat) => (
             <div key={stat.label} className="flex items-center gap-2.5">
-              <span className="text-2xl font-extrabold" style={{ background: "linear-gradient(135deg, #3b82f6, #06b6d4)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }}>
+              <span className="text-2xl font-extrabold" style={{ color: "#123a59" }}>
                 {stat.num}
               </span>
               <span className="text-xs font-semibold text-slate-400 uppercase tracking-wide">{stat.label}</span>

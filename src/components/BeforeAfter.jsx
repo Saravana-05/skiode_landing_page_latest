@@ -31,7 +31,7 @@ const modules = [
 
 export default function WhatSkiodeReplaces() {
   return (
-    <section id="before-after" className="py-10 relative overflow-hidden" style={{ background: "#f8faff" }}>
+    <section id="before-after" className="homepage-section relative overflow-hidden" style={{ background: "#f8faff" }}>
       <div className="absolute inset-0 dot-pattern-light pointer-events-none" />
 
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative">
@@ -39,8 +39,8 @@ export default function WhatSkiodeReplaces() {
         {/* Header */}
         <div className="text-center mb-8">
           <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}
-            className="inline-flex items-center gap-2 rounded-full px-5 py-2 text-xs font-bold mb-3"
-            style={{ background: "rgba(59,130,246,0.07)", border: "1px solid rgba(59,130,246,0.15)", color: "#3b82f6" }}>
+            className="section-eyebrow inline-flex items-center gap-2 rounded-full px-5 py-2 font-bold mb-3"
+            style={{ background: "rgba(18,58,89,0.07)", border: "1px solid rgba(18,58,89,0.15)", color: "#123a59" }}>
             <Sparkles size={12} /> BPM + Lowcode + RPA + AI — All In One
           </motion.div>
           <motion.h2 initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.1 }}
@@ -48,7 +48,7 @@ export default function WhatSkiodeReplaces() {
             One platform, <span style={{ color: "#163e64" }}>zero fragmentation</span>
           </motion.h2>
           <motion.p initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.2 }}
-            className="text-lg text-slate-500 max-w-2xl mx-auto leading-relaxed">
+            className="section-lead text-lg text-slate-500 max-w-none mx-auto leading-relaxed">
             Stop managing a dozen subscriptions. skiode replaces them all.
           </motion.p>
         </div>
@@ -110,13 +110,13 @@ export default function WhatSkiodeReplaces() {
           <div className="hidden lg:flex flex-col items-center justify-center px-0 relative z-10">
             <div className="w-14 h-14 rounded-full bg-white flex items-center justify-center"
               style={{ border: "2px solid #e2e8f0", boxShadow: "0 4px 20px rgba(0,0,0,0.08)" }}>
-              <ArrowRight size={20} className="text-blue-500" />
+              <ArrowRight size={20} className="text-[#123a59]" />
             </div>
           </div>
           {/* Mobile arrow */}
           <div className="flex lg:hidden items-center justify-center py-4">
             <div className="w-10 h-10 rounded-full bg-white flex items-center justify-center border border-slate-200 shadow-sm rotate-90">
-              <ArrowRight size={16} className="text-blue-500" />
+              <ArrowRight size={16} className="text-[#123a59]" />
             </div>
           </div>
 
@@ -177,7 +177,7 @@ export default function WhatSkiodeReplaces() {
               { num: "10×", label: "Productivity boost" },
             ].map((s, i, arr) => (
               <div key={s.label} className={i < arr.length - 1 ? "pb-5 border-b" : ""} style={{ borderColor: "#e2e8f0" }}>
-                <div className="text-3xl font-black whitespace-nowrap" style={{ color: "#3b82f6" }}>{s.num}</div>
+                <div className="text-3xl font-black whitespace-nowrap" style={{ color: "#123a59" }}>{s.num}</div>
                 <div className="text-xs text-slate-400 font-semibold mt-1 whitespace-nowrap">{s.label}</div>
               </div>
             ))}
@@ -198,7 +198,7 @@ export default function WhatSkiodeReplaces() {
             { num: "10×", label: "Productivity boost" },
           ].map(s => (
             <div key={s.label} className="text-center">
-              <div className="text-3xl sm:text-4xl font-black" style={{ color: "#3b82f6" }}>{s.num}</div>
+              <div className="text-3xl sm:text-4xl font-black" style={{ color: "#123a59" }}>{s.num}</div>
               <div className="text-sm text-slate-400 font-semibold mt-1">{s.label}</div>
             </div>
           ))}

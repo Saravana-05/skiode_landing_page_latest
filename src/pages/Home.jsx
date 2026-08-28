@@ -6,6 +6,8 @@ import InteractiveShowcase from '../components/InteractiveShowcase'
 import PlatformOverview from '../components/PlatformOverview'
 import ProcessFlowShowcase from '../components/ProcessFlowShowcase'
 import IntegrationsShowcase from '../components/IntegrationsShowcase'
+import Testimonials from '../components/Testimonials'
+import FAQ from '../components/FAQ'
 import FinalCTA from '../components/FinalCTA'
 
 export default function Home() {
@@ -20,6 +22,8 @@ export default function Home() {
       <PlatformOverview />
       <ProcessFlowShowcase />
       <IntegrationsShowcase />
+      <Testimonials />
+      <FAQ />
       <FinalCTA />
     </>
   )

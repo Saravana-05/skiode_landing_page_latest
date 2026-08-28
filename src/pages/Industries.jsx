@@ -109,42 +109,42 @@ const industries = [
 
 export default function Industries() {
   return (
-    <div className="min-h-screen pt-20" style={{ background: "linear-gradient(180deg, #f8faff 0%, #ffffff 30%, #f8faff 100%)" }}>
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-        <div className="text-center mb-16">
+    <div className="min-h-screen pt-20" style={{ background: "#f7faf9" }}>
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-9">
+        <div className="text-center mb-8">
           <motion.div {...fade}
-            className="inline-flex items-center gap-2 rounded-full px-5 py-2 text-xs font-semibold mb-5"
-            style={{ background: "rgba(59,130,246,0.08)", border: "1px solid rgba(59,130,246,0.15)", color: "#3b82f6" }}>
+            className="inline-flex items-center gap-2 rounded-full px-5 py-2 text-[12px] font-semibold mb-3"
+            style={{ background: "rgba(22,64,101,0.08)", border: "1px solid rgba(22,64,101,0.24)", color: "#0a2342" }}>
             Industry Solutions
           </motion.div>
           <motion.h1 {...fade} transition={{ delay: 0.1 }}
-            className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-slate-900 mb-5 leading-tight">
+            className="text-[36px] font-extrabold mb-3 leading-tight" style={{ color: "#0a2342" }}>
             Solutions by{" "}
-            <span style={{ background: "linear-gradient(135deg, #3b82f6, #06b6d4)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }}>
+            <span style={{ color: "#164065" }}>
               Industry Verticals
             </span>
           </motion.h1>
           <motion.p {...fade} transition={{ delay: 0.2 }}
-            className="text-lg text-slate-500 max-w-2xl mx-auto">
+            className="text-[12px] text-slate-500 max-w-2xl mx-auto">
             From healthcare to logistics, skiode delivers pointed solutions across 8+ industry verticals.
           </motion.p>
         </div>
 
-        <div className="grid md:grid-cols-2 gap-6">
+        <div className="grid md:grid-cols-2 gap-4">
           {industries.map((ind, i) => (
             <motion.div key={ind.id} {...fade} transition={{ delay: i * 0.08 }}
               id={ind.id}
-              className="scroll-mt-24 rounded-3xl p-6 sm:p-8 group hover:-translate-y-1 transition-all duration-300"
+              className="scroll-mt-24 rounded-3xl p-5 sm:p-6 group hover:-translate-y-1 transition-all duration-300"
               style={{ background: "white", border: "1px solid rgba(0,0,0,0.06)", boxShadow: "0 2px 16px rgba(0,0,0,0.04)" }}>
-              <div className="flex items-center gap-3 mb-4">
+              <div className="flex items-center gap-3 mb-3">
                 <div className="w-11 h-11 rounded-2xl flex items-center justify-center"
                   style={{ background: `${ind.color}12` }}>
                   <ind.icon size={20} style={{ color: ind.color }} />
                 </div>
-                <h3 className="text-lg font-extrabold text-slate-900">{ind.title}</h3>
+                <h3 className="text-[12px] font-extrabold uppercase tracking-wide" style={{ color: "#0a2342" }}>{ind.title}</h3>
               </div>
-              <p className="text-sm text-slate-500 leading-relaxed mb-5">{ind.desc}</p>
-              <div className="space-y-2">
+              <p className="text-sm text-slate-500 leading-relaxed mb-3">{ind.desc}</p>
+              <div className="space-y-1.5">
                 {ind.hooks.map((h) => (
                   <div key={h} className="flex items-start gap-2">
                     <CheckCircle2 size={13} style={{ color: ind.color }} className="mt-0.5 flex-shrink-0" />
@@ -158,10 +158,10 @@ export default function Industries() {
 
         {/* CTA */}
         <motion.div {...fade} transition={{ delay: 0.3 }}
-          className="mt-14 text-center">
+          className="mt-8 text-center">
           <Link to="/request-demo"
             className="inline-flex items-center gap-2 px-7 py-3.5 rounded-2xl font-bold text-sm text-white transition-all hover:scale-105"
-            style={{ background: "linear-gradient(135deg, #3b82f6, #06b6d4)", boxShadow: "0 8px 32px rgba(59,130,246,0.4)" }}>
+            style={{ background: "#0a2342", color: "#39ff14", boxShadow: "0 8px 24px rgba(10,35,66,0.22)" }}>
             Discuss Your Industry <ArrowRight size={14} />
           </Link>
         </motion.div>

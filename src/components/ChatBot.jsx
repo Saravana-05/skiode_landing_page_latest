@@ -1,6 +1,6 @@
 import { useState, useRef, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { MessageCircle, X, Send, Bot, User, Sparkles, ArrowUp, Grip } from 'lucide-react'
+import { MessageCircle, X, Send, Bot, User, Sparkles, ArrowUp, ArrowDown, Grip } from 'lucide-react'
 
 const QA = [
   { q: 'what is skiode', a: 'skiode is an AI-powered low-code platform that lets you build apps, automate processes, deploy bots, and integrate with 50+ systems — all from one visual workspace. No coding required.' },
@@ -22,6 +22,10 @@ const QA = [
   { q: 'hello', a: 'Hello! 👋 Welcome to skiode. I\'m here to help you learn about our AI-powered low-code platform. Ask me anything about features, pricing, integrations, or how skiode can help your business!' },
   { q: 'hi', a: 'Hi there! 👋 Great to see you. I can help you with questions about skiode — our platform features, pricing, integrations, use cases, and more. What would you like to know?' },
   { q: 'thank', a: 'You\'re welcome! If you have more questions, feel free to ask anytime. You can also request a live demo to see skiode in action. Happy to help! 😊' },
+  { q: 'form builder', a: 'The Form Builder is a drag-and-drop canvas with 20+ field types, conditional logic, and validation rules. Design forms visually and they\'re instantly mobile-responsive — no coding required.' },
+  { q: 'users permissions', a: 'Users & Permissions lets you manage teams, roles, and access policies from one place — role-based access control, field-level permissions, and full audit logs to keep every workflow secure and compliant.' },
+  { q: 'platform overview', a: 'The Platform Overview brings every module together — Form Builder, Process Flow, OCR & AI, BOTs, Dashboards, Users & Permissions, and Integrations — in one connected workspace. Build, automate, connect, and deploy without switching tools.' },
+  { q: 'dms document management', a: 'The DMS (Document Management System) module gives you centralized, version-controlled document storage with role-based access — linked directly to your forms and workflows, so files stay organized and auditable.' },
 ]
 
 const suggestions = [
@@ -60,7 +64,7 @@ function findAnswer(input) {
   if (lower.includes('feature') || lower.includes('what can') || lower.includes('capability')) return QA.find(i => i.q === 'features').a
   if (lower.includes('process') || lower.includes('workflow') || lower.includes('approval')) return QA.find(i => i.q === 'what is process flow').a
   if (lower.includes('rpa') || lower.includes('automat')) return QA.find(i => i.q === 'rpa').a
-  if (lower.includes('ocr') || lower.includes('document') || lower.includes('extract')) return QA.find(i => i.q === 'ocr').a
+  if (lower.includes('ocr') || lower.includes('extract') || lower.includes('scan') || lower.includes('invoice')) return QA.find(i => i.q === 'ocr').a
   if (lower.includes('bot')) return QA.find(i => i.q === 'bot').a
   if (lower.includes('mobile') || lower.includes('app')) return QA.find(i => i.q === 'mobile').a
   if (lower.includes('secur') || lower.includes('complian') || lower.includes('iso')) return QA.find(i => i.q === 'security').a
@@ -70,6 +74,10 @@ function findAnswer(input) {
   if (lower.includes('contact') || lower.includes('reach') || lower.includes('talk')) return QA.find(i => i.q === 'contact').a
   if (lower.includes('hello') || lower.includes('hi') || lower.includes('hey') || lower.includes('good')) return QA.find(i => i.q === 'hello').a
   if (lower.includes('thank') || lower.includes('thanks') || lower.includes('thx')) return QA.find(i => i.q === 'thank').a
+  if (lower.includes('form') || lower.includes('field')) return QA.find(i => i.q === 'form builder').a
+  if (lower.includes('user') || lower.includes('permission') || lower.includes('role') || lower.includes('access')) return QA.find(i => i.q === 'users permissions').a
+  if (lower.includes('platform overview') || lower.includes('all modules') || lower.includes('workspace')) return QA.find(i => i.q === 'platform overview').a
+  if (lower.includes('dms') || lower.includes('document') || lower.includes('file storage')) return QA.find(i => i.q === 'dms document management').a
 
   return "Great question! I don't have a specific answer for that yet, but our team would love to help. Click \"Request Demo\" in the navbar to connect with us, or try asking about our features, pricing, integrations, or process flow!"
 }
@@ -77,7 +85,7 @@ function findAnswer(input) {
 export default function ChatBot() {
   const [chatOpen, setChatOpen] = useState(false)
   const [fabOpen, setFabOpen] = useState(false)
-  const [showScrollTop, setShowScrollTop] = useState(false)
+  const [nearTop, setNearTop] = useState(true)
   const [messages, setMessages] = useState([
     { from: 'bot', text: "Hi! 👋 I'm skiode AI assistant. Ask me anything about our platform — features, pricing, integrations, or how we can help your business!" }
   ])
@@ -88,7 +96,8 @@ export default function ChatBot() {
   const fabRef = useRef(null)
 
   useEffect(() => {
-    const onScroll = () => setShowScrollTop(window.scrollY > 400)
+    const onScroll = () => setNearTop(window.scrollY < 400)
+    onScroll()
     window.addEventListener('scroll', onScroll)
     return () => window.removeEventListener('scroll', onScroll)
   }, [])
@@ -141,19 +150,20 @@ export default function ChatBot() {
             <AnimatePresence>
               {fabOpen && (
                 <>
-                  {showScrollTop && (
-                    <motion.button
-                      initial={{ opacity: 0, scale: 0.4, y: 20 }}
-                      animate={{ opacity: 1, scale: 1, y: 0 }}
-                      exit={{ opacity: 0, scale: 0.4, y: 20 }}
-                      transition={{ duration: 0.2, delay: 0.05 }}
-                      onClick={() => { window.scrollTo({ top: 0, behavior: 'smooth' }); setFabOpen(false) }}
-                      className="w-12 h-12 rounded-full flex items-center justify-center text-white shadow-xl hover:scale-110 transition-transform cursor-pointer"
-                      style={{ background: 'linear-gradient(135deg, #10b981, #06b6d4)', boxShadow: '0 4px 20px rgba(16,185,129,0.4)' }}
-                      aria-label="Scroll to top">
-                      <ArrowUp size={20} strokeWidth={2.5} />
-                    </motion.button>
-                  )}
+                  <motion.button
+                    initial={{ opacity: 0, scale: 0.4, y: 20 }}
+                    animate={{ opacity: 1, scale: 1, y: 0 }}
+                    exit={{ opacity: 0, scale: 0.4, y: 20 }}
+                    transition={{ duration: 0.2, delay: 0.05 }}
+                    onClick={() => {
+                      window.scrollTo({ top: nearTop ? document.documentElement.scrollHeight : 0, behavior: 'smooth' })
+                      setFabOpen(false)
+                    }}
+                    className="w-12 h-12 rounded-full flex items-center justify-center shadow-xl hover:scale-110 transition-transform cursor-pointer"
+                    style={{ background: '#39ff14', boxShadow: '0 4px 20px rgba(57,255,20,0.35)' }}
+                    aria-label={nearTop ? 'Scroll to bottom' : 'Scroll to top'}>
+                    {nearTop ? <ArrowDown size={20} strokeWidth={2.5} color="#164065" /> : <ArrowUp size={20} strokeWidth={2.5} color="#164065" />}
+                  </motion.button>
                   <motion.button
                     initial={{ opacity: 0, scale: 0.4, y: 20 }}
                     animate={{ opacity: 1, scale: 1, y: 0 }}
@@ -161,7 +171,7 @@ export default function ChatBot() {
                     transition={{ duration: 0.2 }}
                     onClick={() => { setChatOpen(true); setFabOpen(false) }}
                     className="w-12 h-12 rounded-full flex items-center justify-center text-white shadow-xl hover:scale-110 transition-transform cursor-pointer"
-                    style={{ background: 'linear-gradient(135deg, #3b82f6, #8b5cf6)', boxShadow: '0 4px 20px rgba(59,130,246,0.4)' }}
+                    style={{ background: '#164065', boxShadow: '0 4px 20px rgba(22,64,101,0.4)' }}
                     aria-label="Open chat">
                     <MessageCircle size={20} />
                   </motion.button>
@@ -177,12 +187,8 @@ export default function ChatBot() {
               onClick={() => setFabOpen(!fabOpen)}
               className="w-14 h-14 rounded-full flex items-center justify-center shadow-2xl relative"
               style={{
-                background: fabOpen
-                  ? 'linear-gradient(135deg, #64748b, #475569)'
-                  : 'linear-gradient(135deg, #3b82f6, #8b5cf6)',
-                boxShadow: fabOpen
-                  ? '0 8px 32px rgba(100,116,139,0.4)'
-                  : '0 8px 32px rgba(59,130,246,0.4)',
+                background: '#000000',
+                boxShadow: '0 8px 32px rgba(0,0,0,0.45)',
               }}>
               {fabOpen ? (
                 <X size={22} className="text-white" />
@@ -191,7 +197,7 @@ export default function ChatBot() {
               )}
               {!fabOpen && (
                 <span className="absolute inset-0 rounded-full animate-ping opacity-20"
-                  style={{ background: 'linear-gradient(135deg, #3b82f6, #8b5cf6)' }} />
+                  style={{ background: '#000000' }} />
               )}
             </motion.button>
           </div>
@@ -215,7 +221,7 @@ export default function ChatBot() {
             }}>
             {/* Header */}
             <div className="flex items-center justify-between px-5 py-4 flex-shrink-0"
-              style={{ background: 'linear-gradient(135deg, #3b82f6, #7c3aed)' }}>
+              style={{ background: '#164065' }}>
               <div className="flex items-center gap-3">
                 <div className="w-9 h-9 rounded-xl flex items-center justify-center"
                   style={{ background: 'rgba(255,255,255,0.2)' }}>

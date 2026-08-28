@@ -139,31 +139,31 @@ export default function UseCasesSection() {
   const cs = useCases[active]
 
   return (
-    <section className="py-28 relative overflow-hidden"
-      style={{ background: "linear-gradient(180deg, #f8faff 0%, #ffffff 40%, #f0f4ff 100%)" }}>
+    <section className="py-16 relative overflow-hidden"
+      style={{ background: "#f7faf9" }}>
       <div className="absolute inset-0 dot-pattern-light pointer-events-none opacity-40" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
         {/* Header */}
-        <div className="text-center mb-16">
+        <div className="text-center mb-10">
           <motion.div
             initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}
-            className="inline-flex items-center gap-2 rounded-full px-5 py-2 text-xs font-bold mb-6"
-            style={{ background: "rgba(59,130,246,0.08)", border: "1px solid rgba(59,130,246,0.15)", color: "#3b82f6" }}>
-            <div className="w-1.5 h-1.5 rounded-full bg-blue-400 animate-pulse" />
+            className="inline-flex items-center gap-2 rounded-full px-5 py-2 text-[12px] font-bold mb-4"
+            style={{ background: "rgba(22,64,101,0.08)", border: "1px solid rgba(22,64,101,0.24)", color: "#0a2342" }}>
+            <div className="w-1.5 h-1.5 rounded-full animate-pulse" style={{ background: "#164065" }} />
             Solutions Delivered · By Industry Verticals
           </motion.div>
           <motion.h2
             initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.1 }}
-            className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-slate-900 mb-4 leading-tight">
+            className="text-[36px] font-extrabold mb-3 leading-tight" style={{ color: "#0a2342" }}>
             Real-World{" "}
-            <span style={{ background: "linear-gradient(135deg, #3b82f6, #8b5cf6)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }}>
+            <span style={{ color: "#164065" }}>
               Case Studies
             </span>
           </motion.h2>
           <motion.p
             initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.2 }}
-            className="text-base text-slate-500 max-w-xl mx-auto">
+            className="text-[12px] text-slate-500 max-w-xl mx-auto">
             From pharma sale orders to RPA-powered Oracle integrations — see how skiode transforms enterprise operations.
           </motion.p>
         </div>
@@ -184,32 +184,32 @@ export default function UseCasesSection() {
                 className="w-full flex items-center gap-3 px-4 py-3 rounded-2xl text-left transition-all duration-300"
                 style={{
                   background: active === i ? "white" : "transparent",
-                  border: active === i ? `1.5px solid ${uc.accent}30` : "1.5px solid transparent",
-                  boxShadow: active === i ? `0 6px 24px ${uc.accent}10` : "none",
+                  border: active === i ? "1.5px solid rgba(22,64,101,0.3)" : "1.5px solid transparent",
+                  boxShadow: active === i ? "0 6px 24px rgba(10,35,66,0.08)" : "none",
                 }}>
                 {/* Thumbnail */}
                 <div className="w-10 h-10 rounded-xl flex-shrink-0 overflow-hidden"
                   style={{
-                    background: uc.image ? "transparent" : `${uc.accent}12`,
-                    border: active === i ? `1.5px solid ${uc.accent}30` : "1.5px solid rgba(0,0,0,0.06)",
+                    background: uc.image ? "transparent" : "rgba(22,64,101,0.08)",
+                    border: active === i ? "1.5px solid rgba(22,64,101,0.3)" : "1.5px solid rgba(0,0,0,0.06)",
                   }}>
                   {uc.image ? (
                     <img src={uc.image} alt={uc.industry} className="w-full h-full object-cover" />
                   ) : (
                     <div className="w-full h-full flex items-center justify-center">
-                      <Bot size={16} style={{ color: uc.accent }} />
+                      <Bot size={16} style={{ color: "#0a2342" }} />
                     </div>
                   )}
                 </div>
                 <div className="flex-1 min-w-0">
-                  <div className="text-[10px] font-bold uppercase tracking-wider" style={{ color: active === i ? uc.accent : "#94a3b8" }}>
+                  <div className="text-[12px] font-bold uppercase tracking-wider" style={{ color: active === i ? "#0a2342" : "#94a3b8" }}>
                     {uc.industry}
                   </div>
-                  <div className="text-sm font-semibold truncate" style={{ color: active === i ? "#1e293b" : "#64748b" }}>
+                  <div className="text-[12px] font-semibold truncate" style={{ color: active === i ? "#0a2342" : "#64748b" }}>
                     {uc.title.length > 35 ? uc.title.slice(0, 35) + "…" : uc.title}
                   </div>
                 </div>
-                <ChevronRight size={14} className="flex-shrink-0" style={{ color: active === i ? uc.accent : "#d1d5db" }} />
+                <ChevronRight size={14} className="flex-shrink-0" style={{ color: active === i ? "#164065" : "#d1d5db" }} />
               </motion.button>
             ))}
           </div>
@@ -227,7 +227,7 @@ export default function UseCasesSection() {
                 style={{ background: "white", border: "1px solid rgba(0,0,0,0.06)", boxShadow: "0 8px 40px rgba(0,0,0,0.06)" }}>
 
                 {/* Top accent line */}
-                <div className="h-1" style={{ background: `linear-gradient(90deg, ${cs.accent}, ${cs.accent}50, transparent)` }} />
+                <div className="h-1" style={{ background: "#164065" }} />
 
                 {/* Image banner */}
                 {cs.image && (
@@ -235,10 +235,10 @@ export default function UseCasesSection() {
                     <img src={cs.image} alt={cs.industry}
                       className="w-full h-full object-cover" />
                     <div className="absolute inset-0 pointer-events-none"
-                      style={{ background: `linear-gradient(180deg, transparent 30%, rgba(0,0,0,0.5) 100%)` }} />
+                      style={{ background: "rgba(10,35,66,0.22)" }} />
                     <div className="absolute bottom-4 left-6 right-6">
                       <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider text-white"
-                        style={{ background: `${cs.accent}cc`, backdropFilter: "blur(8px)" }}>
+                        style={{ background: "#0a2342", color: "#39ff14", backdropFilter: "blur(8px)" }}>
                         <Sparkles size={10} /> {cs.industry}
                       </span>
                     </div>
@@ -249,7 +249,7 @@ export default function UseCasesSection() {
                   {/* Title */}
                   {!cs.image && (
                     <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider mb-3"
-                      style={{ background: `${cs.accent}10`, color: cs.accent }}>
+                      style={{ background: "rgba(22,64,101,0.08)", color: "#0a2342" }}>
                       <Sparkles size={10} /> {cs.industry}
                     </span>
                   )}
@@ -258,18 +258,18 @@ export default function UseCasesSection() {
                   {/* Challenge & Solution */}
                   <div className="grid sm:grid-cols-2 gap-4 mb-6">
                     <div className="rounded-xl p-4"
-                      style={{ background: "linear-gradient(135deg, #fff1f2, #fef2f2)", border: "1px solid #fecdd3" }}>
+                      style={{ background: "#f4f7f9", border: "1px solid rgba(10,35,66,0.14)" }}>
                       <div className="flex items-center gap-1.5 mb-2">
                         <span className="text-xs">⚠️</span>
-                        <span className="text-[10px] font-extrabold text-red-500 uppercase tracking-wider">Challenge</span>
+                        <span className="text-[12px] font-extrabold uppercase tracking-wider" style={{ color: "#0a2342" }}>Challenge</span>
                       </div>
                       <p className="text-xs text-slate-600 leading-relaxed">{cs.challenge}</p>
                     </div>
                     <div className="rounded-xl p-4"
-                      style={{ background: "linear-gradient(135deg, #f0fdf4, #ecfdf5)", border: "1px solid #86efac" }}>
+                      style={{ background: "rgba(22,64,101,0.06)", border: "1px solid rgba(22,64,101,0.2)" }}>
                       <div className="flex items-center gap-1.5 mb-2">
-                        <Zap size={11} className="text-emerald-500" />
-                        <span className="text-[10px] font-extrabold text-emerald-600 uppercase tracking-wider">Solution</span>
+                        <Zap size={11} style={{ color: "#164065" }} />
+                        <span className="text-[12px] font-extrabold uppercase tracking-wider" style={{ color: "#0a2342" }}>Solution</span>
                       </div>
                       <p className="text-xs text-slate-600 leading-relaxed">{cs.solution}</p>
                     </div>
@@ -277,7 +277,7 @@ export default function UseCasesSection() {
 
                   {/* Features */}
                   <div className="mb-6">
-                    <span className="text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-2.5 block">skiode Features Leveraged</span>
+                    <span className="text-[12px] font-bold uppercase tracking-wider mb-2.5 block" style={{ color: "#0a2342" }}>skiode Features Leveraged</span>
                     <div className="flex flex-wrap gap-1.5">
                       {cs.features.map((f) => {
                         const feat = featureMap[f] || { icon: Zap, color: cs.accent }
@@ -318,10 +318,10 @@ export default function UseCasesSection() {
         {/* View all */}
         <motion.div
           initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}
-          className="text-center mt-12">
+          className="text-center mt-8">
           <Link to="/use-cases"
             className="inline-flex items-center gap-2.5 px-7 py-3.5 rounded-2xl text-sm font-bold text-white transition-all hover:scale-105"
-            style={{ background: "linear-gradient(135deg, #3b82f6, #06b6d4)", boxShadow: "0 8px 32px rgba(59,130,246,0.35)" }}>
+            style={{ background: "#0a2342", color: "#39ff14", boxShadow: "0 8px 24px rgba(10,35,66,0.2)" }}>
             View All 8 Case Studies <ArrowRight size={14} />
           </Link>
         </motion.div>
