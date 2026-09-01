@@ -3,7 +3,6 @@ import { useEffect } from 'react'
 import Navbar from './components/Navbar'
 import Footer from './components/Footer'
 import ChatBot from './components/ChatBot'
-import LaunchExperience from './components/LaunchExperience'
 import Home from './pages/Home'
 import PlatformPage from './pages/PlatformPage'
 import PricingPage from './pages/PricingPage'
@@ -28,7 +27,6 @@ function ScrollToTop() {
 export default function App() {
   return (
     <div className="overflow-x-hidden">
-      <LaunchExperience />
       <ScrollToTop />
       <Navbar />
       <Routes>
